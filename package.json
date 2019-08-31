@@ -18,6 +18,9 @@
     "native",
     "card"
   ],
+  "peerDependencies": {
+    "react-native-webview": "^7.0.1",
+  },
   "author": "Oluwatobi Shokunbi",
   "license": "MIT",
   "bugs": {
