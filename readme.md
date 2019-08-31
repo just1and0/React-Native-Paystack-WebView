@@ -16,27 +16,29 @@ $ yarn add React-Native-Paystack-WebView
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
 
+```javascript
+import PaystackWebView from 'React-Native-Paystack-WebView'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 
-    import  PaystackWebView  from  'React-Native-Paystack-WebView'
-    import  React, {Component} from  'react';
-    import {View,} from  'react-native';
-	  
-	  class  Landing  extends  Component { 
-		  render() {
-			  return (
-			  <View  style={styles.container}>
-				  <PaystackWebView
-				  buttonText=  "Pay Now"
-				  paystackKey="your key here"
-				  amount={120000}
-				 billingEmail="ayoshokz@gmail.com"
-				 billingMobile="08101274387"
-				 billingName="Oluwatobi Shokunbi"
-				 ActivityIndicatorColor="green"
-				 />
-		 </View>);
-		 }
-	}
+class MyApp extends Component {
+  render () {
+    return (
+      <View style={{ flex: 1 }}>
+        <PaystackWebView
+          buttonText='Pay Now'
+          paystackKey='your key here'
+          amount={120000}
+          billingEmail='ayoshokz@gmail.com'
+          billingMobile='08101274387'
+          billingName='Oluwatobi Shokunbi'
+          ActivityIndicatorColor='green'
+        />
+      </View>
+    )
+  }
+}
+```
 
 ## API's
 
