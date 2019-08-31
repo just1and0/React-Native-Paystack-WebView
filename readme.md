@@ -4,6 +4,16 @@
 
 The package allows you accept payment using paystack and guess what , it doesn't require any form of linking, just install and begin to use .
 
+### Compatibility
+
+Our release cycle is independent of  `react-native`. We follow semver and here is the compatibility table:
+
+|`@react-native-community/cli` | `react-native`|
+| :---         |     :---:      | 
+|[^1.0.0](https://github.com/react-native-community/cli/tree/1.x)| ^0.59.0|
+
+
+
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
 Add React-Native-Paystack-WebView to your project by running;
