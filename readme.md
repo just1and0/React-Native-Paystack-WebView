@@ -8,11 +8,13 @@ The package allows you accept payment using paystack and guess what , it doesn't
 
 Add React-Native-Paystack-WebView to your project by running;
 
-$  npm install React-Native-Paystack-WebView
-or
-$ yarn add React-Native-Paystack-WebView
+`npm install React-Native-Paystack-WebView`
 
-> and that's it, you're all good to go!
+or
+
+`yarn add React-Native-Paystack-WebView`
+
+ and that's it, you're all good to go!
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
 
