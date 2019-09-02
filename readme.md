@@ -82,5 +82,11 @@ What to help make this package even more awesome?  [Read how to contribute](http
 
 This project is licensed under MIT license.
 
+## Related Projects
+-  [React-Native-quidpay-WebView](https://github.com/react-native-nigeria/react-native-quidpay-webview)
+-  [React-Native-rave-WebView](https://github.com/react-native-nigeria/react-native-rave-webview)
+
+
+
 
 ### Don't forget to star, like and share :)
