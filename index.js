@@ -7,7 +7,6 @@
  */
 import React, { Component } from 'react'
 import {
-  WebView,
   Modal,
   Text,
   View,
@@ -52,8 +51,12 @@ export default class Paystack extends Component {
                                 metadata: {
                                 custom_fields: [
                                         {
-                                        display_name:  '${ this.props.billingName}',
-                                        variable_name:  '${this.props.billingName}',
+                                        display_name:  '${
+                                          this.props.billingName
+                                        }',
+                                        variable_name:  '${
+                                          this.props.billingName
+                                        }',
                                         value:''
                                         }
                                 ]
