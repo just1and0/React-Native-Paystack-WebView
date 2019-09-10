@@ -10,10 +10,10 @@ import {
   Modal,
   Text,
   View,
+  WebView,
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native'
-import { WebView } from 'react-native-webview'
 
 export default class Paystack extends Component {
   constructor (props) {
@@ -63,11 +63,11 @@ export default class Paystack extends Component {
                                 },
                                 callback: function(response){
                                       var resp = {event:'successful', transactionRef:response.reference};
-                                      window.ReactNativeWebView.postMessage(JSON.stringify(resp))
+                                      window.postMessage(JSON.stringify(resp))
                                 },
                                 onClose: function(){
                                    var resp = {event:'cancelled'};
-                                   window.ReactNativeWebView.postMessage(JSON.stringify(resp))
+                                   window.postMessage(JSON.stringify(resp))
                                 }
                                 });
                                 handler.openIframe();
@@ -83,19 +83,25 @@ export default class Paystack extends Component {
     switch (webResponse.event) {
       case 'cancelled':
         this.setState({ showModal: false }, () => {
-          this.props.onCancel()
+          this.props.onCancel?
+          this.props.onCancel():
+          null
         })
         break
 
       case 'successful':
         this.setState({ showModal: false }, () => {
-          this.props.onSuccess(webResponse.transactionRef)
+          this.props.onSuccess?
+          this.props.onSuccess(webResponse.transactionRef):
+          alert('Success')
         })
         break
 
       default:
         this.setState({ showModal: false }, () => {
-          this.props.onCancel()
+          this.props.onCancel?
+          this.props.onCancel():
+          null
         })
         break
     }
