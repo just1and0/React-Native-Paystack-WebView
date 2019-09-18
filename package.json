@@ -10,6 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/just1and0/React-Native-Paystack-WebView.git"
   },
+  "dependencies": {
+    "react-native-webview": "^7.0.1"
+  },
+  "peerDependencies": {
+    "react-native-webview": ">=7.0 <7.1"
+  },
   "keywords": [
     "paystack",
     "payment",
