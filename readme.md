@@ -1,7 +1,6 @@
  # React-Native-Paystack-WebView
 
-# Screenshots
-![](https://i.ibb.co/bRGL24X/dove-1.png "First ScreenShot")![](https://i.ibb.co/hDrJfY8/dove2.png "Loading Screen") ![](https://i.ibb.co/QMnFBCx/dove3.png "Payment Screen")
+ ![package in action](https://picasaweb.google.com/101819388491824070414/6731100653835510225#6731100658334156434)
 
 The package allows you accept payment using paystack and guess what , it doesn't require any form of linking, just install and begin to use .
 
