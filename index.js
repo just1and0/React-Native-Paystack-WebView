@@ -27,6 +27,7 @@ Paystack ={
                       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
                       <!-- Fonts -->
                       <link rel="dns-prefetch" href="//fonts.gstatic.com">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
                       <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
                       <title>SUBSCRIPTION</title>
               </head>
@@ -52,11 +53,13 @@ Paystack ={
                                 },
                                 callback: function(response){
                                       var resp = {event:'successful', transactionRef:response.reference};
-                                      postMessage(JSON.stringify(resp))
+                                      //postMessage(JSON.stringify(resp))
+                                      window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                                 },
                                 onClose: function(){
                                    var resp = {event:'cancelled'};
-                                   postMessage(JSON.stringify(resp))
+                                   //postMessage(JSON.stringify(resp))
+                                   window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                                 }
                                 });
                                 handler.openIframe();
