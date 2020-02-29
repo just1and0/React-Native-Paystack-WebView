@@ -5,19 +5,20 @@
  * @format
  * @flow
  */
-import React, {Component} from 'react';
-import {WebView, Modal, Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';   
-  
+import React, { Component } from 'react';
+import { Modal, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { WebView } from 'react-native-webview';
+
 export default class Paystack extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-           showModal:false,
-         }
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
     }
-  
-Paystack ={
-      html:  `  
+  }
+
+  Paystack = {
+    html: `  
       <!DOCTYPE html>
       <html lang="en">
               <head>
@@ -68,59 +69,59 @@ Paystack ={
               </body>
       </html> 
       `
+  }
+
+  messageRecived = (data) => {
+    var webResponse = JSON.parse(data);
+    switch (webResponse.event) {
+      case 'cancelled':
+        this.setState({ showModal: false }, () => {
+          this.props.onCancel();
+        })
+        break;
+
+      case 'successful':
+        this.setState({ showModal: false }, () => {
+          this.props.onSuccess(webResponse.transactionRef);
+        })
+        break;
+
+      default:
+        this.setState({ showModal: false }, () => {
+          this.props.onCancel();
+        })
+        break;
     }
+  }
 
-    messageRecived=(data)=>{
-          var webResponse = JSON.parse(data);
-          switch(webResponse.event){
-                case 'cancelled':
-                    this.setState({showModal:false},()=>{
-                      this.props.onCancel();
-                   })    
-                break;
-
-                case 'successful':
-                    this.setState({showModal:false},()=>{
-                      this.props.onSuccess(webResponse.transactionRef);
-                    })    
-                break;
-                
-                default:
-                    this.setState({showModal:false},()=>{
-                      this.props.onCancel();
-                   })    
-                break;
-          }
-      }
-
-render() {
+  render() {
     return (
       <View>
-          <Modal 
-              visible={this.state.showModal}
-              animationType="slide"
-              transparent={false}>
-                  <WebView
-                      javaScriptEnabled={true}
-                      javaScriptEnabledAndroid={true}
-                      originWhitelist={['*']}
-                      ref={( webView ) => this.MyWebView = webView}
-                      source={this.Paystack}
-                      onMessage={(e)=>{this.messageRecived(e.nativeEvent.data)}}
-                      onLoadStart={()=>this.setState({isLoading:true})}
-                      onLoadEnd={()=>this.setState({isLoading:false})}
-                    />
-                    {/*Start of Loading modal*/}
-                      {
-                          this.state.isLoading &&
-                          <View>
-                            <ActivityIndicator size="large" color={this.props.ActivityIndicatorColor} />
-                          </View>
-                        }
-            </Modal>
-             <TouchableOpacity style={this.props.btnStyles} onPress={()=> this.setState({showModal:true})}>
-                <Text style={this.props.textStyles}  >{this.props.buttonText}</Text>
-            </TouchableOpacity>
+        <Modal
+          visible={this.state.showModal}
+          animationType="slide"
+          transparent={false}>
+          <WebView
+            javaScriptEnabled={true}
+            javaScriptEnabledAndroid={true}
+            originWhitelist={['*']}
+            ref={(webView) => this.MyWebView = webView}
+            source={this.Paystack}
+            onMessage={(e) => { this.messageRecived(e.nativeEvent.data) }}
+            onLoadStart={() => this.setState({ isLoading: true })}
+            onLoadEnd={() => this.setState({ isLoading: false })}
+          />
+          {/*Start of Loading modal*/}
+          {
+            this.state.isLoading &&
+            <View>
+              <ActivityIndicator size="large" color={this.props.ActivityIndicatorColor} />
+            </View>
+          }
+        </Modal>
+        <TouchableOpacity style={this.props.btnStyles} onPress={() => this.setState({ showModal: true })}>
+          <Text style={this.props.textStyles}  >{this.props.buttonText}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -129,7 +130,6 @@ render() {
 
 Paystack.defaultProps = {
   buttonText: "Pay Now",
-  amount:10,
-  ActivityIndicatorColor:'green'
+  amount: 10,
+  ActivityIndicatorColor: 'green'
 }
- 
