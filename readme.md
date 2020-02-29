@@ -29,7 +29,7 @@ or
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
 
 ```javascript
-import PaystackWebView from 'React-Native-Paystack-WebView'
+import PaystackWebView from 'react-native-paystack-webview'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
