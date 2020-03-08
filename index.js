@@ -5,19 +5,44 @@
  * @format
  * @flow
  */
-import React, {Component} from 'react';
-import {WebView, Modal, Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';   
-  
-export default class Paystack extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-           showModal:false,
-         }
+
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
+import {
+  Modal,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+  SafeAreaView,
+} from 'react-native';
+import {WebView} from 'react-native-webview';
+
+function Paystack(props, ref) {
+  const [isLoading, setisLoading] = useState(true);
+  const [showModal, setshowModal] = useState(false);
+
+  useEffect(() => {
+    autoStartCheck();
+  }, []);
+
+  const autoStartCheck = () => {
+    if (props.autoStart) {
+      setshowModal(true);
     }
-  
-Paystack ={
-      html:  `  
+  };
+
+  useImperativeHandle(ref, () => ({
+    StartTransaction() {
+      setshowModal(true);
+    },
+  }));
+
+  const Paystackcontent = `   
       <!DOCTYPE html>
       <html lang="en">
               <head>
@@ -37,16 +62,16 @@ Paystack ={
                               window.onload = payWithPaystack;
                               function payWithPaystack(){
                               var handler = PaystackPop.setup({ 
-                                key: '${this.props.paystackKey}',
-                                email: '${this.props.billingEmail}',
-                                amount: ${this.props.amount}00,
+                                key: '${props.paystackKey}',
+                                email: '${props.billingEmail}',
+                                amount: ${props.amount}00,
                                 currency: "NGN",
                                 ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                                 metadata: {
                                 custom_fields: [
                                         {
-                                        display_name:  '${this.props.billingName}',
-                                        variable_name:  '${this.props.billingName}',
+                                        display_name:  '${props.billingName}',
+                                        variable_name:  '${props.billingName}',
                                         value:''
                                         }
                                 ]
@@ -67,69 +92,76 @@ Paystack ={
                       </script> 
               </body>
       </html> 
-      `
+      `;
+
+  const messageRecived = data => {
+    var webResponse = JSON.parse(data);
+    switch (webResponse.event) {
+      case 'cancelled':
+        setshowModal(false);
+        props.onCancel();
+
+        break;
+
+      case 'successful':
+        setshowModal(false);
+        props.onSuccess(webResponse.transactionRef);
+
+        break;
+
+      default:
+        setshowModal(false);
+        props.onCancel();
+
+        break;
     }
+  };
 
-    messageRecived=(data)=>{
-          var webResponse = JSON.parse(data);
-          switch(webResponse.event){
-                case 'cancelled':
-                    this.setState({showModal:false},()=>{
-                      this.props.onCancel();
-                   })    
-                break;
+  return (
+    <SafeAreaView style={[{flex: 1}, props.SafeAreaViewContainer]}>
+      <Modal
+        style={[{flex: 1}]}
+        visible={showModal}
+        animationType="slide"
+        transparent={false}>
+        <SafeAreaView style={[{flex: 1}, props.SafeAreaViewContainerModal]}>
+          <WebView
+            style={[{flex: 1}]}
+            source={{html: Paystackcontent}}
+            onMessage={e => {
+              messageRecived(e.nativeEvent.data);
+            }}
+            onLoadStart={() => setisLoading(true)}
+            onLoadEnd={() => setisLoading(false)}
+          />
 
-                case 'successful':
-                    this.setState({showModal:false},()=>{
-                      this.props.onSuccess(webResponse.transactionRef);
-                    })    
-                break;
-                
-                default:
-                    this.setState({showModal:false},()=>{
-                      this.props.onCancel();
-                   })    
-                break;
-          }
-      }
-
-render() {
-    return (
-      <View>
-          <Modal 
-              visible={this.state.showModal}
-              animationType="slide"
-              transparent={false}>
-                  <WebView
-                      javaScriptEnabled={true}
-                      javaScriptEnabledAndroid={true}
-                      originWhitelist={['*']}
-                      ref={( webView ) => this.MyWebView = webView}
-                      source={this.Paystack}
-                      onMessage={(e)=>{this.messageRecived(e.nativeEvent.data)}}
-                      onLoadStart={()=>this.setState({isLoading:true})}
-                      onLoadEnd={()=>this.setState({isLoading:false})}
-                    />
-                    {/*Start of Loading modal*/}
-                      {
-                          this.state.isLoading &&
-                          <View>
-                            <ActivityIndicator size="large" color={this.props.ActivityIndicatorColor} />
-                          </View>
-                        }
-            </Modal>
-             <TouchableOpacity style={this.props.btnStyles} onPress={()=> this.setState({showModal:true})}>
-                <Text style={this.props.textStyles}  >{this.props.buttonText}</Text>
-            </TouchableOpacity>
-      </View>
-    );
-  }
+          {isLoading && (
+            <View>
+              <ActivityIndicator
+                size="large"
+                color={props.ActivityIndicatorColor}
+              />
+            </View>
+          )}
+        </SafeAreaView>
+      </Modal>
+      {props.showPayButton && (
+        <TouchableOpacity
+          style={props.btnStyles}
+          onPress={() => setshowModal(true)}>
+          <Text style={props.textStyles}>{props.buttonText}</Text>
+        </TouchableOpacity>
+      )}
+    </SafeAreaView>
+  );
 }
 
+export default forwardRef(Paystack);
 
 Paystack.defaultProps = {
-  buttonText: "Pay Now",
-  amount:10,
-  ActivityIndicatorColor:'green'
-}
- 
+  buttonText: 'Pay Now',
+  amount: 10,
+  ActivityIndicatorColor: 'green',
+  autoStart: false,
+  showPayButton: true,
+};
