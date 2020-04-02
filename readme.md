@@ -226,6 +226,9 @@ What to help make this package even more awesome? [Read how to contribute](https
 
 This project is licensed under MIT license.
 
+## Disclimiar
+Do not put your seceret key in production, only use the callback! as it is not safe.  I won't be held accountable for any lost, hack or security breach.
+
 ## Related Projects
 
 - [React-Native-quidpay-WebView](https://github.com/react-native-nigeria/react-native-quidpay-webview)
