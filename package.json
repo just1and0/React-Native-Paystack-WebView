@@ -1,6 +1,6 @@
 {
   "name": "react-native-paystack-webview",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "This package allows you to accept payment in your react native project using paystack ",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "react",
     "react",
     "native",
-    "card"
+    "card",
+    "recurrent-payment"
   ],
   "author": "Oluwatobi Shokunbi",
   "license": "MIT",

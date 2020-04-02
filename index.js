@@ -10,17 +10,17 @@ import React, {
   useState,
   useEffect,
   forwardRef,
-  useImperativeHandle,
-} from 'react';
+  useImperativeHandle
+} from "react";
 import {
   Modal,
   Text,
   View,
   TouchableOpacity,
   ActivityIndicator,
-  SafeAreaView,
-} from 'react-native';
-import {WebView} from 'react-native-webview';
+  SafeAreaView
+} from "react-native";
+import { WebView } from "react-native-webview";
 
 function Paystack(props, ref) {
   const [isLoading, setisLoading] = useState(true);
@@ -39,7 +39,7 @@ function Paystack(props, ref) {
   useImperativeHandle(ref, () => ({
     StartTransaction() {
       setshowModal(true);
-    },
+    }
   }));
 
   const Paystackcontent = `   
@@ -77,9 +77,8 @@ function Paystack(props, ref) {
                                 ]
                                 },
                                 callback: function(response){
-                                      var resp = {event:'successful', transactionRef:response.reference};
-                                      //postMessage(JSON.stringify(resp))
-                                      window.ReactNativeWebView.postMessage(JSON.stringify(resp))
+                                      var resp = {event:'successful', transactionRef:response};
+                                       window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                                 },
                                 onClose: function(){
                                    var resp = {event:'cancelled'};
@@ -97,16 +96,33 @@ function Paystack(props, ref) {
   const messageRecived = data => {
     var webResponse = JSON.parse(data);
     switch (webResponse.event) {
-      case 'cancelled':
+      case "cancelled":
         setshowModal(false);
         props.onCancel();
 
         break;
 
-      case 'successful':
+      case "successful":
         setshowModal(false);
-        props.onSuccess(webResponse.transactionRef);
+        const reference = webResponse.transactionRef.reference;
 
+        fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+          method: "GET",
+          headers: new Headers({
+            Authorization: "Bearer " + props.paystackSecretKey
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            props.onSuccess({
+              status: "success",
+              data: webResponse.transactionRef,
+              cardDetails: data.data.authorization
+            });
+          })
+          .catch(error => {
+            props.onCancel();
+          });
         break;
 
       default:
@@ -118,16 +134,17 @@ function Paystack(props, ref) {
   };
 
   return (
-    <SafeAreaView style={[{flex: 1}, props.SafeAreaViewContainer]}>
+    <SafeAreaView style={[{ flex: 1 }, props.SafeAreaViewContainer]}>
       <Modal
-        style={[{flex: 1}]}
+        style={[{ flex: 1 }]}
         visible={showModal}
         animationType="slide"
-        transparent={false}>
-        <SafeAreaView style={[{flex: 1}, props.SafeAreaViewContainerModal]}>
+        transparent={false}
+      >
+        <SafeAreaView style={[{ flex: 1 }, props.SafeAreaViewContainerModal]}>
           <WebView
-            style={[{flex: 1}]}
-            source={{html: Paystackcontent}}
+            style={[{ flex: 1 }]}
+            source={{ html: Paystackcontent }}
             onMessage={e => {
               messageRecived(e.nativeEvent.data);
             }}
@@ -148,7 +165,8 @@ function Paystack(props, ref) {
       {props.showPayButton && (
         <TouchableOpacity
           style={props.btnStyles}
-          onPress={() => setshowModal(true)}>
+          onPress={() => setshowModal(true)}
+        >
           <Text style={props.textStyles}>{props.buttonText}</Text>
         </TouchableOpacity>
       )}
@@ -159,9 +177,9 @@ function Paystack(props, ref) {
 export default forwardRef(Paystack);
 
 Paystack.defaultProps = {
-  buttonText: 'Pay Now',
+  buttonText: "Pay Now",
   amount: 10,
-  ActivityIndicatorColor: 'green',
+  ActivityIndicatorColor: "green",
   autoStart: false,
-  showPayButton: true,
+  showPayButton: true
 };
