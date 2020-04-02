@@ -115,6 +115,82 @@ function Pay(){
 ```
 
 
+## Recurrent Payment
+Once billing of card is successful, you'll get an object data in the success callback. The call back will contain **cardDetails** , this object contains basic details about the card you just billed, save this to your backend.
+
+
+```javascript import PaystackWebView from 'react-native-paystack-webview';
+import React, {useRef} from 'react';
+import {View, TouchableOpacity,Text} from 'react-native';
+function Pay(){
+   const childRef = useRef();
+const success = (e) =>{
+	// get authorization_code
+	const {authorization_code} = e.cardDetails;
+	
+}
+  return(
+    <View style={{flex: 1}}>
+        <PaystackWebView
+          showPayButton={false}
+          paystackKey="your-key-here"
+          amount={120000}
+          billingEmail="paystackwebview@something.com"
+          billingMobile="09787377462"
+          billingName="Oluwatobi Shokunbi"
+          ActivityIndicatorColor="green"
+          SafeAreaViewContainer={{marginTop: 5}}
+          SafeAreaViewContainerModal={{marginTop: 5}}
+          onCancel={() => {  alert('cancelled'); }}
+          onSuccess={(e) => {  success(e) }}
+           ref={childRef}
+        />
+
+            <TouchableOpacity onPress={()=> childRef.current.StartTransaction()}>
+             <Text>pay now</Text>
+						<TouchableOpacity/>
+      </View>
+)
+}
+```
+
+
+now we have the authorization_code, and other card details, we can bill this card again by using the *react-native-paystack-helpers* package to bill this card anytime we want to.
+
+first run; *yarn add react-native-paystack-helpers || npm i react-native-paystack-helpers*
+
+now to bill the card again;
+
+```javascript  
+import React from 'react';
+import {Transaction} from 'react-native-paystack-helpers';
+import {View, TouchableOpacity,Text} from 'react-native';
+
+function Pay(){
+    
+const bill = () =>{
+	// get authorization_code
+	const aa = await Transaction.ChargeAuthorization(
+      authorization_code,
+      payStack-secret-key,
+     amount,
+      billing-email,
+    );
+    console.log(aa);
+	
+}
+  return(
+    <View style={{flex: 1}}>
+    
+
+            <TouchableOpacity onPress={()=> bill()}>
+             <Text>Bill again</Text>
+	<TouchableOpacity/>
+      </View>
+)
+}
+```
+
 
 ## Note:
 
