@@ -10,7 +10,7 @@ import React, {
   useState,
   useEffect,
   forwardRef,
-  useImperativeHandle
+  useImperativeHandle,
 } from "react";
 import {
   Modal,
@@ -18,7 +18,7 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import { WebView } from "react-native-webview";
 
@@ -39,7 +39,7 @@ function Paystack(props, ref) {
   useImperativeHandle(ref, () => ({
     StartTransaction() {
       setshowModal(true);
-    }
+    },
   }));
 
   const Paystackcontent = `   
@@ -95,7 +95,7 @@ function Paystack(props, ref) {
       </html> 
       `;
 
-  const messageRecived = data => {
+  const messageRecived = (data) => {
     var webResponse = JSON.parse(data);
     switch (webResponse.event) {
       case "cancelled":
@@ -111,18 +111,18 @@ function Paystack(props, ref) {
         fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
           method: "GET",
           headers: new Headers({
-            Authorization: "Bearer " + props.paystackSecretKey
-          })
+            Authorization: "Bearer " + props.paystackSecretKey,
+          }),
         })
-          .then(response => response.json())
-          .then(data => {
+          .then((response) => response.json())
+          .then((data) => {
             props.onSuccess({
               status: "success",
               data: webResponse.transactionRef,
-              cardDetails: data.data.authorization
+              cardDetails: data.data.authorization,
             });
           })
-          .catch(error => {
+          .catch((error) => {
             props.onCancel();
           });
         break;
@@ -147,7 +147,7 @@ function Paystack(props, ref) {
           <WebView
             style={[{ flex: 1 }]}
             source={{ html: Paystackcontent }}
-            onMessage={e => {
+            onMessage={(e) => {
               messageRecived(e.nativeEvent.data);
             }}
             onLoadStart={() => setisLoading(true)}
@@ -183,5 +183,6 @@ Paystack.defaultProps = {
   amount: 10,
   ActivityIndicatorColor: "green",
   autoStart: false,
-  showPayButton: true
+  showPayButton: true,
+  currency: "NGN",
 };
