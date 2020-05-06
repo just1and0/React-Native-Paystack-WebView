@@ -40,6 +40,9 @@ function Paystack(props, ref) {
     StartTransaction() {
       setshowModal(true);
     },
+    endTransaction() {
+      setshowModal(false)
+    }
   }));
 
   const Paystackcontent = `   
@@ -68,7 +71,7 @@ function Paystack(props, ref) {
                                 currency: "NGN",
                                 channels:['${props.channels}'],
                                 currency: '${props.currency}',
-                                ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                                ref: ${props.refNumber}, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                                 metadata: {
                                 custom_fields: [
                                         {
@@ -84,7 +87,6 @@ function Paystack(props, ref) {
                                 },
                                 onClose: function(){
                                    var resp = {event:'cancelled'};
-                                   //postMessage(JSON.stringify(resp))
                                    window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                                 }
                                 });
@@ -95,8 +97,11 @@ function Paystack(props, ref) {
       </html> 
       `;
 
-  const messageRecived = (data) => {
+  const messageReceived = (data) => {
     var webResponse = JSON.parse(data);
+    if (props.handleWebViewMessage) {
+      props.handleWebViewMessage(data);
+    }
     switch (webResponse.event) {
       case "cancelled":
         setshowModal(false);
@@ -128,12 +133,23 @@ function Paystack(props, ref) {
         break;
 
       default:
-        setshowModal(false);
-        props.onCancel();
-
+        console.warn('Unhandled event', webResponse)
         break;
     }
   };
+
+  const showPaymentModal = () => {
+    setshowModal(true);
+  }
+
+  const button = props.renderButton(showPaymentModal) || (
+    <TouchableOpacity
+      style={props.btnStyles}
+      onPress={() => showPaymentModal()}
+    >
+      <Text style={props.textStyles}>{props.buttonText}</Text>
+    </TouchableOpacity>
+  )
 
   return (
     <SafeAreaView style={[{ flex: 1 }, props.SafeAreaViewContainer]}>
@@ -148,7 +164,7 @@ function Paystack(props, ref) {
             style={[{ flex: 1 }]}
             source={{ html: Paystackcontent }}
             onMessage={(e) => {
-              messageRecived(e.nativeEvent.data);
+              messageReceived(e.nativeEvent.data);
             }}
             onLoadStart={() => setisLoading(true)}
             onLoadEnd={() => setisLoading(false)}
@@ -164,14 +180,7 @@ function Paystack(props, ref) {
           )}
         </SafeAreaView>
       </Modal>
-      {props.showPayButton && (
-        <TouchableOpacity
-          style={props.btnStyles}
-          onPress={() => setshowModal(true)}
-        >
-          <Text style={props.textStyles}>{props.buttonText}</Text>
-        </TouchableOpacity>
-      )}
+      {props.showPayButton && button}
     </SafeAreaView>
   );
 }
@@ -185,4 +194,6 @@ Paystack.defaultProps = {
   autoStart: false,
   showPayButton: true,
   currency: "NGN",
+  refNumber: ''+Math.floor((Math.random() * 1000000000) + 1),
+  renderButton: (onClick) => null,
 };
