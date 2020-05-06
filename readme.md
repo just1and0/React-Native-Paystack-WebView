@@ -253,7 +253,7 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `paystackKey`                | Public or Private paystack key(visit paystack.com to get yours) |             `nill` |
 | `amount`                     |                      Amount to be paid                       |             `nill` |
 | `ActivityIndicatorColor`     |                       color of loader                        |   default: `green` |
-| `billingEmail`               |                        Billers email                         |    default: `nill` |
+| `billingEmail(required by paystack)`               |                        Billers email                         |    default: `nill` |
 | `billingMobile`              |                        Billers mobile                        |    default: `nill` |
 | `billingName`                |                         Billers Name                         |    default: `nill` |
 | `onCancel`                   |              callback function if user cancels               |    default: `nill` |
