@@ -77,6 +77,51 @@ class MyApp extends Component {
 }
 ```
 
+### Usage 2
+
+```javascript
+import PaystackWebView from 'react-native-paystack-webview';
+import React, {Component} from 'react';
+import {View} from 'react-native';
+
+class MyApp extends Component {
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        <PaystackWebView
+          buttonText="Pay Now"
+          showPayButton={false}
+          paystackKey="your-key-here"
+          amount={120000}
+          billingEmail="paystackwebview@something.com"
+          billingMobile="09787377462"
+          billingName="Oluwatobi Shokunbi"
+          ActivityIndicatorColor="green"
+          SafeAreaViewContainer={{marginTop: 5}}
+          SafeAreaViewContainerModal={{marginTop: 5}}
+          handleWebViewMessage={(e) => {
+            // handle the message
+          }}
+          onCancel={() => {
+            alert('cancelled');
+          }}
+          onSuccess={() => {
+            alert('success');
+          }}
+          autoStart={false}
+          refNumber={uuid()} // this is only for cases where you have a reference number generated
+          renderButton=((onPress) => {
+            <Button onPress={onPress}>
+              Pay Now
+            <Button>
+          })
+        />
+      </View>
+    );
+  }
+}
+```
+
 
 
 ## Use ref's
@@ -208,7 +253,7 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `paystackKey`                | Public or Private paystack key(visit paystack.com to get yours) |             `nill` |
 | `amount`                     |                      Amount to be paid                       |             `nill` |
 | `ActivityIndicatorColor`     |                       color of loader                        |   default: `green` |
-| `billingEmail`               |                        Billers email                         |    default: `nill` |
+| `billingEmail(required by paystack)`               |                        Billers email                         |    default: `nill` |
 | `billingMobile`              |                        Billers mobile                        |    default: `nill` |
 | `billingName`                |                         Billers Name                         |    default: `nill` |
 | `onCancel`                   |              callback function if user cancels               |    default: `nill` |
@@ -217,6 +262,9 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `SafeAreaViewContainer`      |              style for SafeAreaView containter               |    default: `nill` |
 | `SafeAreaViewContainerModal` |               style for SafeAreaView for modal               |    default: `nill` |
 | `showPayButton`              |            Control the Pay Now button visibility             |    default: `true` |
+| `refNumber`              |            Reference number, if you have already generated one             |    default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
+| `renderButton`              |           Render your own Pay Now button, should be used when `showPayButton` is `true`            |    default: `null` |
+| `handleWebViewMessage`              |         Will be called when a WebView receives a message            |    default: `true` |
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
