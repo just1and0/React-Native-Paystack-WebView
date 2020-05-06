@@ -133,6 +133,9 @@ function Paystack(props, ref) {
         break;
 
       default:
+        if (props.handleWebViewMessage) {
+          props.handleWebViewMessage(data);
+        }
         console.warn('Unhandled event', webResponse)
         break;
     }

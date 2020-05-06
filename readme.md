@@ -263,7 +263,8 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `SafeAreaViewContainerModal` |               style for SafeAreaView for modal               |    default: `nill` |
 | `showPayButton`              |            Control the Pay Now button visibility             |    default: `true` |
 | `refNumber`              |            Reference number, if you have already generated one             |    default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
-| `renderButton`              |           Render your own Pay Now button, should be used when `showPayButton` is `true`            |    default: `true` |
+| `renderButton`              |           Render your own Pay Now button, should be used when `showPayButton` is `true`            |    default: `(onPress) => null` |
+| `handleWebViewMessage`              |         Will be called when a WebView receives a message            |    default: `true` |
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
