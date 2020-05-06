@@ -145,7 +145,7 @@ function Paystack(props, ref) {
     setshowModal(true);
   }
 
-  const button = props.renderButton(showPaymentModal) || (
+  const button = props.renderButton ? props.renderButton(showPaymentModal) : (
     <TouchableOpacity
       style={props.btnStyles}
       onPress={() => showPaymentModal()}
@@ -198,5 +198,4 @@ Paystack.defaultProps = {
   showPayButton: true,
   currency: "NGN",
   refNumber: ''+Math.floor((Math.random() * 1000000000) + 1),
-  renderButton: (onClick) => null,
 };
