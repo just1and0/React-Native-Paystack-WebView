@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "just1and0",
+      "name": "Oluwatobi Shokunbi ",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17249207?v=4",
+      "profile": "https://linksnest.com/just1and0",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "React-Native-Paystack-WebView",
+  "projectOwner": "just1and0",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
