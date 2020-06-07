@@ -51,6 +51,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "walexanderos",
+      "name": "Jimoh Jamiu",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/36700043?v=4",
+      "profile": "https://github.com/walexanderos",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
