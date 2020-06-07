@@ -259,6 +259,7 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `billingEmail(required by paystack)`               |                        Billers email                         |    default: `nill` |
 | `billingMobile`              |                        Billers mobile                        |    default: `nill` |
 | `billingName`                |                         Billers Name                         |    default: `nill` |
+| `channels`                   | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: ```javascript channels={JSON.stringify(["card","ussd"])} ```                   |    default: `"card"` |
 | `onCancel`                   |              callback function if user cancels               |    default: `nill` |
 | `onSuccess`                  | callback function if transaction was successful (it will also return the transactionRef number in the callback ) |    default: `nill` |
 | `autoStart`                  |            Auto start payment once page is opened            |   default: `false` |
