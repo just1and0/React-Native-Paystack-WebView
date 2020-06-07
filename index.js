@@ -101,11 +101,11 @@ function Paystack(props, ref) {
     if (props.handleWebViewMessage) {
       props.handleWebViewMessage(data);
     }
+    console.log(webResponse.event);
     switch (webResponse.event) {
       case "cancelled":
         setshowModal(false);
         props.onCancel();
-
         break;
 
       case "successful":
@@ -127,7 +127,7 @@ function Paystack(props, ref) {
             });
           })
           .catch((error) => {
-            props.onCancel();
+            props.onCancel("payment successful but could not verify payment");
           });
         break;
 
