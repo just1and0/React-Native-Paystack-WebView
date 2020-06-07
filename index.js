@@ -41,8 +41,8 @@ function Paystack(props, ref) {
       setshowModal(true);
     },
     endTransaction() {
-      setshowModal(false)
-    }
+      setshowModal(false);
+    },
   }));
 
   const Paystackcontent = `   
@@ -68,8 +68,8 @@ function Paystack(props, ref) {
                                 key: '${props.paystackKey}',
                                 email: '${props.billingEmail}',
                                 amount: ${props.amount}00, 
-                                channels:['${props.channels}'],
-                                currency: '${props.currency}',
+                                channels:${props.channels},
+                                currency: ${props.currency},
                                 ref: ${props.refNumber}, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                                 metadata: {
                                 custom_fields: [
@@ -135,23 +135,25 @@ function Paystack(props, ref) {
         if (props.handleWebViewMessage) {
           props.handleWebViewMessage(data);
         }
-        console.warn('Unhandled event', webResponse)
+        console.warn("Unhandled event", webResponse);
         break;
     }
   };
 
   const showPaymentModal = () => {
     setshowModal(true);
-  }
+  };
 
-  const button = props.renderButton ? props.renderButton(showPaymentModal) : (
+  const button = props.renderButton ? (
+    props.renderButton(showPaymentModal)
+  ) : (
     <TouchableOpacity
       style={props.btnStyles}
       onPress={() => showPaymentModal()}
     >
       <Text style={props.textStyles}>{props.buttonText}</Text>
     </TouchableOpacity>
-  )
+  );
 
   return (
     <SafeAreaView style={[{ flex: 1 }, props.SafeAreaViewContainer]}>
@@ -196,5 +198,6 @@ Paystack.defaultProps = {
   autoStart: false,
   showPayButton: true,
   currency: "NGN",
-  refNumber: ''+Math.floor((Math.random() * 1000000000) + 1),
+  refNumber: "" + Math.floor(Math.random() * 1000000000 + 1),
+  channels: ["card"],
 };
