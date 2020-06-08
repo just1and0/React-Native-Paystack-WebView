@@ -58,7 +58,8 @@ class MyApp extends Component {
         <PaystackWebView
           buttonText="Pay Now"
           showPayButton={false}
-          paystackKey="your-key-here"
+          paystackKey="your-public-key-here"
+          paystackSecretKey="your-secret-key-here"
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
@@ -66,11 +67,11 @@ class MyApp extends Component {
           ActivityIndicatorColor="green"
           SafeAreaViewContainer={{marginTop: 5}}
           SafeAreaViewContainerModal={{marginTop: 5}}
-          onCancel={() => {
-            alert('cancelled');
+          onCancel={(e) => {
+            console.log(e);
           }}
-          onSuccess={() => {
-            alert('success');
+          onSuccess={(e) => {
+            console.log(e);
           }}
           autoStart={false}
         />
@@ -94,7 +95,8 @@ class MyApp extends Component {
         <PaystackWebView
           buttonText="Pay Now"
           showPayButton={false}
-          paystackKey="your-key-here"
+          paystackKey="your-public-key-here"
+          paystackSecretKey="your-secret-key-here"
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
@@ -105,11 +107,11 @@ class MyApp extends Component {
           handleWebViewMessage={(e) => {
             // handle the message
           }}
-          onCancel={() => {
-            alert('cancelled');
+          onCancel={(e) => {
+            console.log(e);
           }}
-          onSuccess={() => {
-            alert('success');
+          onSuccess={(e) => {
+            console.log(e);
           }}
           autoStart={false}
           refNumber={uuid()} // this is only for cases where you have a reference number generated
@@ -141,7 +143,8 @@ function Pay(){
     <View style={{flex: 1}}>
         <PaystackWebView
           showPayButton={false}
-          paystackKey="your-key-here"
+          paystackKey="your-public-key-here"
+          paystackSecretKey="your-secret-key-here"
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
@@ -149,8 +152,8 @@ function Pay(){
           ActivityIndicatorColor="green"
           SafeAreaViewContainer={{marginTop: 5}}
           SafeAreaViewContainerModal={{marginTop: 5}}
-          onCancel={() => {  alert('cancelled'); }}
-          onSuccess={() => {  alert('success'); }}
+          onCancel={(e) => {  console.log(e) }}
+          onSuccess={(e) => {  console.log(e) }}
            ref={childRef}
         />
 
@@ -181,7 +184,8 @@ const success = (e) =>{
     <View style={{flex: 1}}>
         <PaystackWebView
           showPayButton={false}
-          paystackKey="your-key-here"
+          paystackKey="your-public-key-here"
+          paystackSecretKey="your-secret-key-here"
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
@@ -189,7 +193,7 @@ const success = (e) =>{
           ActivityIndicatorColor="green"
           SafeAreaViewContainer={{marginTop: 5}}
           SafeAreaViewContainerModal={{marginTop: 5}}
-          onCancel={() => {  alert('cancelled'); }}
+          onCancel={(e) => {  console.log(e) }}
           onSuccess={(e) => {  success(e) }}
            ref={childRef}
         />
@@ -254,14 +258,15 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `textStyles`                 |              Defines styles for text in button               |             `nill` |
 | `btnStyles`                  |                   Defines style for button                   |             `nill` |
 | `paystackKey`                | Public or Private paystack key(visit paystack.com to get yours) |             `nill` |
+| `paystackSecretKey`          |  Paystack Secret Key key(visit paystack.com to get yours)    |             `nill` |
 | `amount`                     |                      Amount to be paid                       |             `nill` |
 | `ActivityIndicatorColor`     |                       color of loader                        |   default: `green` |
 | `billingEmail(required by paystack)`               |                        Billers email                         |    default: `nill` |
 | `billingMobile`              |                        Billers mobile                        |    default: `nill` |
 | `billingName`                |                         Billers Name                         |    default: `nill` |
 | `channels`                   | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={JSON.stringify(["card","ussd"])} `                   |    default: `"card"` |
-| `onCancel`                   |              callback function if user cancels               |    default: `nill` |
-| `onSuccess`                  | callback function if transaction was successful (it will also return the transactionRef number in the callback ) |    default: `nill` |
+| `onCancel`                   |              callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback     |    default: `nill` |
+| `onSuccess`                  | callback function if transaction was successful and verified (it will also return the transactionRef number in the callback ) |    default: `nill` |
 | `autoStart`                  |            Auto start payment once page is opened            |   default: `false` |
 | `SafeAreaViewContainer`      |              style for SafeAreaView containter               |    default: `nill` |
 | `SafeAreaViewContainerModal` |               style for SafeAreaView for modal               |    default: `nill` |

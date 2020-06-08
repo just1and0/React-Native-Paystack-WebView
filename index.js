@@ -68,7 +68,7 @@ function Paystack(props, ref) {
                                 key: '${props.paystackKey}',
                                 email: '${props.billingEmail}',
                                 amount: ${props.amount}00, 
-                                channels:${props.channels},
+                                channels: ${props.channels},
                                 currency: ${props.currency},
                                 ref: ${props.refNumber}, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                                 metadata: {
@@ -101,11 +101,11 @@ function Paystack(props, ref) {
     if (props.handleWebViewMessage) {
       props.handleWebViewMessage(data);
     }
-    console.log(webResponse.event);
+    //console.log(webResponse.event);
     switch (webResponse.event) {
       case "cancelled":
         setshowModal(false);
-        props.onCancel();
+        props.onCancel({status:'cancelled'});
         break;
 
       case "successful":
@@ -127,7 +127,11 @@ function Paystack(props, ref) {
             });
           })
           .catch((error) => {
-            props.onCancel("payment successful but could not verify payment");
+            props.onCancel({
+              status: "unverified",
+              data: webResponse.transactionRef,
+              message: "payment successful but could not verify payment"
+            });
           });
         break;
 
