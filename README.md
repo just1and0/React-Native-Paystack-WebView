@@ -68,10 +68,10 @@ class MyApp extends Component {
           SafeAreaViewContainer={{marginTop: 5}}
           SafeAreaViewContainerModal={{marginTop: 5}}
           onCancel={(e) => {
-            console.log(e);
+            // handle response here
           }}
           onSuccess={(e) => {
-            console.log(e);
+            // handle response here
           }}
           autoStart={false}
         />
@@ -108,10 +108,10 @@ class MyApp extends Component {
             // handle the message
           }}
           onCancel={(e) => {
-            console.log(e);
+            // handle response here
           }}
           onSuccess={(e) => {
-            console.log(e);
+            // handle response here
           }}
           autoStart={false}
           refNumber={uuid()} // this is only for cases where you have a reference number generated
@@ -152,8 +152,8 @@ function Pay(){
           ActivityIndicatorColor="green"
           SafeAreaViewContainer={{marginTop: 5}}
           SafeAreaViewContainerModal={{marginTop: 5}}
-          onCancel={(e) => {  console.log(e) }}
-          onSuccess={(e) => {  console.log(e) }}
+          onCancel={(e) => {  // handle response here }}
+          onSuccess={(e) => {  // handle response here }}
            ref={childRef}
         />
 
@@ -193,7 +193,7 @@ const success = (e) =>{
           ActivityIndicatorColor="green"
           SafeAreaViewContainer={{marginTop: 5}}
           SafeAreaViewContainerModal={{marginTop: 5}}
-          onCancel={(e) => {  console.log(e) }}
+          onCancel={(e) => {  // handle response here }}
           onSuccess={(e) => {  success(e) }}
            ref={childRef}
         />
@@ -258,7 +258,7 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `textStyles`                 |              Defines styles for text in button               |             `nill` |
 | `btnStyles`                  |                   Defines style for button                   |             `nill` |
 | `paystackKey`                | Public or Private paystack key(visit paystack.com to get yours) |             `nill` |
-| `paystackSecretKey`          |  Paystack Secret Key key(visit paystack.com to get yours)    |             `nill` |
+| `paystackSecretKey`          |  Paystack Secret key(visit paystack.com to get yours)    |             `nill` |
 | `amount`                     |                      Amount to be paid                       |             `nill` |
 | `ActivityIndicatorColor`     |                       color of loader                        |   default: `green` |
 | `billingEmail(required by paystack)`               |                        Billers email                         |    default: `nill` |
