@@ -282,6 +282,9 @@ Do not put your seceret key in production, only use the callback! as it is not s
 - [React-Native-quidpay-WebView](https://github.com/react-native-nigeria/react-native-quidpay-webview)
 - [React-Native-rave-WebView](https://github.com/react-native-nigeria/react-native-rave-webview)
 
+### Video Tutorial
+- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0)
+
 ### Don't forget to star, like and share :)
 
 
