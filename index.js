@@ -25,10 +25,22 @@ import { WebView } from "react-native-webview";
 function Paystack(props, ref) {
   const [isLoading, setisLoading] = useState(true);
   const [showModal, setshowModal] = useState(false);
+  const [metadata, setMetadata] = useState("");
 
   useEffect(() => {
     autoStartCheck();
   }, []);
+
+  useEffect(() => {
+    const options = [];
+    for (let key in props.metadata) {
+      let option = props.metadata[key];
+      if (option) {
+        options.push(`${key}:${option}`);
+      }
+    }
+    setMetadata(options.join(","));
+  }, [props.metadata]);
 
   const autoStartCheck = () => {
     if (props.autoStart) {
@@ -78,7 +90,8 @@ function Paystack(props, ref) {
                                         variable_name:  '${props.billingName}',
                                         value:''
                                         }
-                                ]
+                                ],
+                                ${metadata}
                                 },
                                 callback: function(response){
                                       var resp = {event:'successful', transactionRef:response};
@@ -105,7 +118,7 @@ function Paystack(props, ref) {
     switch (webResponse.event) {
       case "cancelled":
         setshowModal(false);
-        props.onCancel({status:'cancelled'});
+        props.onCancel({ status: "cancelled" });
         break;
 
       case "successful":
@@ -130,7 +143,7 @@ function Paystack(props, ref) {
             props.onCancel({
               status: "unverified",
               data: webResponse.transactionRef,
-              message: "payment successful but could not verify payment"
+              message: "payment successful but could not verify payment",
             });
           });
         break;
@@ -204,4 +217,5 @@ Paystack.defaultProps = {
   currency: "NGN",
   refNumber: "" + Math.floor(Math.random() * 1000000000 + 1),
   channels: ["card"],
+  metadata: {},
 };
