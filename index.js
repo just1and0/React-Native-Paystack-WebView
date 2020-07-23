@@ -115,7 +115,6 @@ function Paystack(props, ref) {
         fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
           method: "GET",
           headers: new Headers({
-            Authorization: "Bearer " + props.paystackSecretKey,
           }),
         })
           .then((response) => response.json())
