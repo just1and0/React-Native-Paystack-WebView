@@ -70,7 +70,7 @@ function Paystack(props, ref) {
                                 amount: ${props.amount}00, 
                                 channels: ${props.channels},
                                 currency: ${props.currency},
-                                ref: ${props.refNumber}, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                                ref: '${props.refNumber}', // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                                 metadata: {
                                 custom_fields: [
                                         {
