@@ -4,6 +4,10 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The package allows you accept payment using paystack and guess what , it doesn't require any form of linking, just install and begin to use .
+
+### [](https://github.com/just1and0/React-Native-Paystack-WebView#warning)Warning 
+
+This Project exposes the secret key when verifying the reference, this has serious security implication and someone nefarious can use it. I advise against verifying the transaction on the client side, as verification should be done on server side. - I wont be held accountable for any security breach.
  
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
@@ -275,7 +279,7 @@ What to help make this package even more awesome? [Read how to contribute](https
 This project is licensed under MIT license.
 
 ## Disclamier
-Do not put your seceret key in production, only use the callback! as it is not safe.  I won't be held accountable for any lost, hack or security breach.
+Do not put your seceret key in production applications, as it is not safe.  I won't be held accountable for any lost, hack or security breach.
 
 ## Related Projects
 
