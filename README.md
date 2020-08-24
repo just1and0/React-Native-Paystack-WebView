@@ -129,7 +129,7 @@ function Pay(){
     <View style={{flex: 1}}>
         <PaystackWebView
           showPayButton={false}
-          paystackKey="your-public-key-here" 
+          paystackKey="your-public-key-here"
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
@@ -149,7 +149,6 @@ function Pay(){
 )
 }
 ```
- 
 
 ## Note:
 
@@ -165,7 +164,6 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `textStyles`                         |                                                                                  Defines styles for text in button                                                                                  |                                                     `nill` |
 | `btnStyles`                          |                                                                                      Defines style for button                                                                                       |                                                     `nill` |
 | `paystackKey`                        |                                                                   Public or Private paystack key(visit paystack.com to get yours)                                                                   |                                                     `nill` |
-| `paystackSecretKey`                  |                                                                        Paystack Secret key(visit paystack.com to get yours)                                                                         |                                                     `nill` |
 | `amount`                             |                                                                                          Amount to be paid                                                                                          |                                                     `nill` |
 | `ActivityIndicatorColor`             |                                                                                           color of loader                                                                                           |                                           default: `green` |
 | `billingEmail(required by paystack)` |                                                                                            Billers email                                                                                            |                                            default: `nill` |
