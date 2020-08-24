@@ -49,7 +49,6 @@ class MyApp extends Component {
           buttonText="Pay Now"
           showPayButton={false}
           paystackKey="your-public-key-here"
-          paystackSecretKey="your-secret-key-here"
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
@@ -86,7 +85,6 @@ class MyApp extends Component {
           buttonText="Pay Now"
           showPayButton={false}
           paystackKey="your-public-key-here"
-          paystackSecretKey="your-secret-key-here"
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
@@ -131,8 +129,7 @@ function Pay(){
     <View style={{flex: 1}}>
         <PaystackWebView
           showPayButton={false}
-          paystackKey="your-public-key-here"
-          paystackSecretKey="your-secret-key-here"
+          paystackKey="your-public-key-here" 
           amount={120000}
           billingEmail="paystackwebview@something.com"
           billingMobile="09787377462"
