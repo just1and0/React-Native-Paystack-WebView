@@ -101,45 +101,27 @@ function Paystack(props, ref) {
     if (props.handleWebViewMessage) {
       props.handleWebViewMessage(data);
     }
-    //console.log(webResponse.event);
     switch (webResponse.event) {
       case "cancelled":
         setshowModal(false);
-        props.onCancel({status:'cancelled'});
+        props.onCancel({ status: "cancelled" });
         break;
 
       case "successful":
         setshowModal(false);
-        const reference = webResponse.transactionRef.reference;
+        const reference = webResponse.transactionRef;
 
-        fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
-          method: "GET",
-          headers: new Headers({
-            Authorization: "Bearer " + props.paystackSecretKey,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            props.onSuccess({
-              status: "success",
-              data: webResponse.transactionRef,
-              cardDetails: data.data.authorization,
-            });
-          })
-          .catch((error) => {
-            props.onCancel({
-              status: "unverified",
-              data: webResponse.transactionRef,
-              message: "payment successful but could not verify payment"
-            });
-          });
+        props.onSuccess({
+          status: "success",
+          transactionRef: reference,
+          data: webResponse,
+        });
         break;
 
       default:
         if (props.handleWebViewMessage) {
           props.handleWebViewMessage(data);
         }
-        console.warn("Unhandled event", webResponse);
         break;
     }
   };

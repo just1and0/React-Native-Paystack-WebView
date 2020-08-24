@@ -1,14 +1,13 @@
 # React-Native-Paystack-WebView
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The package allows you accept payment using paystack and guess what , it doesn't require any form of linking, just install and begin to use .
 
-### [](https://github.com/just1and0/React-Native-Paystack-WebView#warning)Warning 
-
-This Project exposes the secret key when verifying the reference, this has serious security implication and someone nefarious can use it. I advise against verifying the transaction on the client side, as verification should be done on server side. - I wont be held accountable for any security breach.
- 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
 Add React-Native-Paystack-WebView to your project by running;
@@ -19,37 +18,33 @@ or
 
 `yarn add react-native-paystack-webview`
 
-
-
 ### **One more thing**
 
 To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview**
 
-run 
+run
 
-``` yarn add react-native-webview ```
+`yarn add react-native-webview`
 
-for IOS: ```cd iOS && pod install && cd .. ```
+for IOS: `cd iOS && pod install && cd ..`
 
 for expo applications run;
 
-``` expo install react-native-webview```
+`expo install react-native-webview`
 
 and that's it, you're all good to go!
-
-
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
 
 ```javascript
-import PaystackWebView from 'react-native-paystack-webview';
-import React, {Component} from 'react';
-import {View} from 'react-native';
+import PaystackWebView from "react-native-paystack-webview";
+import React, { Component } from "react";
+import { View } from "react-native";
 
 class MyApp extends Component {
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <PaystackWebView
           buttonText="Pay Now"
           showPayButton={false}
@@ -60,8 +55,8 @@ class MyApp extends Component {
           billingMobile="09787377462"
           billingName="Oluwatobi Shokunbi"
           ActivityIndicatorColor="green"
-          SafeAreaViewContainer={{marginTop: 5}}
-          SafeAreaViewContainerModal={{marginTop: 5}}
+          SafeAreaViewContainer={{ marginTop: 5 }}
+          SafeAreaViewContainerModal={{ marginTop: 5 }}
           onCancel={(e) => {
             // handle response here
           }}
@@ -122,8 +117,6 @@ class MyApp extends Component {
 }
 ```
 
-
-
 ## Use ref's
 
 make use of ref's to start transaction. See example below;
@@ -160,10 +153,9 @@ function Pay(){
 }
 ```
 
-
 ## Recurrent Payment
-Once billing of card is successful, you'll get an object data in the success callback. The call back will contain **cardDetails** , this object contains basic details about the card you just billed, save this to your backend.
 
+Once billing of card is successful, you'll get an object data in the success callback. The call back will contain **cardDetails** , this object contains basic details about the card you just billed, save this to your backend.
 
 ```javascript import PaystackWebView from 'react-native-paystack-webview';
 import React, {useRef} from 'react';
@@ -173,7 +165,7 @@ function Pay(){
 const success = (e) =>{
 	// get authorization_code
 	const {authorization_code} = e.cardDetails;
-	
+
 }
   return(
     <View style={{flex: 1}}>
@@ -201,20 +193,19 @@ const success = (e) =>{
 }
 ```
 
+now we have the authorization*code, and other card details, we can bill this card again by using the \_react-native-paystack-helpers* package to bill this card anytime we want to.
 
-now we have the authorization_code, and other card details, we can bill this card again by using the *react-native-paystack-helpers* package to bill this card anytime we want to.
-
-first run; *yarn add react-native-paystack-helpers || npm i react-native-paystack-helpers*
+first run; _yarn add react-native-paystack-helpers || npm i react-native-paystack-helpers_
 
 now to bill the card again;
 
-```javascript  
+```javascript
 import React from 'react';
 import {Transaction} from 'react-native-paystack-helpers';
 import {View, TouchableOpacity,Text} from 'react-native';
 
 function Pay(){
-    
+
 const bill = () =>{
 	// get authorization_code
 	const aa = await Transaction.ChargeAuthorization(
@@ -224,11 +215,11 @@ const bill = () =>{
       billing-email,
     );
     console.log(aa);
-	
+
 }
   return(
     <View style={{flex: 1}}>
-    
+
 
             <TouchableOpacity onPress={()=> bill()}>
              <Text>Bill again</Text>
@@ -238,7 +229,6 @@ const bill = () =>{
 }
 ```
 
-
 ## Note:
 
 You can also make use of the new props `autoStart` to initiate payment once the screen mounts. Just see `autoStart={true}`. This is set to `false` by default.
@@ -247,28 +237,28 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 
 #### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props)all React-Native-Paystack-WebView API
 
-| Name                         |                       use/description                        |              extra |
-| :--------------------------- | :----------------------------------------------------------: | -----------------: |
-| `buttonText`                 |                  Defines text on the button                  | default: `Pay Now` |
-| `textStyles`                 |              Defines styles for text in button               |             `nill` |
-| `btnStyles`                  |                   Defines style for button                   |             `nill` |
-| `paystackKey`                | Public or Private paystack key(visit paystack.com to get yours) |             `nill` |
-| `paystackSecretKey`          |  Paystack Secret key(visit paystack.com to get yours)    |             `nill` |
-| `amount`                     |                      Amount to be paid                       |             `nill` |
-| `ActivityIndicatorColor`     |                       color of loader                        |   default: `green` |
-| `billingEmail(required by paystack)`               |                        Billers email                         |    default: `nill` |
-| `billingMobile`              |                        Billers mobile                        |    default: `nill` |
-| `billingName`                |                         Billers Name                         |    default: `nill` |
-| `channels`                   | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={JSON.stringify(["card","ussd"])} `                   |    default: `"card"` |
-| `onCancel`                   |              callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback     |    default: `nill` |
-| `onSuccess`                  | callback function if transaction was successful and verified (it will also return the transactionRef number in the callback ) |    default: `nill` |
-| `autoStart`                  |            Auto start payment once page is opened            |   default: `false` |
-| `SafeAreaViewContainer`      |              style for SafeAreaView containter               |    default: `nill` |
-| `SafeAreaViewContainerModal` |               style for SafeAreaView for modal               |    default: `nill` |
-| `showPayButton`              |            Control the Pay Now button visibility             |    default: `true` |
-| `refNumber`              |            Reference number, if you have already generated one             |    default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
-| `renderButton`              |           Render your own Pay Now button, should be used when `showPayButton` is `true`            |    default: `null` |
-| `handleWebViewMessage`              |         Will be called when a WebView receives a message            |    default: `true` |
+| Name                                 |                                                                                           use/description                                                                                           |                                                      extra |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
+| `buttonText`                         |                                                                                     Defines text on the button                                                                                      |                                         default: `Pay Now` |
+| `textStyles`                         |                                                                                  Defines styles for text in button                                                                                  |                                                     `nill` |
+| `btnStyles`                          |                                                                                      Defines style for button                                                                                       |                                                     `nill` |
+| `paystackKey`                        |                                                                   Public or Private paystack key(visit paystack.com to get yours)                                                                   |                                                     `nill` |
+| `paystackSecretKey`                  |                                                                        Paystack Secret key(visit paystack.com to get yours)                                                                         |                                                     `nill` |
+| `amount`                             |                                                                                          Amount to be paid                                                                                          |                                                     `nill` |
+| `ActivityIndicatorColor`             |                                                                                           color of loader                                                                                           |                                           default: `green` |
+| `billingEmail(required by paystack)` |                                                                                            Billers email                                                                                            |                                            default: `nill` |
+| `billingMobile`                      |                                                                                           Billers mobile                                                                                            |                                            default: `nill` |
+| `billingName`                        |                                                                                            Billers Name                                                                                             |                                            default: `nill` |
+| `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={JSON.stringify(["card","ussd"])}` |                                          default: `"card"` |
+| `onCancel`                           |               callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback               |                                            default: `nill` |
+| `onSuccess`                          |                                    callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                                    |                                            default: `nill` |
+| `autoStart`                          |                                                                               Auto start payment once page is opened                                                                                |                                           default: `false` |
+| `SafeAreaViewContainer`              |                                                                                  style for SafeAreaView containter                                                                                  |                                            default: `nill` |
+| `SafeAreaViewContainerModal`         |                                                                                  style for SafeAreaView for modal                                                                                   |                                            default: `nill` |
+| `showPayButton`                      |                                                                                Control the Pay Now button visibility                                                                                |                                            default: `true` |
+| `refNumber`                          |                                                                         Reference number, if you have already generated one                                                                         | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
+| `renderButton`                       |                                                            Render your own Pay Now button, should be used when `showPayButton` is `true`                                                            |                                            default: `null` |
+| `handleWebViewMessage`               |                                                                          Will be called when a WebView receives a message                                                                           |                                            default: `true` |
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
@@ -278,19 +268,16 @@ What to help make this package even more awesome? [Read how to contribute](https
 
 This project is licensed under MIT license.
 
-## Disclamier
-Do not put your seceret key in production applications, as it is not safe.  I won't be held accountable for any lost, hack or security breach.
-
 ## Related Projects
 
 - [React-Native-quidpay-WebView](https://github.com/react-native-nigeria/react-native-quidpay-webview)
 - [React-Native-rave-WebView](https://github.com/react-native-nigeria/react-native-rave-webview)
 
 ### Video Tutorial
+
 - [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0)
 
 ### Don't forget to star, like and share :)
-
 
 ## Contributors ✨
 
@@ -313,6 +300,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
