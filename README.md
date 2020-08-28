@@ -58,7 +58,7 @@ function Pay() {
         onCancel={(e) => {
           // handle response here
         }}
-        onSuccess={(e) => {
+        onSuccess={(res) => {
           // handle response here
         }}
         autoStart={false}
@@ -97,7 +97,7 @@ function Pay() {
         onCancel={(e) => {
           // handle response here
         }}
-        onSuccess={(e) => {
+        onSuccess={(res) => {
           // handle response here
         }}
         autoStart={false}
@@ -140,7 +140,7 @@ function Pay(){
         onCancel={(e) => {
           // handle response here
         }}
-        onSuccess={(e) => {
+        onSuccess={(res) => {
           // handle response here
         }}
         ref={paystackWebViewRef}
