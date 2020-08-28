@@ -34,119 +34,123 @@ for expo applications run;
 
 and that's it, you're all good to go!
 
-### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
+### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage 1
 
 ```javascript
+import React from "react";
 import PaystackWebView from "react-native-paystack-webview";
-import React, { Component } from "react";
 import { View } from "react-native";
 
-class MyApp extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <PaystackWebView
-          buttonText="Pay Now"
-          showPayButton={false}
-          paystackKey="your-public-key-here"
-          amount={120000}
-          billingEmail="paystackwebview@something.com"
-          billingMobile="09787377462"
-          billingName="Oluwatobi Shokunbi"
-          ActivityIndicatorColor="green"
-          SafeAreaViewContainer={{ marginTop: 5 }}
-          SafeAreaViewContainerModal={{ marginTop: 5 }}
-          onCancel={(e) => {
-            // handle response here
-          }}
-          onSuccess={(e) => {
-            // handle response here
-          }}
-          autoStart={false}
-        />
-      </View>
-    );
-  }
+function Pay() {
+  return (
+    <View style={{ flex: 1 }}>
+      <PaystackWebView
+        buttonText="Pay Now"
+        showPayButton={false}
+        paystackKey="your-public-key-here"
+        amount={120000}
+        billingEmail="paystackwebview@something.com"
+        billingMobile="09787377462"
+        billingName="Oluwatobi Shokunbi"
+        ActivityIndicatorColor="green"
+        SafeAreaViewContainer={{ marginTop: 5 }}
+        SafeAreaViewContainerModal={{ marginTop: 5 }}
+        onCancel={(e) => {
+          // handle response here
+        }}
+        onSuccess={(e) => {
+          // handle response here
+        }}
+        autoStart={false}
+      />
+    </View>
+  );
 }
 ```
 
-### Usage 2
+### Usage 2 - Custom Pay Button
+
+Make use of a custom payment trigger button. See example below;
 
 ```javascript
+import React from 'react';
 import PaystackWebView from 'react-native-paystack-webview';
-import React, {Component} from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 
-class MyApp extends Component {
-  render() {
-    return (
-      <View style={{flex: 1}}>
-        <PaystackWebView
-          buttonText="Pay Now"
-          showPayButton={false}
-          paystackKey="your-public-key-here"
-          amount={120000}
-          billingEmail="paystackwebview@something.com"
-          billingMobile="09787377462"
-          billingName="Oluwatobi Shokunbi"
-          ActivityIndicatorColor="green"
-          SafeAreaViewContainer={{marginTop: 5}}
-          SafeAreaViewContainerModal={{marginTop: 5}}
-          handleWebViewMessage={(e) => {
-            // handle the message
-          }}
-          onCancel={(e) => {
-            // handle response here
-          }}
-          onSuccess={(e) => {
-            // handle response here
-          }}
-          autoStart={false}
-          refNumber={uuid()} // this is only for cases where you have a reference number generated
-          renderButton={(onPress) => {
-            <Button onPress={onPress}>
-              Pay Now
-            <Button>
-          }}
-        />
-      </View>
-    );
-  }
+function Pay() {
+  return (
+    <View style={{flex: 1}}>
+      <PaystackWebView
+        buttonText="Pay Now"
+        showPayButton={false}
+        paystackKey="your-public-key-here"
+        amount={120000}
+        billingEmail="paystackwebview@something.com"
+        billingMobile="09787377462"
+        billingName="Oluwatobi Shokunbi"
+        ActivityIndicatorColor="green"
+        SafeAreaViewContainer={{marginTop: 5}}
+        SafeAreaViewContainerModal={{marginTop: 5}}
+        handleWebViewMessage={(e) => {
+          // handle the message
+        }}
+        onCancel={(e) => {
+          // handle response here
+        }}
+        onSuccess={(e) => {
+          // handle response here
+        }}
+        autoStart={false}
+        refNumber={uuid()} // this is only for cases where you have a reference number generated
+        renderButton={(onPress) => {
+          <Button onPress={onPress}>
+            Pay Now
+          <Button>
+        }}
+      />
+    </View>
+  );
 }
 ```
 
-## Use ref's
+## Usage 3 - Using Refs
 
-make use of ref's to start transaction. See example below;
+Make use of a `ref` to start transaction. See example below;
 
-```javascript import PaystackWebView from 'react-native-paystack-webview';
-import React, {useRef} from 'react';
-import {View, TouchableOpacity,Text} from 'react-native';
+```javascript
+import React, { useRef } from 'react';
+import PaystackWebView from 'react-native-paystack-webview';
+import { View, TouchableOpacity,Text } from 'react-native';
+
 function Pay(){
-   const childRef = useRef();
+  const paystackWebViewRef = useRef();
 
-  return(
+  return (
     <View style={{flex: 1}}>
-        <PaystackWebView
-          showPayButton={false}
-          paystackKey="your-public-key-here"
-          amount={120000}
-          billingEmail="paystackwebview@something.com"
-          billingMobile="09787377462"
-          billingName="Oluwatobi Shokunbi"
-          ActivityIndicatorColor="green"
-          SafeAreaViewContainer={{marginTop: 5}}
-          SafeAreaViewContainerModal={{marginTop: 5}}
-          onCancel={(e) => {  // handle response here }}
-          onSuccess={(e) => {  // handle response here }}
-           ref={childRef}
-        />
+      <PaystackWebView
+        showPayButton={false}
+        paystackKey="your-public-key-here"
+        amount={120000}
+        billingEmail="paystackwebview@something.com"
+        billingMobile="09787377462"
+        billingName="Oluwatobi Shokunbi"
+        ActivityIndicatorColor="green"
+        SafeAreaViewContainer={{marginTop: 5}}
+        SafeAreaViewContainerModal={{marginTop: 5}}
+        onCancel={(e) => {
+          // handle response here
+        }}
+        onSuccess={(e) => {
+          // handle response here
+        }}
+        ref={paystackWebViewRef}
+      />
 
-            <TouchableOpacity onPress={()=> childRef.current.StartTransaction()}>
-             <Text>pay now</Text>
-						<TouchableOpacity/>
+        <TouchableOpacity onPress={()=> paystackWebViewRef.current.StartTransaction()}>
+          <Text>Pay Now</Text>
+        <TouchableOpacity/>
       </View>
-)
+  );
 }
 ```
 
