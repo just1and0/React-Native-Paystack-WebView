@@ -103,11 +103,11 @@ class MyApp extends Component {
           }}
           autoStart={false}
           refNumber={uuid()} // this is only for cases where you have a reference number generated
-          renderButton=((onPress) => {
+          renderButton={(onPress) => {
             <Button onPress={onPress}>
               Pay Now
             <Button>
-          })
+          }}
         />
       </View>
     );
