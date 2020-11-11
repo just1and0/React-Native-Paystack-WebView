@@ -45,6 +45,14 @@ function Paystack(props, ref) {
     },
   }));
 
+  const {amount} = props.amount;
+
+  const toKobo = (amount) => {
+    return (parseFloat(amount) * 100);
+  };
+
+  const koboValue = toKobo(amount);
+
   const Paystackcontent = `   
       <!DOCTYPE html>
       <html lang="en">
@@ -67,7 +75,7 @@ function Paystack(props, ref) {
                               var handler = PaystackPop.setup({ 
                                 key: '${props.paystackKey}',
                                 email: '${props.billingEmail}',
-                                amount: ${props.amount}00, 
+                                amount: ${koboValue}, 
                                 channels: ${props.channels},
                                 currency: ${props.currency},
                                 ref: '${props.refNumber}', // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
