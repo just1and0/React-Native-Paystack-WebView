@@ -67,7 +67,7 @@ function Paystack(props, ref) {
                               var handler = PaystackPop.setup({ 
                                 key: '${props.paystackKey}',
                                 email: '${props.billingEmail}',
-                                amount: ${props.amount}00, 
+                                amount: ${props.amount}${props.hasMantissa ? '' : '00'}, 
                                 channels: ${props.channels},
                                 currency: ${props.currency},
                                 ref: '${props.refNumber}', // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
@@ -180,6 +180,7 @@ export default forwardRef(Paystack);
 Paystack.defaultProps = {
   buttonText: "Pay Now",
   amount: 10,
+  hasMantissa: false,
   ActivityIndicatorColor: "green",
   autoStart: false,
   showPayButton: true,
