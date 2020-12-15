@@ -67,7 +67,7 @@ function Paystack(props, ref) {
                               var handler = PaystackPop.setup({ 
                                 key: '${props.paystackKey}',
                                 email: '${props.billingEmail}',
-                                amount: ${props.amount}${props.hasMantissa ? '' : '00'}, 
+                                amount: ${props.hasMantissa ? `${props.amount * 100}` : `${props.amount}00`}, 
                                 channels: ${props.channels},
                                 currency: ${props.currency},
                                 ref: '${props.refNumber}', // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
