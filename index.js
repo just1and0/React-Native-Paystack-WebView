@@ -45,7 +45,7 @@ function Paystack(props, ref) {
     },
   }));
 
-  const {amount} = props.amount;
+  const {amount} = props;
 
   const toKobo = (amount) => {
     return (parseFloat(amount) * 100);
