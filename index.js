@@ -69,7 +69,7 @@ function Paystack(props, ref) {
                                 email: '${props.billingEmail}',
                                 amount: ${props.amount}00, 
                                 channels: ${props.channels},
-                                currency: ${props.currency},
+                                currency: '${props.currency}',
                                 ref: '${props.refNumber}', // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                                 metadata: {
                                 custom_fields: [
@@ -111,7 +111,7 @@ function Paystack(props, ref) {
         setshowModal(false);
         const reference = webResponse.transactionRef;
 
-        props.onSuccess({
+        props?.onSuccess({
           status: "success",
           transactionRef: reference,
           data: webResponse,
