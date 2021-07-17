@@ -7,13 +7,8 @@
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint",
-    "lint:staged": "lint-staged",
+    "lint-staged": "lint-staged",
     "prettier": "prettier --write"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
