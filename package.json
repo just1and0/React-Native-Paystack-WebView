@@ -1,14 +1,14 @@
 {
   "name": "react-native-paystack-webview",
-  "version": "3.2.1",
+  "version": "4.0.2",
   "description": "This package allows you to accept payment in your react native project using paystack ",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint",
+    "lint": "tsc --project ./tsconfig.json --noEmit && eslint --ext=jsx,ts,tsx src",
     "lint-staged": "lint-staged",
-    "prettier": "prettier --write"
+    "prettier": "prettier --write",
+    "prepare": "babel --out-dir dist js"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
@@ -19,7 +19,8 @@
     ]
   },
   "dependencies": {
-    "react-native-webview": "^11.6.5"
+    "react-native-webview": "^11.6.5",
+    "validator": "^13.6.0"
   },
   "repository": {
     "type": "git",
@@ -42,11 +43,13 @@
   "homepage": "https://github.com/just1and0/React-Native-Paystack-WebView#readme",
   "devDependencies": {
     "@types/react": "^16.8.3",
-    "@types/react-native": "^0.63.13",
+    "@types/react-native": "^0.64.12",
+    "@types/validator": "^13.6.3",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
-    "@typescript-eslint/parser": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.4",
     "eslint": "^7.30.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
