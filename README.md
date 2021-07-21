@@ -23,13 +23,15 @@ run
 
 `yarn add react-native-webview`
 
-for IOS: `cd iOS && pod install && cd ..`
+for iOS: `cd iOS && pod install && cd ..`
 
 for expo applications run;
 
 `expo install react-native-webview`
 
 and that's it, you're all good to go!
+
+<img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage 1
 
@@ -47,8 +49,6 @@ function Pay() {
         paystackKey="your-public-key-here"
         amount={'25000.00'}
         billingEmail="paystackwebview@something.com"
-        billingMobile="09787377462"
-        billingName="Oluwatobi Shokunbi"
         activityIndicatorColor="green"
         onCancel={(e) => {
           // handle response here
@@ -79,10 +79,7 @@ function Pay(){
     <View style={{flex: 1}}>
       <PaystackWebView
         paystackKey="your-public-key-here"
-        amount={"2400.00"}
         billingEmail="paystackwebview@something.com"
-        billingMobile="09787377462"
-        billingName="Oluwatobi Shokunbi"
         amount={'25000.00'}
         onCancel={(e) => {
           // handle response here
