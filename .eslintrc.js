@@ -46,5 +46,7 @@ module.exports = {
     'react/jsx-filename-extension': IGNORE,
     'no-case-declarations': IGNORE,
     'no-unused-expressions': IGNORE,
+    'object-curly-newline': IGNORE,
+    'prefer-template': IGNORE,
   },
 };

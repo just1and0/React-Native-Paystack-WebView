@@ -1,9 +1,5 @@
-import React, {
-  useState, useEffect, forwardRef, useRef, useImperativeHandle,
-} from 'react';
-import {
-  Modal, View, ActivityIndicator, SafeAreaView,
-} from 'react-native';
+import React, { useState, useEffect, forwardRef, useRef, useImperativeHandle } from 'react';
+import { Modal, View, ActivityIndicator, SafeAreaView } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
 import { getAmountValueInKobo, getChannels } from './helpers';
 import { PayStackProps, PayStackRef } from './types';
@@ -82,7 +78,7 @@ const Paystack: React.ForwardRefRenderFunction<PayStackRef, PayStackProps> = (
                 metadata: {
                 custom_fields: [
                         {
-                        display_name:  '${`${firstName} ${lastName}`}',
+                        display_name:  '${firstName + ' ' + lastName}',
                         variable_name:  '${billingName}',
                         value:''
                         }
@@ -105,7 +101,6 @@ const Paystack: React.ForwardRefRenderFunction<PayStackRef, PayStackProps> = (
 
   const messageReceived = (data: string) => {
     const webResponse = JSON.parse(data);
-    console.log('WEB RES===>', webResponse);
     if (handleWebViewMessage) {
       handleWebViewMessage(data);
     }
@@ -119,12 +114,13 @@ const Paystack: React.ForwardRefRenderFunction<PayStackRef, PayStackProps> = (
         setshowModal(false);
         const reference = webResponse.transactionRef;
 
-        onSuccess
-          && onSuccess({
+        if (onSuccess) {
+          onSuccess({
             status: 'success',
             transactionRef: reference,
             data: webResponse,
           });
+        }
         break;
 
       default:
@@ -137,7 +133,6 @@ const Paystack: React.ForwardRefRenderFunction<PayStackRef, PayStackProps> = (
 
   const onNavigationStateChange = (state: WebViewNavigation) => {
     const { url } = state;
-    console.log('NAVIGATION STATE', state);
     if (url === CLOSE_URL) {
       setshowModal(false);
     }

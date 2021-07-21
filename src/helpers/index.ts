@@ -1,9 +1,7 @@
 import validator from 'validator';
 import { PaymentChannels } from 'types';
 
-const {
-  isDecimal, isFloat, isInt, toFloat, toInt,
-} = validator;
+const { isDecimal, isFloat, isInt, toFloat, toInt } = validator;
 
 type AmountValue = string | number;
 
@@ -16,7 +14,7 @@ function isString(value: any): boolean {
 }
 
 export function isValidStringAmount(stringAmount: string): boolean {
-  if (stringAmount.endsWith('.')) {
+  if (isString(stringAmount) && stringAmount?.endsWith('.')) {
     return false;
   }
 
