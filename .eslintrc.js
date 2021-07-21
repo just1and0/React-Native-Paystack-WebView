@@ -28,8 +28,23 @@ module.exports = {
   rules: {
     // Allow imports from dev and peer dependencies
     'import/no-extraneous-dependencies': [ERROR, { devDependencies: true, peerDependencies: true }],
-    'no-unused-vars': IGNORE,
+    'no-unused-vars': WARN,
     'no-shadow': IGNORE,
     'import/no-unresolved': IGNORE,
+    'import/extensions': [
+      ERROR,
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'react/prop-types': IGNORE,
+    'no-use-before-define': IGNORE,
+    'react/jsx-filename-extension': IGNORE,
+    'no-case-declarations': IGNORE,
+    'no-unused-expressions': IGNORE,
   },
 };
