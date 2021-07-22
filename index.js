@@ -158,6 +158,8 @@ function Paystack(props, ref) {
             }}
             onLoadStart={() => setisLoading(true)}
             onLoadEnd={() => setisLoading(false)}
+            cacheEnabled={false}
+            cacheMode={'LOAD_NO_CACHE'}
           />
 
           {isLoading && (
