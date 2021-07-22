@@ -1,0 +1,26 @@
+{
+  "include": ["src/*"],
+  "exclude": ["node_modules", "**/*.test.*"],
+  "compilerOptions": {
+    "baseUrl": "src",
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "lib": ["es2017"],
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "lib",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "allowJs": true,
+    "typeRoots": ["./src/types"]
+  }
+}
