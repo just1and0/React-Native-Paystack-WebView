@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { PaymentChannels } from 'types';
+import { PaymentChannels } from './types/index';
 
 const { isDecimal, isFloat, isInt, toFloat, toInt } = validator;
 

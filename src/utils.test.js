@@ -7,7 +7,7 @@ import {
   toNumber,
   getAmountValueInKobo,
   getChannels,
-} from '../helpers';
+} from './helper';
 
 describe('Utility functions work properly', () => {
   test('getChannels should return a stingified array with comma', () => {

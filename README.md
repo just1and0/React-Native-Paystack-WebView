@@ -3,7 +3,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 
-The package allows you accept payment using paystack and guess what , it doesn't require any form of linking, just install and begin to use .
+The package allows you accept payment using paystack, install, add keys and use. No stress :) 
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
@@ -17,7 +17,7 @@ or
 
 ### **One more thing**
 
-To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview**
+To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview** 
 
 run
 
@@ -37,15 +37,13 @@ and that's it, you're all good to go!
 
 ```javascript
 import React from 'react';
-import PaystackWebView from 'react-native-paystack-webview';
+import  { Paystack }  from 'react-native-paystack-webview';
 import { View } from 'react-native';
 
 function Pay() {
   return (
     <View style={{ flex: 1 }}>
-      <PaystackWebView
-        buttonText="Pay Now"
-        showPayButton={false}
+      <Paystack  
         paystackKey="your-public-key-here"
         amount={'25000.00'}
         billingEmail="paystackwebview@something.com"
@@ -63,21 +61,21 @@ function Pay() {
 }
 ```
 
-## Usage 3 - Using Refs
+## Usage 2 - Using Refs
 
 Make use of a `ref` to start transaction. See example below;
 
 ```javascript
 import React, { useRef } from 'react';
-import PaystackWebView from 'react-native-paystack-webview';
+import  { Paystack , paystackProps}  from 'react-native-paystack-webview';
 import { View, TouchableOpacity,Text } from 'react-native';
 
 function Pay(){
-  const paystackWebViewRef = useRef();
+  const paystackWebViewRef = useRef<paystackProps.PayStackRef>(); 
 
   return (
     <View style={{flex: 1}}>
-      <PaystackWebView
+      <Paystack
         paystackKey="your-public-key-here"
         billingEmail="paystackwebview@something.com"
         amount={'25000.00'}
@@ -100,7 +98,7 @@ function Pay(){
 
 ## Note:
 
-You can also make use of the new props `autoStart` to initiate payment once the screen mounts. Just see `autoStart={true}`. This is set to `false` by default.
+You can also make use of the new props `autoStart` to initiate payment once the screen mounts. Just set `autoStart={true}`. This is set to `false` by default.
 
 ## API's
 
@@ -121,14 +119,10 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `refNumber`                          |                                                                         Reference number, if you have already generated one                                                                         | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
 | `handleWebViewMessage`               |                                                                          Will be called when a WebView receives a message                                                                           |                                            default: `true` |
 
-## Upcoming:
-
-- official [Paystack-iOS](https://github.com/PaystackHQ/paystack-ios/tree/master/Paystack) SDK integration 📗
-- official [Paystack-Android](https://github.com/PaystackHQ/paystack-android) SDK integration 📘
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
-What to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/contribution.md)
+Want to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/contribution.md) and feel free to send in your PR!
 
 ## [](https://github.com/just1and0/React-Native-Paystack-WebView#licensing)Licensing
 

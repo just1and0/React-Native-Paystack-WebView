@@ -1,3 +1,4 @@
+import * as React from 'react';
 export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
 
 export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
@@ -21,11 +22,12 @@ export interface PayStackProps {
   channels?: PaymentChannels[];
   refNumber?: string;
   billingName?: string;
-  handleWebViewMessage?: (string) => void;
-  onCancel: (Response) => void;
-  onSuccess: (SuccessResponse) => void;
+  handleWebViewMessage?: (string: string) => void;
+  onCancel: (Response: Response) => void;
+  onSuccess: (SuccessResponse:SuccessResponse) => void;
   autoStart?: boolean;
   activityIndicatorColor?: string;
+  ref: React.ReactElement;
 }
 
 export interface PayStackRef {
