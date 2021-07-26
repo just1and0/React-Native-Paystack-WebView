@@ -19,15 +19,7 @@ or
 
 To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview** 
 
-run
-
-`yarn add react-native-webview`
-
 for iOS: `cd iOS && pod install && cd ..`
-
-for expo applications run;
-
-`expo install react-native-webview`
 
 and that's it, you're all good to go!
 
