@@ -98,6 +98,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "omivrex",
+      "name": "Rex Omiv",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42608841?v=4",
+      "profile": "https://github.com/omivrex",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
