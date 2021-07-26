@@ -152,6 +152,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
           onLoadEnd={() => setisLoading(false)}
           onNavigationStateChange={onNavigationStateChange}
           ref={webView}
+          cacheEnabled={false}
+          cacheMode={'LOAD_NO_CACHE'}
         />
 
         {isLoading && (
