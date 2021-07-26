@@ -1,10 +1,14 @@
 # React-Native-Paystack-WebView
 
+ 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+ 
 
-The package allows you accept payment using paystack and guess what , it doesn't require any form of linking, just install and begin to use .
+The package allows you accept payment using paystack, install, add keys and use. No stress :) 
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
@@ -18,13 +22,13 @@ or
 
 ### **One more thing**
 
-To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview**
+To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview** 
 
 run
 
 `yarn add react-native-webview`
 
-for IOS: `cd iOS && pod install && cd ..`
+for iOS: `cd iOS && pod install && cd ..`
 
 for expo applications run;
 
@@ -32,109 +36,54 @@ for expo applications run;
 
 and that's it, you're all good to go!
 
+<img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
+
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage 1
 
 ```javascript
-import React from "react";
-import PaystackWebView from "react-native-paystack-webview";
-import { View } from "react-native";
-
-function Pay() {
-  return (
-    <View style={{ flex: 1 }}>
-      <PaystackWebView
-        buttonText="Pay Now"
-        showPayButton={false}
-        paystackKey="your-public-key-here"
-        amount={120000}
-        billingEmail="paystackwebview@something.com"
-        billingMobile="09787377462"
-        billingName="Oluwatobi Shokunbi"
-        ActivityIndicatorColor="green"
-        SafeAreaViewContainer={{ marginTop: 5 }}
-        SafeAreaViewContainerModal={{ marginTop: 5 }}
-        onCancel={(e) => {
-          // handle response here
-        }}
-        onSuccess={(res) => {
-          // handle response here
-        }}
-        autoStart={false}
-      />
-    </View>
-  );
-}
-```
-
-### Usage 2 - Custom Pay Button
-
-Make use of a custom payment trigger button. See example below;
-
-```javascript
 import React from 'react';
-import PaystackWebView from 'react-native-paystack-webview';
+import  { Paystack }  from 'react-native-paystack-webview';
 import { View } from 'react-native';
 
 function Pay() {
   return (
-    <View style={{flex: 1}}>
-      <PaystackWebView
-        buttonText="Pay Now"
-        showPayButton={false}
+    <View style={{ flex: 1 }}>
+      <Paystack  
         paystackKey="your-public-key-here"
-        amount={120000}
+        amount={'25000.00'}
         billingEmail="paystackwebview@something.com"
-        billingMobile="09787377462"
-        billingName="Oluwatobi Shokunbi"
-        ActivityIndicatorColor="green"
-        SafeAreaViewContainer={{marginTop: 5}}
-        SafeAreaViewContainerModal={{marginTop: 5}}
-        handleWebViewMessage={(e) => {
-          // handle the message
-        }}
+        activityIndicatorColor="green"
         onCancel={(e) => {
           // handle response here
         }}
         onSuccess={(res) => {
           // handle response here
         }}
-        autoStart={false}
-        refNumber={uuid()} // this is only for cases where you have a reference number generated
-        renderButton={(onPress) => {
-          <Button onPress={onPress}>
-            Pay Now
-          <Button>
-        }}
+        autoStart={true}
       />
     </View>
   );
 }
 ```
 
-## Usage 3 - Using Refs
+## Usage 2 - Using Refs
 
 Make use of a `ref` to start transaction. See example below;
 
 ```javascript
 import React, { useRef } from 'react';
-import PaystackWebView from 'react-native-paystack-webview';
+import  { Paystack , paystackProps}  from 'react-native-paystack-webview';
 import { View, TouchableOpacity,Text } from 'react-native';
 
 function Pay(){
-  const paystackWebViewRef = useRef();
+  const paystackWebViewRef = useRef<paystackProps.PayStackRef>(); 
 
   return (
     <View style={{flex: 1}}>
-      <PaystackWebView
-        showPayButton={false}
+      <Paystack
         paystackKey="your-public-key-here"
-        amount={120000}
         billingEmail="paystackwebview@something.com"
-        billingMobile="09787377462"
-        billingName="Oluwatobi Shokunbi"
-        ActivityIndicatorColor="green"
-        SafeAreaViewContainer={{marginTop: 5}}
-        SafeAreaViewContainerModal={{marginTop: 5}}
+        amount={'25000.00'}
         onCancel={(e) => {
           // handle response here
         }}
@@ -144,7 +93,7 @@ function Pay(){
         ref={paystackWebViewRef}
       />
 
-        <TouchableOpacity onPress={()=> paystackWebViewRef.current.StartTransaction()}>
+        <TouchableOpacity onPress={()=> paystackWebViewRef.current.startTransaction()}>
           <Text>Pay Now</Text>
         <TouchableOpacity/>
       </View>
@@ -152,22 +101,15 @@ function Pay(){
 }
 ```
 
-## Note:
-
-You can also make use of the new props `autoStart` to initiate payment once the screen mounts. Just see `autoStart={true}`. This is set to `false` by default.
-
 ## API's
 
 #### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props)all React-Native-Paystack-WebView API
 
 | Name                                 |                                                                                           use/description                                                                                           |                                                      extra |
 | :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
-| `buttonText`                         |                                                                                     Defines text on the button                                                                                      |                                         default: `Pay Now` |
-| `textStyles`                         |                                                                                  Defines styles for text in button                                                                                  |                                                     `nill` |
-| `btnStyles`                          |                                                                                      Defines style for button                                                                                       |                                                     `nill` |
 | `paystackKey`                        |                                                                   Public or Private paystack key(visit paystack.com to get yours)                                                                   |                                                     `nill` |
 | `amount`                             |                                                                                          Amount to be paid                                                                                          |                                                     `nill` |
-| `ActivityIndicatorColor`             |                                                                                           color of loader                                                                                           |                                           default: `green` |
+| `activityIndicatorColor`             |                                                                                           color of loader                                                                                           |                                           default: `green` |
 | `billingEmail(required by paystack)` |                                                                                            Billers email                                                                                            |                                            default: `nill` |
 | `billingMobile`                      |                                                                                           Billers mobile                                                                                            |                                            default: `nill` |
 | `billingName`                        |                                                                                            Billers Name                                                                                             |                                            default: `nill` |
@@ -175,16 +117,13 @@ You can also make use of the new props `autoStart` to initiate payment once the 
 | `onCancel`                           |               callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback               |                                            default: `nill` |
 | `onSuccess`                          |                                    callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                                    |                                            default: `nill` |
 | `autoStart`                          |                                                                               Auto start payment once page is opened                                                                                |                                           default: `false` |
-| `SafeAreaViewContainer`              |                                                                                  style for SafeAreaView containter                                                                                  |                                            default: `nill` |
-| `SafeAreaViewContainerModal`         |                                                                                  style for SafeAreaView for modal                                                                                   |                                            default: `nill` |
-| `showPayButton`                      |                                                                                Control the Pay Now button visibility                                                                                |                                            default: `true` |
 | `refNumber`                          |                                                                         Reference number, if you have already generated one                                                                         | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
-| `renderButton`                       |                                                            Render your own Pay Now button, should be used when `showPayButton` is `true`                                                            |                                            default: `null` |
 | `handleWebViewMessage`               |                                                                          Will be called when a WebView receives a message                                                                           |                                            default: `true` |
+
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
-What to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/contribution.md)
+Want to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/contribution.md) and feel free to send in your PR!
 
 ## [](https://github.com/just1and0/React-Native-Paystack-WebView#licensing)Licensing
 
@@ -220,8 +159,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://johnayeni.xyz"><img src="https://avatars0.githubusercontent.com/u/22295092?v=4?s=100" width="100px;" alt=""/><br /><sub><b>John Ayeni</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=johnayeni" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/majirieyowel"><img src="https://avatars.githubusercontent.com/u/30162976?v=4?s=100" width="100px;" alt=""/><br /><sub><b>majirieyowel</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=majirieyowel" title="Code">💻</a></td>
-  </tr>
+     <td align="center"><a href="https://github.com/majirieyowel"><img src="https://avatars.githubusercontent.com/u/30162976?v=4?s=100" width="100px;" alt=""/><br /><sub><b>majirieyowel</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=majirieyowel" title="Code">💻</a></td>
+     <td align="center"><a href="https://github.com/Zeusmist"><img src="https://avatars.githubusercontent.com/u/51177741?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Erinayo Obidu</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3AZeusmist" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/surafelbm"><img src="https://avatars.githubusercontent.com/u/11531221?v=4?s=100" width="100px;" alt=""/><br /><sub><b>surafelbm</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3Asurafelbm" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/omivrex"><img src="https://avatars.githubusercontent.com/u/42608841?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rex Omiv</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3Aomivrex" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/ossyfizy1"><img src="https://avatars.githubusercontent.com/u/18512476?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Osagie Osaigbovo Charles</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3Aossyfizy1" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/Ujjalcha1"><img src="https://avatars.githubusercontent.com/u/40722840?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ujjalcha1</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3AUjjalcha1" title="Bug reports">🐛</a></td>
+   </tr>
 </table>
 
 <!-- markdownlint-restore -->
