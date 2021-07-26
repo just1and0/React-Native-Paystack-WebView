@@ -82,6 +82,15 @@
       ]
     },
     {
+      "login": "majirieyowel",
+      "name": "majirieyowel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30162976?v=4",
+      "profile": "https://github.com/majirieyowel",
+      "contributions": [
+        "code"
+        ]
+    },
+    {
       "login": "Zeusmist",
       "name": "David Erinayo Obidu",
       "avatar_url": "https://avatars.githubusercontent.com/u/51177741?v=4",
@@ -123,7 +132,7 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/40722840?v=4",
       "profile": "https://github.com/Ujjalcha1",
       "contributions": [
-        "bug"
+        "bug" 
       ]
     }
   ],
