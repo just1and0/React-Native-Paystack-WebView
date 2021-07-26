@@ -30,6 +30,17 @@ function Paystack(props, ref) {
     autoStartCheck();
   }, []);
 
+  useEffect(() => {
+    const options = [];
+    for (let key in props.metadata) {
+      let option = props.metadata[key];
+      if (option) {
+        options.push(`${key}:'${option}'`);
+      }
+    }
+    setMetadata(options.join(','));
+  }, [props.metadata]);
+
   const autoStartCheck = () => {
     if (props.autoStart) {
       setshowModal(true);
@@ -78,7 +89,8 @@ function Paystack(props, ref) {
                                         variable_name:  '${props.billingName}',
                                         value:''
                                         }
-                                ]
+                                ],
+                                ${metadata}
                                 },
                                 callback: function(response){
                                       var resp = {event:'successful', transactionRef:response};
@@ -204,4 +216,5 @@ Paystack.defaultProps = {
   currency: "NGN",
   refNumber: "" + Math.floor(Math.random() * 1000000000 + 1),
   channels: ["card"],
+  metadata: {},
 };
