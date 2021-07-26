@@ -13,11 +13,11 @@ const App = () => {
   return (
     <View style={{justifyContent:'center', backgroundColor:'red', flex:1}}>
       <Paystack
-        paystackKey={'pk_test_13194038d04aaba4e52e0e901ec1457bf33df2f9'}
+        paystackKey={'your-paystack-key-here'}
         onCancel={() => { }}
         onSuccess={() => { }}
-        billingEmail={'ayoshokz@gmail.com'}
-        billingName={'Shokunbi David'}
+        billingEmail={'your-email-here'}
+        billingName={'your-name-here'}
         amount={'700.90'}
         ref={paystackWebViewRef}
         autoStart={true}

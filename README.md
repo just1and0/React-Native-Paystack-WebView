@@ -96,10 +96,6 @@ function Pay(){
 }
 ```
 
-## Note:
-
-You can also make use of the new props `autoStart` to initiate payment once the screen mounts. Just set `autoStart={true}`. This is set to `false` by default.
-
 ## API's
 
 #### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props)all React-Native-Paystack-WebView API
