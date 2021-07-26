@@ -157,6 +157,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Zeusmist"><img src="https://avatars.githubusercontent.com/u/51177741?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Erinayo Obidu</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3AZeusmist" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/surafelbm"><img src="https://avatars.githubusercontent.com/u/11531221?v=4?s=100" width="100px;" alt=""/><br /><sub><b>surafelbm</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3Asurafelbm" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/omivrex"><img src="https://avatars.githubusercontent.com/u/42608841?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rex Omiv</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3Aomivrex" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/ossyfizy1"><img src="https://avatars.githubusercontent.com/u/18512476?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Osagie Osaigbovo Charles</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3Aossyfizy1" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
