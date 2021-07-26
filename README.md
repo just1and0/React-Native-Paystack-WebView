@@ -156,6 +156,37 @@ function Pay(){
 }
 ```
 
+## Use with Medadata
+```
+<Paystack
+  buttonText="Pay now"
+  showPayButton={true}
+  paystackKey="your-public-key-here"
+  paystackSecretKey="your-secret-key-here"
+  amount={amount}
+  billingEmail={email}
+  billingMobile={phone}
+  billingName={name}
+  ActivityIndicatorColor="green"
+  onSuccess={(tranRef) => {
+    handleSuccess(tranRef);
+  }}
+  onCancel={(e) => {
+    handleError(e);
+  }}
+  autoStart={false}
+  refNumber={refNumber}
+  metadata={metadata}
+  /* For custom pay button */
+  renderButton={(onPress) => (
+    <Button style={styles.voteButton}>
+      <Text>{label || 'Pay now'}</Text>
+    </Button>
+  )}
+/>
+
+```
+
 
 ## Recurrent Payment
 Once billing of card is successful, you'll get an object data in the success callback. The call back will contain **cardDetails** , this object contains basic details about the card you just billed, save this to your backend.

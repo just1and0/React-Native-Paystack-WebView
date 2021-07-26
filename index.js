@@ -36,10 +36,10 @@ function Paystack(props, ref) {
     for (let key in props.metadata) {
       let option = props.metadata[key];
       if (option) {
-        options.push(`${key}:${option}`);
+        options.push(`${key}:'${option}'`);
       }
     }
-    setMetadata(options.join(","));
+    setMetadata(options.join(','));
   }, [props.metadata]);
 
   const autoStartCheck = () => {
