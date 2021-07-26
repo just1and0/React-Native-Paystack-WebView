@@ -80,6 +80,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Zeusmist",
+      "name": "David Erinayo Obidu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51177741?v=4",
+      "profile": "https://github.com/Zeusmist",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
