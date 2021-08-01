@@ -1,31 +1,73 @@
 {
   "name": "react-native-paystack-webview",
-  "version": "3.0.8",
+  "version": "4.0.3",
   "description": "This package allows you to accept payment in your react native project using paystack ",
-  "main": "index.js",
+  "homepage": "https://github.com/just1and0/React-Native-Paystack-WebView#readme",
+  "main": "lib/index.js",
+  "types": "lib/index.ts",
+  "author": "Oluwatobi Shokunbi  <ayoshokz@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "android",
+    "ios",
+    "lib",
+    "react-native-paystack-webview.podspec",
+    "!.DS_Store",
+    "!.gradle",
+    "!.idea",
+    "!build",
+    "!gradle",
+    "!*.iml",
+    "!gradlew",
+    "!gradlew.bat",
+    "!local.properties",
+    "!project.xcworkspace",
+    "!xcshareddata",
+    "!xcuserdata"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "rm -rf lib && tsc -p .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prepare": "yarn compile",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/runtime": "^7.14.6",
+    "@react-native-community/eslint-config": "^3.0.0",
+    "@types/jest": "^26.0.24",
+    "@types/react-native": "^0.64.12",
+    "@types/react-test-renderer": "^17.0.1",
+    "@types/validator": "^13.6.3",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.30.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.66.1",
+    "react": "^17.0.2",
+    "react-native": "^0.64.2",
+    "react-test-renderer": "^17.0.2",
+    "typescript": "^4.3.5"
   },
   "peerDependencies": {
-    "react-native-webview": "*"
+    "react": "*",
+    "react-native": "*",
+    "react-native-webview": "*",
+    "validator": "*"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/just1and0/React-Native-Paystack-WebView.git"
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
-  "keywords": [
-    "paystack",
-    "payment",
-    "react",
-    "react",
-    "native",
-    "card",
-    "recurrent-payment"
-  ],
-  "author": "Oluwatobi Shokunbi",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/just1and0/React-Native-Paystack-WebView/issues"
-  },
-  "homepage": "https://github.com/just1and0/React-Native-Paystack-WebView#readme"
+  "dependencies": {
+    "react-native-webview": "*",
+    "validator": "^13.6.0"
+  }
 }
