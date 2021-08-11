@@ -88,7 +88,7 @@
       "profile": "https://github.com/majirieyowel",
       "contributions": [
         "code"
-        ]
+      ]
     },
     {
       "login": "Zeusmist",
@@ -132,7 +132,16 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/40722840?v=4",
       "profile": "https://github.com/Ujjalcha1",
       "contributions": [
-        "bug" 
+        "bug"
+      ]
+    },
+    {
+      "login": "Blac-Panda",
+      "name": "Oyefeso Oluwatunmise",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23406970?v=4",
+      "profile": "http://codexplorer.me",
+      "contributions": [
+        "bug"
       ]
     }
   ],
