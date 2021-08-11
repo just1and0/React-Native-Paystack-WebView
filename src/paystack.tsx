@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, forwardRef, useRef, useImperativeHandle } from 'react';
-import { Modal, View, ActivityIndicator, SafeAreaView } from 'react-native';
+import { Modal, View, ActivityIndicator, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
 import { getAmountValueInKobo, getChannels } from './helper';
 import { PayStackProps, PayStackRef } from './types';
@@ -140,7 +140,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   return (
-    <Modal style={{ flex: 1 }} visible={showModal} animationType="slide" transparent={false}>
+    <Modal style={{ flex: 1 }} visible={showModal} animationType="slide" transparent={false} onRequestClose={()=>setshowModal(false)}>
       <SafeAreaView style={{ flex: 1 }}>
         <WebView
           style={[{ flex: 1 }]}
@@ -159,6 +159,9 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
         {isLoading && (
           <View>
             <ActivityIndicator size="large" color={activityIndicatorColor} />
+            <TouchableOpacity onPress={()=>setshowModal(false)}>
+              <Text style={{textAlign: "center"}} >Close</Text>
+            </TouchableOpacity>
           </View>
         )}
       </SafeAreaView>
