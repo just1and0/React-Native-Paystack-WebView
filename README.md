@@ -92,7 +92,7 @@ function Pay(){
 
         <TouchableOpacity onPress={()=> paystackWebViewRef.current.startTransaction()}>
           <Text>Pay Now</Text>
-        <TouchableOpacity/>
+        </TouchableOpacity>
       </View>
   );
 }
