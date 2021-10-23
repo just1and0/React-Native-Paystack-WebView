@@ -14,6 +14,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     phone,
     lastName,
     firstName,
+    metadata = null,
     amount = '0.00',
     currency = 'NGN',
     channels = ['card'],
@@ -66,35 +67,28 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
             <script type="text/javascript">
               window.onload = payWithPaystack;
               function payWithPaystack(){
-              var handler = PaystackPop.setup({ 
-                key: '${paystackKey}',
-                email: '${billingEmail}',
-                firstname: '${firstName}',
-                lastname: '${lastName}',
-                phone: '${phone}',
-                amount: ${getAmountValueInKobo(amount)}, 
-                currency: '${currency}',
-                ${getChannels(channels)}
-                ${refNumberString}
-                metadata: {
-                custom_fields: [
-                        {
-                        display_name:  '${firstName + ' ' + lastName}',
-                        variable_name:  '${billingName}',
-                        value:''
-                        }
-                ]},
-                callback: function(response){
+                var handler = PaystackPop.setup({ 
+                  key: '${paystackKey}',
+                  email: '${billingEmail}',
+                  firstname: '${firstName}',
+                  lastname: '${lastName}',
+                  phone: '${phone}',
+                  amount: ${getAmountValueInKobo(amount)}, 
+                  currency: '${currency}',
+                  ${getChannels(channels)}
+                  ${refNumberString}
+                  metadata: ${JSON.stringify(metadata)},
+                  callback: function(response){
                       var resp = {event:'successful', transactionRef:response};
-                        window.ReactNativeWebView.postMessage(JSON.stringify(resp))
-                },
-                onClose: function(){
-                    var resp = {event:'cancelled'};
-                    window.ReactNativeWebView.postMessage(JSON.stringify(resp))
-                }
+                      window.ReactNativeWebView.postMessage(JSON.stringify(resp))
+                  },
+                  onClose: function(){
+                      var resp = {event:'cancelled'};
+                      window.ReactNativeWebView.postMessage(JSON.stringify(resp))
+                  }
                 });
                 handler.openIframe();
-                }
+              }
             </script> 
           </body>
       </html> 
