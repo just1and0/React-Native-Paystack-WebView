@@ -116,7 +116,7 @@ function Pay(){
 | `autoStart`                          |                                                                               Auto start payment once page is opened                                                                                |                                           default: `false` |
 | `refNumber`                          |                                                                         Reference number, if you have already generated one                                                                         | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
 | `handleWebViewMessage`               |                                                                          Will be called when a WebView receives a message                                                                           |                                            default: `true` |
-
+| `metadata`                           |    Will be called when a WebView receives a message    |  default: `null`                   |
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
