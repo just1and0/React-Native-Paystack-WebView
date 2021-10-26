@@ -120,7 +120,7 @@ function Pay(){
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
-Want to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/contribution.md) and feel free to send in your PR!
+Want to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/CONTRIBUTING.md) and feel free to send in your PR!
 
 ## [](https://github.com/just1and0/React-Native-Paystack-WebView#licensing)Licensing
 
