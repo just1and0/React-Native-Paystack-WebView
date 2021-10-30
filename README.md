@@ -1,5 +1,9 @@
 # React-Native-Paystack-WebView
 
+```V5 is coming 🎉```
+
+`As we celebrate this package being backed by paystack, we have been hard at work re-vamping the package and making our api's very closely related to the paystack inline web payment, all to enable you accpet payment seemlessly in your React Native Applications 😊.`
+
  
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request) 
