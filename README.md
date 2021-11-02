@@ -2,7 +2,7 @@
 
 ```V5 is coming 🎉```
 
-`As we celebrate this package being backed by paystack, we have been hard at work re-vamping the package and making our api's very closely related to the paystack inline web payment, all to enable you accept payment seemlessly in your React Native Applications 😊.`
+`As we celebrate this package being backed by `[Paystack](https://paystack.com)`, we have been hard at work re-vamping the package and making our api's very closely related to the paystack inline web payment, all to enable you accept payment seemlessly in your React Native Applications 😊.`
 
  
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
