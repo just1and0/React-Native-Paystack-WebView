@@ -178,3 +178,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+
+# Roadmap
+we have a lot to get done before we hit stable, here's a list;
+- Make the reference usage more user friendly
+- Since you want it to conform to InlineJS, let the variable names also match
+- Let the parameter types also conform to InlineJS parameter types
+- Paystack is a word, hence when used as a package name/class name, let it use PascalCase (Paystack) and when used as a variable, camelCase (paystack)
