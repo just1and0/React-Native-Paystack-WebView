@@ -24,7 +24,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
-    metadata
+    metaData
   },
   ref,
 ) => {
@@ -39,16 +39,16 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 
   useEffect(() => {
     const options = [];
-    if(metadata) {
-      for (let key in metadata) {
-        let option = metadata[key];
+    if(metaData) {
+      for (let key in metaData) {
+        let option = metaData[key];
         if (option) {
           options.push(`${key}:'${option}'`);
         }
       }
       setMetadata(options.join(','));
     }
-  }, [metadata]);
+  }, [metaData]);
 
   useImperativeHandle(ref, () => ({
     startTransaction() {
