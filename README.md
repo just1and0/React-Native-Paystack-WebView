@@ -1,4 +1,4 @@
-# React-Native-Paystack-WebView
+# DEPRECATED
 
 ```V5 is coming 🎉```
 
