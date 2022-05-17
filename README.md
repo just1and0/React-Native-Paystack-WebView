@@ -1,7 +1,7 @@
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 # DEPRECATED
-This will no longer be maintained or updated, please consider using [*Ortho-community-checkout*](https://github.com/OrthoHQ/ortho-community-checkout) instead.  
+This will no longer be maintained or updated, please consider using [*react-native-ortho*](https://github.com/OrthoHQ/react-native-ortho) instead.  
  
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request) 
