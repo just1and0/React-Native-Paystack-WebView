@@ -19,6 +19,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     channels = ['card'],
     refNumber,
     billingName,
+    subaccount,
     handleWebViewMessage,
     onCancel,
     autoStart = false,
@@ -51,6 +52,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
+  
+  const subAccountString = subaccount ? `subaccount: '${subaccount}',` : ''; // should only send subaccount if present, else if blank
 
   const Paystackcontent = `   
       <!DOCTYPE html>
@@ -76,6 +79,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 currency: '${currency}',
                 ${getChannels(channels)}
                 ${refNumberString}
+                ${subAccountString}
                 metadata: {
                 custom_fields: [
                         {
@@ -167,7 +171,3 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 };
 
 export default forwardRef(Paystack);
-
-
-
-
