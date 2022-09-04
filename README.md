@@ -162,6 +162,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="http://codexplorer.me"><img src="https://avatars.githubusercontent.com/u/23406970?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Oyefeso Oluwatunmise</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3ABlac-Panda" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://fuadolatunji.me"><img src="https://avatars.githubusercontent.com/u/65264054?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fuad Olatunji</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=fuadop" title="Documentation">📖</a></td>
   </tr>
 </table>
 
