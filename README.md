@@ -1,10 +1,3 @@
-# React-Native-Paystack-WebView
-
-```V5 is coming 🎉```
-
-`As we celebrate this package being backed by `[Paystack](https://paystack.com)`, we have been hard at work re-vamping the package and making our api's very closely related to the paystack inline web payment, all to enable you accept payment seemlessly in your React Native Applications 😊.`
-
- 
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request) 
  
@@ -114,7 +107,7 @@ function Pay(){
 | `billingEmail(required by paystack)` |                                                                                            Billers email                                                                                            |                                            default: `nill` |
 | `billingMobile`                      |                                                                                           Billers mobile                                                                                            |                                            default: `nill` |
 | `billingName`                        |                                                                                            Billers Name                                                                                             |                                            default: `nill` |
-| `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={["card","ussd"]}` |                                          default: `["card"]` |
+| `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={["card","ussd"]}`                 |                                         default: `["card"]`|
 | `onCancel`                           |               callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback               |                                            default: `nill` |
 | `onSuccess`                          |                                    callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                                    |                                            default: `nill` |
 | `autoStart`                          |                                                                               Auto start payment once page is opened                                                                                |                                           default: `false` |
@@ -178,3 +171,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+
+# Roadmap
+we have a lot to get done before we hit stable, here's a list;
+- Make the reference usage more user friendly
+- Since you want it to conform to InlineJS, let the variable names also match
+- Let the parameter types also conform to InlineJS parameter types
+- Paystack is a word, hence when used as a package name/class name, let it use PascalCase (Paystack) and when used as a variable, camelCase (paystack)
