@@ -24,16 +24,31 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
+    metaData
   },
   ref,
 ) => {
   const [isLoading, setisLoading] = useState(true);
   const [showModal, setshowModal] = useState(false);
+  const [mdata, setMetadata] = useState('');
   const webView = useRef(null);
 
   useEffect(() => {
     autoStartCheck();
   }, []);
+
+  useEffect(() => {
+    const options = [];
+    if(metaData) {
+      for (let key in metaData) {
+        let option = metaData[key];
+        if (option) {
+          options.push(`${key}:'${option}'`);
+        }
+      }
+      setMetadata(options.join(','));
+    }
+  }, [metaData]);
 
   useImperativeHandle(ref, () => ({
     startTransaction() {
@@ -83,7 +98,9 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                         variable_name:  '${billingName}',
                         value:''
                         }
-                ]},
+                ],
+                ${mdata}
+              },
                 callback: function(response){
                       var resp = {event:'successful', transactionRef:response};
                         window.ReactNativeWebView.postMessage(JSON.stringify(resp))
