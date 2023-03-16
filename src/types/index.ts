@@ -28,6 +28,7 @@ export interface PayStackProps {
   autoStart?: boolean;
   activityIndicatorColor?: string;
   ref: React.ReactElement;
+  plan: string
 }
 
 export interface PayStackRef {
