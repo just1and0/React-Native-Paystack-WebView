@@ -80,6 +80,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${refNumberString}
                 ${paystackPlan}
                 metadata: {
+                plan_code: '${plan}',
                 custom_fields: [
                         {
                         display_name:  '${firstName + ' ' + lastName}',
