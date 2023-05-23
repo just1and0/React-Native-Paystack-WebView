@@ -45,6 +45,7 @@ function Pay() {
     <View style={{ flex: 1 }}>
       <Paystack  
         paystackKey="your-public-key-here"
+        plan="bzhHhbsjJnjsnaj"
         amount={'25000.00'}
         billingEmail="paystackwebview@something.com"
         activityIndicatorColor="green"
@@ -78,6 +79,7 @@ function Pay(){
       <Paystack
         paystackKey="your-public-key-here"
         billingEmail="paystackwebview@something.com"
+        plan="bzhHhbsjJnjsnaj"
         amount={'25000.00'}
         onCancel={(e) => {
           // handle response here
@@ -104,6 +106,10 @@ function Pay(){
 | :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
 | `paystackKey`                        |                                                                   Public or Private paystack key(visit paystack.com to get yours)                                                                   |                                                     `nill` |
 | `amount`                             |                                                                                          Amount to be paid                                                                                          |                                                     `nill` |
+|
+`plan`                               |
+                   Plan code from dashboard, which makes payment become a subscription payment
+                              default: `false`  | 
 | `activityIndicatorColor`             |                                                                                           color of loader                                                                                           |                                           default: `green` |
 | `billingEmail(required by paystack)` |                                                                                            Billers email                                                                                            |                                            default: `nill` |
 | `billingMobile`                      |                                                                                           Billers mobile                                                                                            |                                            default: `nill` |

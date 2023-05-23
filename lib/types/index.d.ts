@@ -10,12 +10,14 @@ interface SuccessResponse extends Response {
 }
 export interface PayStackProps {
     paystackKey: string;
+    metadata?: object;
     billingEmail: string;
     firstName?: string;
     lastName?: string;
     phone?: string | number;
     amount: string | number;
     currency?: Currency;
+    plan?: string;
     channels?: PaymentChannels[];
     refNumber?: string;
     billingName?: string;
