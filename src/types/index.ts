@@ -22,6 +22,7 @@ export interface PayStackProps {
   channels?: PaymentChannels[];
   refNumber?: string;
   billingName?: string;
+  subaccount?: string;
   handleWebViewMessage?: (string: string) => void;
   onCancel: (Response: Response) => void;
   onSuccess: (SuccessResponse:SuccessResponse) => void;

@@ -152,6 +152,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "generousdev",
+      "name": "Abubakar Abdullahi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39764887?v=4",
+      "profile": "https://github.com/GenerousDev",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
