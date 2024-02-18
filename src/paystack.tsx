@@ -62,11 +62,12 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
           <title>Paystack</title>
         </head>
           <body  onload="payWithPaystack()" style="background-color:#fff;height:100vh">
-            <script src="https://js.paystack.co/v1/inline.js"></script>
+            <script src="https://js.paystack.co/v2/inline.js"></script>
             <script type="text/javascript">
               window.onload = payWithPaystack;
               function payWithPaystack(){
-              var handler = PaystackPop.setup({ 
+              var paystack = new PaystackPop();
+              paystack.newTransaction({ 
                 key: '${paystackKey}',
                 email: '${billingEmail}',
                 firstname: '${firstName}',
@@ -84,16 +85,15 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                         value:''
                         }
                 ]},
-                callback: function(response){
+                onSuccess: function(response){
                       var resp = {event:'successful', transactionRef:response};
                         window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                 },
-                onClose: function(){
+                onCancel: function(){
                     var resp = {event:'cancelled'};
                     window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                 }
                 });
-                handler.openIframe();
                 }
             </script> 
           </body>
