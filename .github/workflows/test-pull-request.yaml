@@ -1,0 +1,15 @@
+on: 
+ pull_request:
+   types: [opened]
+
+name: Test new pull request
+jobs:
+ release:
+   name: Unit test
+   runs-on: ubuntu-latest
+   steps:
+     - name: Install npm package 
+       with:
+         EXECUTE_COMMANDS: | 
+           yarn install 
+           yarn test 
