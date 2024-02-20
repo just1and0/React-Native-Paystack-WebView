@@ -24,6 +24,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
+    plan = false
   },
   ref,
 ) => {
@@ -51,7 +52,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
-
+  const paystackPlan = (!plan || plan == null || plan == undefined) ? '' : `plan: '${plan}',`;
+  
   const Paystackcontent = `   
       <!DOCTYPE html>
       <html lang="en">
@@ -77,7 +79,9 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 currency: '${currency}',
                 ${getChannels(channels)}
                 ${refNumberString}
+                ${paystackPlan}
                 metadata: {
+                plan_code: '${plan}',
                 custom_fields: [
                         {
                         display_name:  '${firstName + ' ' + lastName}',
