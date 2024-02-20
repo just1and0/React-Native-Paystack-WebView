@@ -45,7 +45,7 @@ function Pay() {
     <View style={{ flex: 1 }}>
       <Paystack  
         paystackKey="your-public-key-here"
-        plan="bzhHhbsjJnjsnaj"
+        plan="your-plan-here"
         amount={'25000.00'}
         billingEmail="paystackwebview@something.com"
         activityIndicatorColor="green"
@@ -79,7 +79,7 @@ function Pay(){
       <Paystack
         paystackKey="your-public-key-here"
         billingEmail="paystackwebview@something.com"
-        plan="bzhHhbsjJnjsnaj"
+        plan="your-plan-here"
         amount={'25000.00'}
         onCancel={(e) => {
           // handle response here
@@ -113,7 +113,7 @@ function Pay(){
 | `billingName`                        |                                                                                            Billers Name                                                                                             |                                            default: `nill` |
 | `subaccount`                        |                                                                                           Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`                                                                                              |                                            default: `nill` |
 | `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={["card","ussd"]}`                 |                                         default: `["card"]`|
-| `metadata`                           | Object containing any extra information you want recorded with the transaction. Fields within the custom_field object will show up on merchant receipt and within the transaction information on the Paystack Dashboard.                 |                                         default: `{}`|
+| `metadata` | Object containing any extra information you want recorded with the transaction. Fields within the custom_field object will show up on merchant receipt and within the transaction information on the Paystack Dashboard. | default: `{}`|
 | `onCancel`                           |               callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback               |                                            default: `nill` |
 | `onSuccess`                          |                                    callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                                    |                                            default: `nill` |
 | `autoStart`                          |                                                                               Auto start payment once page is opened                                                                                |                                           default: `false` |
