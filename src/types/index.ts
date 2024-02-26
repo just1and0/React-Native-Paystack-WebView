@@ -17,6 +17,7 @@ export interface PayStackProps {
   firstName?: string;
   lastName?: string;
   phone?: string | number;
+  metadata?: any;
   amount: string | number;
   currency?: Currency;
   channels?: PaymentChannels[];
