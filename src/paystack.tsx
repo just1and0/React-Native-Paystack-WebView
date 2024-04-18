@@ -83,7 +83,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${refNumberString}
                 ${subAccountString}
                 metadata: {
-                custom_fields: ${customFields}
+                custom_fields: ${JSON.stringify(customFields)}
                 },
                 onSuccess: function(response){
                       var resp = {event:'successful', transactionRef:response};
