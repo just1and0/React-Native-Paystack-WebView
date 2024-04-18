@@ -8,11 +8,6 @@ interface SuccessResponse extends Response {
     transactionRef?: string;
     data?: any;
 }
-interface CustomFieldProps {
-    display_name: string;
-    variable_name: string;
-    value: string;
-}
 export interface PayStackProps {
     paystackKey: string;
     billingEmail: string;
@@ -24,7 +19,7 @@ export interface PayStackProps {
     channels?: PaymentChannels[];
     refNumber?: string;
     billingName?: string;
-    customFields?: CustomFieldProps[];
+    customFields?: string;
     subaccount?: string;
     handleWebViewMessage?: (string: string) => void;
     onCancel: (Response: Response) => void;
