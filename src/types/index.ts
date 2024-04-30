@@ -17,6 +17,16 @@ interface CustomFieldProps {
   value: string
 }
 
+interface metadataProps {
+  custom_fields: CustomFieldProps[];
+  transactionType: 'PRODUCT_KEY' | 'SUBSCRIPTION';
+  phone: string;
+  planID: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface PayStackProps {
   paystackKey: string;
   billingEmail: string;
@@ -28,7 +38,7 @@ export interface PayStackProps {
   channels?: PaymentChannels[];
   refNumber?: string;
   billingName?: string;
-  customFields?: CustomFieldProps[];
+  metadata?: metadataProps;
   subaccount?: string;
   handleWebViewMessage?: (string: string) => void;
   onCancel: (Response: Response) => void;

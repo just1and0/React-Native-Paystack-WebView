@@ -19,7 +19,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     channels = ['card'],
     refNumber,
     billingName,
-    customFields,
+    metadata,
     subaccount,
     handleWebViewMessage,
     onCancel,
@@ -82,9 +82,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${getChannels(channels)}
                 ${refNumberString}
                 ${subAccountString}
-                metadata: {
-                custom_fields: ${JSON.stringify(customFields)}
-                },
+                metadata: ${JSON.stringify(metadata)},
                 onSuccess: function(response){
                       var resp = {event:'successful', transactionRef:response};
                         window.ReactNativeWebView.postMessage(JSON.stringify(resp))
