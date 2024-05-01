@@ -1,12 +1,26 @@
 import * as React from 'react';
-export declare type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
-export declare type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
+export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
+export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
 interface Response {
     status: string;
 }
 interface SuccessResponse extends Response {
     transactionRef?: string;
     data?: any;
+}
+interface CustomFieldProps {
+    display_name: string;
+    variable_name: string;
+    value: string;
+}
+interface metadataProps {
+    custom_fields: CustomFieldProps[];
+    transactionType: 'PRODUCT_KEY' | 'SUBSCRIPTION';
+    phone: string;
+    planID: string;
+    email: string;
+    firstName: string;
+    lastName: string;
 }
 export interface PayStackProps {
     paystackKey: string;
@@ -19,6 +33,7 @@ export interface PayStackProps {
     channels?: PaymentChannels[];
     refNumber?: string;
     billingName?: string;
+    metadata?: metadataProps;
     subaccount?: string;
     handleWebViewMessage?: (string: string) => void;
     onCancel: (Response: Response) => void;

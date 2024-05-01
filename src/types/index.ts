@@ -11,6 +11,22 @@ interface SuccessResponse extends Response {
   data?: any;
 }
 
+interface CustomFieldProps {
+  display_name: string,
+  variable_name: string,
+  value: string
+}
+
+interface metadataProps {
+  custom_fields: CustomFieldProps[];
+  transactionType: 'PRODUCT_KEY' | 'SUBSCRIPTION';
+  phone: string;
+  planID: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface PayStackProps {
   paystackKey: string;
   billingEmail: string;
@@ -22,10 +38,11 @@ export interface PayStackProps {
   channels?: PaymentChannels[];
   refNumber?: string;
   billingName?: string;
+  metadata?: metadataProps;
   subaccount?: string;
   handleWebViewMessage?: (string: string) => void;
   onCancel: (Response: Response) => void;
-  onSuccess: (SuccessResponse:SuccessResponse) => void;
+  onSuccess: (SuccessResponse: SuccessResponse) => void;
   autoStart?: boolean;
   activityIndicatorColor?: string;
   ref: React.ReactElement;

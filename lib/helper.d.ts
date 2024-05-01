@@ -1,5 +1,5 @@
 import { PaymentChannels } from './types/index';
-declare type AmountValue = string | number;
+type AmountValue = string | number;
 export declare function isValidStringAmount(stringAmount: string): boolean;
 export declare function isValidDecimalMonetaryValue(amountValue: AmountValue | any): boolean;
 export declare function isNegative(amountValue: AmountValue): boolean;
