@@ -3,7 +3,7 @@ import { useState, useEffect, forwardRef, useRef, useImperativeHandle } from 're
 import { Modal, View, ActivityIndicator, SafeAreaView } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
 import { getAmountValueInKobo, getChannels } from './helper';
-import { PayStackProps, PayStackRef } from './types';
+import { PayStackProps, PayStackRef, DynamicMultiSplitObject } from './types';
 
 const CLOSE_URL = 'https://standard.paystack.co/close';
 
@@ -21,6 +21,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     billingName,
     subaccount,
     split_code,
+    split,
     handleWebViewMessage,
     onCancel,
     autoStart = false,
@@ -52,11 +53,20 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     }
   };
 
+  const dynamicSplitObjectIsValid = (split:DynamicMultiSplitObject|undefined): split is DynamicMultiSplitObject => {
+    if ( split !== null && (typeof split === "object") && (split.type) && (split.bearer_type) && (split.subaccounts)) {
+      return true;
+    } else  { return false; }
+  }
+
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
   
   const subAccountString = subaccount ? `subaccount: '${subaccount}',` : ''; // should only send subaccount with the correct subaccoount_code if you want to enable split payment on transaction
   
   const splitCodeString = split_code ? `split_code: '${split_code}',` : ''; // should only send split_code with the correct split_code from the split group if you want to enable multi-split payment on transaction
+  //Multi-split enables merchants to split the settlement for a transaction across their payout account, and one or more subaccounts
+  
+  const dynamicSplitString = dynamicSplitObjectIsValid(split) ? `split: ` + JSON.stringify(split)  + `,` : ''; // should only send split_code with the correct split_code from the split group if you want to enable multi-split payment on transaction
   //Multi-split enables merchants to split the settlement for a transaction across their payout account, and one or more subaccounts
 
   const Paystackcontent = `   
@@ -86,6 +96,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${refNumberString}
                 ${subAccountString}
                 ${splitCodeString}
+                ${dynamicSplitString}
                 metadata: {
                 custom_fields: [
                         {
