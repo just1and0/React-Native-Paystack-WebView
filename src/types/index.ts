@@ -23,6 +23,7 @@ export interface PayStackProps {
   refNumber?: string;
   billingName?: string;
   subaccount?: string;
+  split_code?: string;
   handleWebViewMessage?: (string: string) => void;
   onCancel: (Response: Response) => void;
   onSuccess: (SuccessResponse:SuccessResponse) => void;
