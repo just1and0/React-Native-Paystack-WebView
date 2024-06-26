@@ -23,6 +23,8 @@ export interface PayStackProps {
   refNumber?: string;
   billingName?: string;
   subaccount?: string;
+  modal: Boolean | undefined;
+  style: Object | undefined;
   handleWebViewMessage?: (string: string) => void;
   onCancel: (Response: Response) => void;
   onSuccess: (SuccessResponse:SuccessResponse) => void;

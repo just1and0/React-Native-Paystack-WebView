@@ -9,6 +9,8 @@ const CLOSE_URL = 'https://standard.paystack.co/close';
 
 const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> = (
   {
+    modal = true,
+    style = {},
     paystackKey,
     billingEmail,
     phone,
@@ -143,7 +145,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     }
   };
 
-  return (
+  return modal === true ?  (
     <Modal style={{ flex: 1 }} visible={showModal} animationType="slide" transparent={false}>
       <SafeAreaView style={{ flex: 1 }}>
         <WebView
@@ -167,7 +169,34 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
         )}
       </SafeAreaView>
     </Modal>
-  );
+  ) :
+    (
+      showModal ?
+        <View style={[ { flex: 1 }, style ]}   >
+        <WebView
+          style={[{ flex: 1 }]}
+          source={{ html: Paystackcontent }}
+          onMessage={(e) => {
+            messageReceived(e.nativeEvent?.data);
+          }}
+          onLoadStart={() => setisLoading(true)}
+          onLoadEnd={() => setisLoading(false)}
+          onNavigationStateChange={onNavigationStateChange}
+          ref={webView}
+          cacheEnabled={false}
+          cacheMode={'LOAD_NO_CACHE'}
+        />
+
+        {isLoading && (
+          <View>
+            <ActivityIndicator size="large" color={activityIndicatorColor} />
+          </View>
+        )}
+    </View> : null
+    )
+  
+  
+  ;
 };
 
 export default forwardRef(Paystack);
