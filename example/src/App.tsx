@@ -29,6 +29,9 @@ const App = () => {
         <Text>Pay Now</Text>
       </TouchableOpacity>
     </View>
+    {
+    paystackWebViewRef.current?.closePaymentModal();
+    }
   )
 }
 
