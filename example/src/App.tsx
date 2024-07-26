@@ -13,6 +13,8 @@ const App = () => {
   return (
     <View style={{justifyContent:'center', backgroundColor:'red', flex:1}}>
       <Paystack
+        modal={true}
+        style = {{}}
         paystackKey={'your-paystack-key-here'}
         onCancel={() => { }}
         onSuccess={() => { }}
@@ -27,6 +29,9 @@ const App = () => {
         <Text>Pay Now</Text>
       </TouchableOpacity>
     </View>
+    {
+    paystackWebViewRef.current?.closePaymentModal();
+    }
   )
 }
 
