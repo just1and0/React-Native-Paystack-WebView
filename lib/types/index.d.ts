@@ -20,15 +20,20 @@ export interface PayStackProps {
     refNumber?: string;
     billingName?: string;
     subaccount?: string;
+    modal: Boolean | undefined;
+    style: Object | undefined;
     handleWebViewMessage?: (string: string) => void;
     onCancel: (Response: Response) => void;
     onSuccess: (SuccessResponse: SuccessResponse) => void;
     autoStart?: boolean;
     activityIndicatorColor?: string;
     ref: React.ReactElement;
+    onError: () => void;
+    onHttpError: () => void;
 }
 export interface PayStackRef {
     startTransaction: () => void;
     endTransaction: () => void;
+    closePaymentModal: () => void;
 }
 export {};

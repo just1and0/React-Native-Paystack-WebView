@@ -31,9 +31,12 @@ export interface PayStackProps {
   autoStart?: boolean;
   activityIndicatorColor?: string;
   ref: React.ReactElement;
+  onError: () => void;
+  onHttpError: ()=> void;
 }
 
 export interface PayStackRef {
   startTransaction: () => void;
   endTransaction: () => void;
+  closePaymentModal: () => void;
 }

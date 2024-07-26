@@ -9,6 +9,8 @@ const CLOSE_URL = 'https://standard.paystack.co/close';
 
 const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> = (
   {
+    onError,
+    onHttpError,
     modal = true,
     style = {},
     paystackKey,
@@ -27,12 +29,13 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
+  
   },
   ref,
 ) => {
   const [isLoading, setisLoading] = useState(true);
   const [showModal, setshowModal] = useState(false);
-  const webView = useRef(null);
+  const webView = useRef(null)  as React.MutableRefObject<any>;;
 
   useEffect(() => {
     autoStartCheck();
@@ -43,8 +46,16 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
       setshowModal(true);
     },
     endTransaction() {
+      setisLoading(false);
       setshowModal(false);
     },
+    closePaymentModal() {
+      setisLoading(false);
+      webView.current.stopLoading();
+      webView.current.injectJavaScript('window.close()');
+      // setTimeout(() => setshowModal(false), 1000);
+      setshowModal(false)
+    }
   }));
 
   const autoStartCheck = () => {
@@ -145,55 +156,64 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     }
   };
 
-  return modal === true ?  (
-    <Modal style={{ flex: 1 }} visible={showModal} animationType="slide" transparent={false}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <WebView
-          style={[{ flex: 1 }]}
-          source={{ html: Paystackcontent }}
-          onMessage={(e) => {
-            messageReceived(e.nativeEvent?.data);
-          }}
-          onLoadStart={() => setisLoading(true)}
-          onLoadEnd={() => setisLoading(false)}
-          onNavigationStateChange={onNavigationStateChange}
-          ref={webView}
-          cacheEnabled={false}
-          cacheMode={'LOAD_NO_CACHE'}
-        />
+  // render  modal or view based on modal prop
 
-        {isLoading && (
-          <View>
-            <ActivityIndicator size="large" color={activityIndicatorColor} />
-          </View>
-        )}
-      </SafeAreaView>
-    </Modal>
-  ) :
-    (
+  if (modal === true) {
+    return (
+      <Modal style={{ flex: 1 }} visible={showModal} animationType="slide" transparent={false}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <WebView
+            style={[ { flex: 1 } ]}
+            source={{ html: Paystackcontent }}
+            onMessage={(e) => {
+              messageReceived(e.nativeEvent?.data);
+            }}
+            onLoadStart={() => setisLoading(true)}
+            onLoadEnd={() => setisLoading(false)}
+            onError={() => onError && onError()}
+            onHttpError={() => onHttpError && onHttpError()}
+            onNavigationStateChange={onNavigationStateChange}
+            ref={webView}
+            cacheEnabled={false}
+            cacheMode={'LOAD_NO_CACHE'}
+          />
+
+          {isLoading && (
+            <View>
+              <ActivityIndicator size="large" color={activityIndicatorColor} />
+            </View>
+          )}
+        </SafeAreaView>
+      </Modal>
+    )
+  } else {
+    return (
       showModal ?
         <View style={[ { flex: 1 }, style ]}   >
-        <WebView
-          style={[{ flex: 1 }]}
-          source={{ html: Paystackcontent }}
-          onMessage={(e) => {
-            messageReceived(e.nativeEvent?.data);
-          }}
-          onLoadStart={() => setisLoading(true)}
-          onLoadEnd={() => setisLoading(false)}
-          onNavigationStateChange={onNavigationStateChange}
-          ref={webView}
-          cacheEnabled={false}
-          cacheMode={'LOAD_NO_CACHE'}
-        />
+          <WebView
+            style={[ { flex: 1 } ]}
+            source={{ html: Paystackcontent }}
+            onMessage={(e) => {
+              messageReceived(e.nativeEvent?.data);
+            }}
+            onLoadStart={() => setisLoading(true)}
+            onLoadEnd={() => setisLoading(false)}
+            onError={() => onError && onError()}
+            onHttpError={() => onHttpError && onHttpError()}
+            onNavigationStateChange={onNavigationStateChange}
+            ref={webView}
+            cacheEnabled={false}
+            cacheMode={'LOAD_NO_CACHE'}
+          />
 
-        {isLoading && (
-          <View>
-            <ActivityIndicator size="large" color={activityIndicatorColor} />
-          </View>
-        )}
-    </View> : null
+          {isLoading && (
+            <View>
+              <ActivityIndicator size="large" color={activityIndicatorColor} />
+            </View>
+          )}
+        </View> : null
     )
+  }
   
   
   ;

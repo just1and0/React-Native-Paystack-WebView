@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = package['homepage']
   s.platform     = :ios, "10.0"
 
-  s.source       = { :git => "git+https://github.com/just1and0/React-Native-Paystack-WebView.git", :tag => "v#{s.version}" }
+  s.source       = { :git => "git+https://github.com/sharafadeenhammed/native-customizable-paystack-webview.git", :tag => "v#{s.version}" }
   s.source_files  = "ios/**/*.{h,m,swift}"
 
   s.dependency 'React'
