@@ -52,7 +52,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
-  const paystackPlan = (!plan || plan == null || plan == undefined) ? '' : `plan: '${plan}',`;
+  const paystackPlan = plan ? plan: '${plan}', : '';;
   
   const Paystackcontent = `   
       <!DOCTYPE html>
