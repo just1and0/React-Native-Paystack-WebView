@@ -1,9 +1,9 @@
-import * as React from 'react'
+import * as React from 'react';
 import { useState, useEffect, forwardRef, useRef, useImperativeHandle } from 'react';
 import { Modal, View, ActivityIndicator, SafeAreaView } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
 import { getAmountValueInKobo, getChannels } from './helper';
-import { PayStackProps, PayStackRef } from './types';
+import { PaymentChannels, PayStackProps } from './types';
 
 const CLOSE_URL = 'https://standard.paystack.co/close';
 
@@ -16,7 +16,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     firstName,
     amount = '0.00',
     currency = 'NGN',
-    channels = ['card'],
+    channels = ['card'] as PaymentChannels[],
     refNumber,
     billingName,
     subaccount,
@@ -25,8 +25,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
-  },
-  ref,
+  }: PayStackProps,
+  ref: PayStackProps,
 ) => {
   const [isLoading, setisLoading] = useState(true);
   const [showModal, setshowModal] = useState(false);
@@ -52,7 +52,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
-  
+
   const subAccountString = subaccount ? `subaccount: '${subaccount}',` : ''; // should only send subaccount with the correct subaccoount_code if you want to enable split payment on transaction
 
   const Paystackcontent = `   
@@ -149,7 +149,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
         <WebView
           style={[{ flex: 1 }]}
           source={{ html: Paystackcontent }}
-          onMessage={(e) => {
+          onMessage={(e: any) => {
             messageReceived(e.nativeEvent?.data);
           }}
           onLoadStart={() => setisLoading(true)}
@@ -171,7 +171,3 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 };
 
 export default forwardRef(Paystack);
-
-
-
-
