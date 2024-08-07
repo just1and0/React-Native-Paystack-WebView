@@ -19,6 +19,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     channels = ['card'],
     refNumber,
     billingName,
+    subaccount,
     handleWebViewMessage,
     onCancel,
     autoStart = false,
@@ -52,8 +53,9 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
-  const paystackPlan = plan ? plan: '${plan}', : '';;
-  
+  const paystackPlan = plan ? plan: '${plan}', : '';  
+  const subAccountString = subaccount ? `subaccount: '${subaccount}',` : ''; // should only send subaccount with the correct subaccoount_code if you want to enable split payment on transaction
+
   const Paystackcontent = `   
       <!DOCTYPE html>
       <html lang="en">
@@ -64,11 +66,12 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
           <title>Paystack</title>
         </head>
           <body  onload="payWithPaystack()" style="background-color:#fff;height:100vh">
-            <script src="https://js.paystack.co/v1/inline.js"></script>
+            <script src="https://js.paystack.co/v2/inline.js"></script>
             <script type="text/javascript">
               window.onload = payWithPaystack;
               function payWithPaystack(){
-              var handler = PaystackPop.setup({ 
+              var paystack = new PaystackPop();
+              paystack.newTransaction({ 
                 key: '${paystackKey}',
                 email: '${billingEmail}',
                 firstname: '${firstName}',
@@ -79,6 +82,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${getChannels(channels)}
                 ${refNumberString}
                 ${paystackPlan}
+                ${subAccountString}
                 metadata: {
                 plan_code: '${plan}',
                 custom_fields: [
@@ -88,16 +92,15 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                         value:''
                         }
                 ]},
-                callback: function(response){
+                onSuccess: function(response){
                       var resp = {event:'successful', transactionRef:response};
                         window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                 },
-                onClose: function(){
+                onCancel: function(){
                     var resp = {event:'cancelled'};
                     window.ReactNativeWebView.postMessage(JSON.stringify(resp))
                 }
                 });
-                handler.openIframe();
                 }
             </script> 
           </body>
