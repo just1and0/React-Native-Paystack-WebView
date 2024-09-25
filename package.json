@@ -1,10 +1,10 @@
 {
   "name": "react-native-paystack-webview",
-  "version": "4.0.3",
+  "version": "4.1.4",
   "description": "This package allows you to accept payment in your react native project using paystack ",
   "homepage": "https://github.com/just1and0/React-Native-Paystack-WebView#readme",
   "main": "lib/index.js",
-  "types": "lib/index.ts",
+  "types": "lib/index.d.ts",
   "author": "Oluwatobi Shokunbi  <ayoshokz@gmail.com>",
   "license": "MIT",
   "files": [
