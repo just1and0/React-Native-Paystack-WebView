@@ -27,7 +27,7 @@ for iOS: `cd iOS && pod install && cd ..`
 
 for expo applications run;
 
-`expo install react-native-webview`
+`npx expo install react-native-webview`
 
 and that's it, you're all good to go!
 
