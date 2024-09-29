@@ -11,23 +11,30 @@
     "build": "rm -rf production && tsc -p .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
-    "semantic-release":"semantic-release"
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
-    "semantic-release":"^24.0.0",
-    "typescript": "^4.3.5",
-    "@types/validator": "^13.6.3",
-    "react": "^17.0.2",
-    "react-native": "^0.64.2",
+    "@babel/core": "^7.14.6",
+    "@babel/runtime": "^7.14.6",
+    "@react-native-community/eslint-config": "^3.0.0",
     "@types/jest": "^26.0.24",
     "@types/react-native": "^0.64.12",
-    "@types/react-test-renderer": "^17.0.1"
+    "@types/validator": "^13.6.3",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.30.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.66.1",
+    "react": "^17.0.1",
+    "react-native": "^0.64.2",
+    "semantic-release": "^24.0.0",
+    "typescript": "^4.3.5"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
     "react-native-webview": "*"
-  }, 
+  },
   "dependencies": {
     "react-native-webview": "*",
     "validator": "^13.6.0"
