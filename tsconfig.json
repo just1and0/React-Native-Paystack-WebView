@@ -6,7 +6,7 @@
     "lib": ["ESNext"],
     "module": "CommonJS",
     "noEmitOnError": true,
-    "outDir": "./lib",
+    "outDir": "./production/lib",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
@@ -14,5 +14,5 @@
     "typeRoots": ["./lib/types"]
   },
   "exclude": ["**/__tests__/*"],
-  "include": ["src"]
+  "include": ["development"]
 }
