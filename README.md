@@ -146,7 +146,7 @@ This project is licensed under the MIT License.
 
 ## Sponsorship
 - Star the project on Github
-- [Buy me a coffee](buymeacoffee.com/6pL0Q8YkW)
+- [Buy me a coffee](https://buymeacoffee.com/6pL0Q8YkW)
 
 ## Thanks to Our Superheroes ✨
 A huge shoutout to our amazing contributors! Your efforts make this project better every day. Check out the ([emoji key](https://allcontributors.org/docs/en/emoji-key)) for what each contribution means:
