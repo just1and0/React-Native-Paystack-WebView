@@ -1,39 +1,51 @@
-# React Native Paystack WebView
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request) 
- 
+<div style="text-align: center;">
 
-The package allows you accept payment using paystack, install, add keys and use. No stress :) 
+# React Native Paystack WebView
+The package allows you accept payment using paystack, install, add keys and use. No stress :)
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
+
+</div>
+
+
+<div style="text-align: center;">
+    <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
+</div>
+
+ 
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
-Add React-Native-Paystack-WebView to your project by running;
+Add `react-native-paystack-webView` to your project by running;
 
-`npm install react-native-paystack-webview`
+```bash 
+npm install react-native-paystack-webview
 
 or
 
-`yarn add react-native-paystack-webview`
+yarn add react-native-paystack-webview
+```
+### **Additional Setup**
 
-### **One more thing**
+To ensure everything works smoothly, install and configure the required dependency, `react-native-webview`:
 
-To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview** 
-
-run
-
-`yarn add react-native-webview`
-
-for iOS: `cd iOS && pod install && cd ..`
-
+ 
+```bash 
+yarn add react-native-webview
+```
+for iOS: 
+```bash 
+cd iOS && pod install && cd ..
+```
 for expo applications run;
+```bash 
+npx expo install react-native-webview
+```
+That’s it! You’re all set.
 
-`npx expo install react-native-webview`
-
-and that's it, you're all good to go!
-
-<img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
-
-### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage 1
+### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
+##### Basic Example
 
 ```javascript
 import React from 'react';
@@ -61,9 +73,9 @@ function Pay() {
 }
 ```
 
-## Usage 2 - Using Refs
+##### Using Refs
 
-Make use of a `ref` to start transaction. See example below;
+You can also use a `ref` to start a transaction. Here’s how:
 
 ```javascript
 import React, { useRef } from 'react';
@@ -96,9 +108,7 @@ function Pay(){
 }
 ```
 
-## API's
-
-#### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props)all React-Native-Paystack-WebView API
+### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props) API Reference
 
 | Name                                 |                                                                                           use/description                                                                                           |                                                      extra |
 | :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
@@ -119,11 +129,11 @@ function Pay(){
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
-Want to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/CONTRIBUTING.md) and feel free to send in your PR!
+Want to help improve this package? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/CONTRIBUTING.md) and feel free to submit your PR!
 
 ## [](https://github.com/just1and0/React-Native-Paystack-WebView#licensing)Licensing
 
-This project is licensed under MIT license.
+This project is licensed under the MIT License.
 
 ## Related Projects
 
@@ -179,11 +189,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-
-# Roadmap
-we have a lot to get done before we hit stable, here's a list;
-- Make the reference usage more user friendly
-- Since you want it to conform to InlineJS, let the variable names also match
-- Let the parameter types also conform to InlineJS parameter types
-- Paystack is a word, hence when used as a package name/class name, let it use PascalCase (Paystack) and when used as a variable, camelCase (paystack)
