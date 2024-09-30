@@ -1,23 +1,23 @@
-<div style="text-align: center;">
-
-# React Native Paystack WebView
+<div>
+<center>
+<h1>React Native Paystack WebView</h1>
 The package allows you accept payment using paystack, install, add keys and use. No stress :)
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
+</center>
 </div>
-
-
-<div style="text-align: center;">
+<div>
+<center>
     <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
+</center>
 </div>
-
  
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
-Add `react-native-paystack-webView` to your project by running;
+Add `react-native-paystack-webview` to your project by running;
 
 ```bash 
 npm install react-native-paystack-webview
@@ -110,21 +110,21 @@ function Pay(){
 
 ### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props) API Reference
 
-| Name                                 |                                                                                           use/description                                                                                           |                                                      extra |
-| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
-| `paystackKey`                        |                                                                   Public or Private paystack key(visit paystack.com to get yours)                                                                   |                                                     `nill` |
-| `amount`                             |                                                                                          Amount to be paid                                                                                          |                                                     `nill` |
-| `activityIndicatorColor`             |                                                                                           color of loader                                                                                           |                                           default: `green` |
-| `billingEmail(required by paystack)` |                                                                                            Billers email                                                                                            |                                            default: `nill` |
-| `billingMobile`                      |                                                                                           Billers mobile                                                                                            |                                            default: `nill` |
-| `billingName`                        |                                                                                            Billers Name                                                                                             |                                            default: `nill` |
-| `subaccount`                        |                                                                                           Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`                                                                                              |                                            default: `nill` |
-| `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={["card","ussd"]}`                 |                                         default: `["card"]`|
-| `onCancel`                           |               callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback               |                                            default: `nill` |
-| `onSuccess`                          |                                    callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                                    |                                            default: `nill` |
-| `autoStart`                          |                                                                               Auto start payment once page is opened                                                                                |                                           default: `false` |
-| `refNumber`                          |                                                                         Reference number, if you have already generated one                                                                         | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
-| `handleWebViewMessage`               |                                                                          Will be called when a WebView receives a message                                                                           |                                            default: `true` |
+| Name                                 |                                                                                   use/description                                                                                   |                                                      extra |
+| :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
+| `paystackKey`                        |                                                           Public or Private paystack key(visit paystack.com to get yours)                                                           |                                                     `nill` |
+| `amount`                             |                                                                                  Amount to be paid                                                                                  |                                                     `nill` |
+| `activityIndicatorColor`             |                                                                                   color of loader                                                                                   |                                           default: `green` |
+| `billingEmail(required by paystack)` |                                                                                    Billers email                                                                                    |                                            default: `nill` |
+| `billingMobile`                      |                                                                                   Billers mobile                                                                                    |                                            default: `nill` |
+| `billingName`                        |                                                                                    Billers Name                                                                                     |                                            default: `nill` |
+| `subaccount`                         |    Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`     |                                            default: `nill` |
+| `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={["card","ussd"]}` |                                        default: `["card"]` |
+| `onCancel`                           |       callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback       |                                            default: `nill` |
+| `onSuccess`                          |                            callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                            |                                            default: `nill` |
+| `autoStart`                          |                                                                       Auto start payment once page is opened                                                                        |                                           default: `false` |
+| `refNumber`                          |                                                                 Reference number, if you have already generated one                                                                 | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
+| `handleWebViewMessage`               |                                                                  Will be called when a WebView receives a message                                                                   |                                            default: `true` |
 
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
@@ -142,13 +142,16 @@ This project is licensed under the MIT License.
 
 ### Video Tutorial
 
-- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0)
+- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0) 
 
-### Don't forget to star, like and share :)
+## Sponsorship
+- Star the project on Github
+- [Buy me a coffee](buymeacoffee.com/6pL0Q8YkW)
 
-## Contributors ✨
+## Thanks to Our Superheroes ✨
+A huge shoutout to our amazing contributors! Your efforts make this project better every day. Check out the ([emoji key](https://allcontributors.org/docs/en/emoji-key)) for what each contribution means:
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+ 
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
