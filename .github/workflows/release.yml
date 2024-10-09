@@ -19,12 +19,12 @@ jobs:
         with:
           node-version: "lts/*"
       - run: npm install
-      - run: npm run build
-      - run: npm audit signatures
       - name: Run Tests
-        run: npm test
+        run: npm run test
       - name: TypeScript Check
         run: yarn tsc
+      - run: npm run build
+      - run: npm audit signatures
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
