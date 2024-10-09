@@ -13,49 +13,76 @@ This package lets you accept payments with Paystack in a snap! Just install, add
     <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
 </center>
 </div>
- 
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
-Add `react-native-paystack-webview` to your project by running;
+#### Basic React Native Installation
 
-```bash 
+To install React-Native-Paystack-WebView, you can use either npm or yarn:
+
+For npm:
+
+```
+npm install react-native-paystack-webview react-native-webview
+```
+
+For yarn:
+
+```
+yarn add react-native-paystack-webview react-native-webview
+```
+
+#### Expo Installation
+
+If you are using Expo, you can install react-native-webview using the following command:
+
+```
+npx expo install react-native-webview
+```
+
+If you are using npm for your expo installation:
+
+```
 npm install react-native-paystack-webview
+```
 
-or
+If you are using yarn:
 
+```
 yarn add react-native-paystack-webview
 ```
+
 ### **Additional Setup**
 
 To ensure everything works smoothly, install and configure the required dependency, `react-native-webview`:
 
- 
-```bash 
+```bash
 yarn add react-native-webview
 ```
-for iOS: 
-```bash 
+
+for iOS:
+
+```bash
 cd iOS && pod install && cd ..
 ```
+
 for expo applications run;
-```bash 
+
+```bash
 npx expo install react-native-webview
 ```
-That’s it! You’re all set.
 
-### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
-##### Basic Example
+That’s it! You’re all set.
 
 ```javascript
 import React from 'react';
-import  { Paystack }  from 'react-native-paystack-webview';
+import { Paystack } from 'react-native-paystack-webview';
 import { View } from 'react-native';
 
 function Pay() {
   return (
     <View style={{ flex: 1 }}>
-      <Paystack  
+      <Paystack
         paystackKey="your-public-key-here"
         amount={'25000.00'}
         billingEmail="paystackwebview@something.com"
@@ -73,9 +100,9 @@ function Pay() {
 }
 ```
 
-##### Using Refs
+## Usage 2 - Using Refs
 
-You can also use a `ref` to start a transaction. Here’s how:
+Make use of a `ref` to start transaction. See example below;
 
 ```javascript
 import React, { useRef } from 'react';
@@ -83,7 +110,7 @@ import  { Paystack , paystackProps}  from 'react-native-paystack-webview';
 import { View, TouchableOpacity,Text } from 'react-native';
 
 function Pay(){
-  const paystackWebViewRef = useRef<paystackProps.PayStackRef>(); 
+  const paystackWebViewRef = useRef<paystackProps.PayStackRef>();
 
   return (
     <View style={{flex: 1}}>
@@ -126,14 +153,13 @@ function Pay(){
 | `refNumber`                          |                                                                 Reference number, if you have already generated one                                                                 | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
 | `handleWebViewMessage`               |                                                                  Will be called when a WebView receives a message                                                                   |                                            default: `true` |
 
-
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
-Want to help improve this package? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/main/CONTRIBUTING.md) and feel free to submit your PR!
+Want to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/CONTRIBUTING.md) and feel free to send in your PR!
 
 ## [](https://github.com/just1and0/React-Native-Paystack-WebView#licensing)Licensing
 
-This project is licensed under the MIT License.
+This project is licensed under MIT license.
 
 ## Related Projects
 
@@ -142,16 +168,13 @@ This project is licensed under the MIT License.
 
 ### Video Tutorial
 
-- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0) 
+- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0)
 
-## Sponsorship
-- Star the project on Github
-- [Buy me a coffee](https://buymeacoffee.com/6pL0Q8YkW)
+### Don't forget to star, like and share :)
 
-## Thanks to Our Superheroes ✨
-A huge shoutout to our amazing contributors! Your efforts make this project better every day. Check out the ([emoji key](https://allcontributors.org/docs/en/emoji-key)) for what each contribution means:
+## Contributors ✨
 
- 
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -192,3 +215,12 @@ A huge shoutout to our amazing contributors! Your efforts make this project bett
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+# Roadmap
+
+we have a lot to get done before we hit stable, here's a list;
+
+- Make the reference usage more user friendly
+- Since you want it to conform to InlineJS, let the variable names also match
+- Let the parameter types also conform to InlineJS parameter types
+- Paystack is a word, hence when used as a package name/class name, let it use PascalCase (Paystack) and when used as a variable, camelCase (paystack)

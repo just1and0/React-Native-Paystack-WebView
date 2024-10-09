@@ -1,9 +1,10 @@
-import * as React from 'react'
+import type * as React from 'react';
 import { useState, useEffect, forwardRef, useRef, useImperativeHandle } from 'react';
 import { Modal, View, ActivityIndicator, SafeAreaView } from 'react-native';
-import { WebView, WebViewNavigation } from 'react-native-webview';
+import { WebView } from 'react-native-webview';
+import type { WebViewNavigation } from 'react-native-webview';
 import { getAmountValueInKobo, getChannels } from './helper';
-import { PayStackProps, PayStackRef } from './types';
+import type { PaymentChannels, PayStackProps } from './types';
 
 const CLOSE_URL = 'https://standard.paystack.co/close';
 
@@ -16,7 +17,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     firstName,
     amount = '0.00',
     currency = 'NGN',
-    channels = ['card'],
+    channels = ['card'] as PaymentChannels[],
     refNumber,
     billingName,
     subaccount,
@@ -28,8 +29,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   },
   ref,
 ) => {
-  const [isLoading, setisLoading] = useState(true);
-  const [showModal, setshowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const webView = useRef(null);
 
   useEffect(() => {
@@ -38,21 +39,21 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 
   useImperativeHandle(ref, () => ({
     startTransaction() {
-      setshowModal(true);
+      setShowModal(true);
     },
     endTransaction() {
-      setshowModal(false);
+      setShowModal(false);
     },
   }));
 
   const autoStartCheck = () => {
     if (autoStart) {
-      setshowModal(true);
+      setShowModal(true);
     }
   };
 
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
-  
+
   const subAccountString = subaccount ? `subaccount: '${subaccount}',` : ''; // should only send subaccount with the correct subaccoount_code if you want to enable split payment on transaction
 
   const Paystackcontent = `   
@@ -84,7 +85,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 metadata: {
                 custom_fields: [
                         {
-                        display_name:  '${firstName + ' ' + lastName}',
+                        display_name:  '${`${firstName} ${lastName}`}',
                         variable_name:  '${billingName}',
                         value:''
                         }
@@ -111,12 +112,12 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     }
     switch (webResponse.event) {
       case 'cancelled':
-        setshowModal(false);
+        setShowModal(false);
         onCancel({ status: 'cancelled' });
         break;
 
-      case 'successful':
-        setshowModal(false);
+      case 'successful': {
+        setShowModal(false);
         const reference = webResponse.transactionRef;
 
         if (onSuccess) {
@@ -127,6 +128,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
           });
         }
         break;
+      }
 
       default:
         if (handleWebViewMessage) {
@@ -139,7 +141,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   const onNavigationStateChange = (state: WebViewNavigation) => {
     const { url } = state;
     if (url === CLOSE_URL) {
-      setshowModal(false);
+      setShowModal(false);
     }
   };
 
@@ -152,8 +154,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
           onMessage={(e) => {
             messageReceived(e.nativeEvent?.data);
           }}
-          onLoadStart={() => setisLoading(true)}
-          onLoadEnd={() => setisLoading(false)}
+          onLoadStart={() => setIsLoading(true)}
+          onLoadEnd={() => setIsLoading(false)}
           onNavigationStateChange={onNavigationStateChange}
           ref={webView}
           cacheEnabled={false}
@@ -171,7 +173,3 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 };
 
 export default forwardRef(Paystack);
-
-
-
-
