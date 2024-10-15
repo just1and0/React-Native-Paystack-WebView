@@ -10,8 +10,6 @@ We’re excited to have you contribute! Here’s how to get started:
 - Submit a Pull Request (PR): Once you’re satisfied with your changes, submit a PR. Be sure to provide a clear description of what your PR does and the problem it solves.
 - Add @just1and0 as a reviewer.
 
-
-
 ## Important Notes
 - All commit messages must begin with either;
   - fix(RNPSW):<title-of-change> : this is a fix PR
