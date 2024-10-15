@@ -8,6 +8,7 @@ We’re excited to have you contribute! Here’s how to get started:
 - Create a New Branch: For each new feature or change, create a new branch from the `main` branch.
 - Make Your Changes.
 - Submit a Pull Request (PR): Once you’re satisfied with your changes, submit a PR. Be sure to provide a clear description of what your PR does and the problem it solves.
+- Add @just1and0 as a reviewer.
 
 
 
