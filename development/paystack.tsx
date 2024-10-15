@@ -25,6 +25,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
+    modalProps,
   },
   ref,
 ) => {
@@ -144,7 +145,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   };
 
   return (
-    <Modal style={{ flex: 1 }} visible={showModal} animationType="slide" transparent={false}>
+    <Modal style={{ flex: 1 }} visible={showModal} animationType="slide" transparent={false} {...modalProps}>
       <SafeAreaView style={{ flex: 1 }}>
         <WebView
           style={[{ flex: 1 }]}

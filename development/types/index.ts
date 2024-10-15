@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ModalProps } from 'react-native';
 export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
 
 export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
@@ -29,6 +30,7 @@ export interface PayStackProps {
   autoStart?: boolean;
   activityIndicatorColor?: string;
   ref: React.ReactElement;
+  modalProps?: ModalProps;
 }
 
 export interface PayStackRef {
