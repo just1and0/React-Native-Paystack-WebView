@@ -1,7 +1,7 @@
 import * as React from 'react';
 export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
 
-export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
+export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'bank_transfer' | 'eft';
 
 export type SplitTypes = 'flat' | 'percentage';
 
