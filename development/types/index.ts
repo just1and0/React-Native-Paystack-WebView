@@ -39,6 +39,7 @@ export interface PayStackProps {
   refNumber?: string;
   billingName?: string;
   plan?: string;
+  invoice_limit?: number;
   subaccount?: string;  
   split_code?: string;
   split?: DynamicMultiSplitProps;

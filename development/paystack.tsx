@@ -20,6 +20,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     refNumber,
     billingName,
     plan,
+    invoice_limit,
     subaccount,
     split_code,
     split,
@@ -73,6 +74,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   const planCodeString = plan ? `ref: '${plan}',` : ''; // should only send plan with the predefined plan_code as generated on paystack dashboard if present, else if blank, it will be ignored.
   // Please note that when plan is provided, the amount prop will be ignored
 
+  const invoiceLimitString = invoice_limit? `invoice_limit: ${invoice_limit},` : ''; // should only send invoice limit as integer when plan subscription is specified
+
   const Paystackcontent = `   
       <!DOCTYPE html>
       <html lang="en">
@@ -99,6 +102,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${getChannels(channels)}
                 ${refNumberString}
                 ${planCodeString}
+                ${invoiceLimitString}
                 ${subAccountString}
                 ${splitCodeString}
                 ${dynamicSplitString}
