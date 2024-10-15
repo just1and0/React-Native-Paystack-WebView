@@ -11,7 +11,7 @@ We’re excited to have you contribute! Here’s how to get started:
 - Add @just1and0 as a reviewer.
 
 ## Important Notes
-- All commit messages must begin with either;
+- All commit titles must begin with either;
   - fix(RNPSW):<title-of-change> : this is a fix PR
   - feat(RNPSW):<title-of-change> : this is a new feature PR
   - perf(RNPSW):<title-of-change> : this is a performance PR
