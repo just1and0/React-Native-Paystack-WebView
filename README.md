@@ -1,17 +1,20 @@
 <div>
-<center>
-<h1>React Native Paystack WebView</h1>
-This package lets you accept payments with Paystack in a snap! Just install, add your keys, and you’re good to go—no headaches here! Plus, it’s officially [endorsed](https://paystack.com/docs/libraries-and-plugins/libraries/#react-native) by [Paystack](https://paystack.com), so you know you’re in good hands. Payment processing has never been this easy!
  
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
-
-</center>
-</div>
-<div>
 <center>
-    <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
+ 
+<h1>React Native Paystack WebView</h1>
+
+This package lets you accept payments with Paystack in a snap! Just install, add your keys, and you’re good to go—no headaches here! Plus, it’s officially 
+<a href="https://paystack.com/docs/libraries-and-plugins/libraries/#react-native">endorsed</a> by <a href="https://paystack.com">Paystack</a>, so you know you’re in good hands. Payment processing has never been this easy!
+   <a href="#contributors-">
+    <img src="https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square" alt="All Contributors" />
+  </a>
+  
 </center>
+ 
+</div> 
+<div> 
+ <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
 </div>
  
 
