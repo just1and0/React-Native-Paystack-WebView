@@ -38,6 +38,7 @@ export interface PayStackProps {
   channels?: PaymentChannels[];
   refNumber?: string;
   billingName?: string;
+  plan?: string;
   subaccount?: string;  
   split_code?: string;
   split?: DynamicMultiSplitProps;
