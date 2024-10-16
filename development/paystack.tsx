@@ -4,7 +4,8 @@ import { Modal, View, ActivityIndicator, SafeAreaView } from 'react-native';
 import { WebView } from 'react-native-webview';
 import type { WebViewNavigation } from 'react-native-webview';
 import { getAmountValueInKobo, getChannels } from './helper';
-import type { PaymentChannels, PayStackProps } from './types';
+import { PayStackProps, PayStackRef, DynamicMultiSplitProps } from './types';
+
 
 const CLOSE_URL = 'https://standard.paystack.co/close';
 
@@ -21,6 +22,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     refNumber,
     billingName,
     subaccount,
+    split_code,
+    split,
     handleWebViewMessage,
     onCancel,
     autoStart = false,
@@ -52,9 +55,21 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     }
   };
 
+  const dynamicSplitObjectIsValid = (split:DynamicMultiSplitProps|undefined): split is DynamicMultiSplitProps => {
+    if ( split !== null && (typeof split === "object") && (split.type) && (split.bearer_type) && (split.subaccounts)) {
+      return true;
+    } else  { return false; }
+  }
+
   const refNumberString = refNumber ? `ref: '${refNumber}',` : ''; // should only send ref number if present, else if blank, paystack will auto-generate one
 
   const subAccountString = subaccount ? `subaccount: '${subaccount}',` : ''; // should only send subaccount with the correct subaccoount_code if you want to enable split payment on transaction
+
+  const splitCodeString = split_code ? `split_code: '${split_code}',` : ''; // should only send split_code with the correct split_code from the split group if you want to enable multi-split payment on transaction
+  //Multi-split enables merchants to split the settlement for a transaction across their payout accounts, and one or more subaccounts
+
+  const dynamicSplitString = dynamicSplitObjectIsValid(split) ? `split: ` + JSON.stringify(split)  + `,` : ''; // should only send split for dynamic multi-account split with the correct split object as defined
+  //Sometimes, you can't determine a split configuration until later in the purchase flow. With dynamic splits, you can create splits on the fly. This can be achieved by passing a split object
 
   const Paystackcontent = `   
       <!DOCTYPE html>
@@ -82,6 +97,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${getChannels(channels)}
                 ${refNumberString}
                 ${subAccountString}
+                ${splitCodeString}
+                ${dynamicSplitString}
                 metadata: {
                 custom_fields: [
                         {
