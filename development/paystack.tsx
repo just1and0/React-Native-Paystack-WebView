@@ -71,7 +71,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
   const dynamicSplitString = dynamicSplitObjectIsValid(split) ? `split: ` + JSON.stringify(split)  + `,` : ''; // should only send split for dynamic multi-account split with the correct split object as defined
   //Sometimes, you can't determine a split configuration until later in the purchase flow. With dynamic splits, you can create splits on the fly. This can be achieved by passing a split object
 
-  const planCodeString = plan ? `ref: '${plan}',` : ''; // should only send plan with the predefined plan_code as generated on paystack dashboard if present, else if blank, it will be ignored.
+  const planCodeString = plan ? `plan: '${plan}',` : ''; // should only send plan with the predefined plan_code as generated on paystack dashboard if present, else if blank, it will be ignored.
   // Please note that when plan is provided, the amount prop will be ignored
 
   const invoiceLimitString = invoice_limit? `invoice_limit: ${invoice_limit},` : ''; // should only send invoice limit as integer when plan subscription is specified
