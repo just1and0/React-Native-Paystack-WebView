@@ -171,6 +171,24 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "mureyvenom",
+      "name": "Oluwamurewa Alao",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47125673?v=4",
+      "profile": "https://mureyfolio.com.ng/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "El-Nazy",
+      "name": "Emmanuel Ngene",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48170272?v=4",
+      "profile": "https://github.com/El-Nazy",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

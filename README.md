@@ -1,39 +1,54 @@
-# React Native Paystack WebView
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-) 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request) 
+<div>
  
+<center>
+ 
+<h1>React Native Paystack WebView</h1>
 
-The package allows you accept payment using paystack, install, add keys and use. No stress :) 
+This package lets you accept payments with Paystack in a snap! Just install, add your keys, and you’re good to go—no headaches here! Plus, it’s officially 
+<a href="https://paystack.com/docs/libraries-and-plugins/libraries/#react-native">endorsed</a> by <a href="https://paystack.com">Paystack</a>, so you know you’re in good hands. Payment processing has never been this easy!
+   <a href="#contributors-">
+    <img src="https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square" alt="All Contributors" />
+  </a>
+  
+</center>
+ 
+</div> 
+<div align="center">
+  <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
+</div>
+ 
 
 ### [](https://github.com/just1and0/React-Native-Paystack-WebView#installation)Installation
 
-Add React-Native-Paystack-WebView to your project by running;
+Add `react-native-paystack-webview` to your project by running;
 
-`npm install react-native-paystack-webview`
+```bash 
+npm install react-native-paystack-webview
 
 or
 
-`yarn add react-native-paystack-webview`
+yarn add react-native-paystack-webview
+```
+### **Additional Setup**
 
-### **One more thing**
+To ensure everything works smoothly, install and configure the required dependency, `react-native-webview`:
 
-To frontload the installation work, let's also install and configure dependencies used by this project, being **react-native-webview** 
-
-run
-
-`yarn add react-native-webview`
-
-for iOS: `cd iOS && pod install && cd ..`
-
+ 
+```bash 
+yarn add react-native-webview
+```
+for iOS: 
+```bash 
+cd iOS && pod install && cd ..
+```
 for expo applications run;
+```bash 
+npx expo install react-native-webview
+```
+That’s it! You’re all set.
 
-`expo install react-native-webview`
-
-and that's it, you're all good to go!
-
-<img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
-
-### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage 1
+### [](https://github.com/just1and0/React-Native-Paystack-WebView#usage)Usage
+##### Basic Example
 
 ```javascript
 import React from 'react';
@@ -61,9 +76,9 @@ function Pay() {
 }
 ```
 
-## Usage 2 - Using Refs
+##### Using Refs
 
-Make use of a `ref` to start transaction. See example below;
+You can also use a `ref` to start a transaction. Here’s how:
 
 ```javascript
 import React, { useRef } from 'react';
@@ -96,34 +111,57 @@ function Pay(){
 }
 ```
 
-## API's
+### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props) API Reference
 
-#### [](https://github.com/just1and0/object-to-array-convert#all-object-to-array-convert-props)all React-Native-Paystack-WebView API
+| Name                                 |                                                                                   use/description                                                                                   |                                                      extra |
+| :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
+| `paystackKey`                        |                                                           Public or Private paystack key(visit paystack.com to get yours)                                                           |                                                     `nill` |
+| `amount`                             |                                                                                  Amount to be paid                                                                                  |                                                     `nill` |
+| `activityIndicatorColor`             |                                                                                   color of loader                                                                                   |                                           default: `green` |
+| `billingEmail(required by paystack)` |                                                                                    Billers email                                                                                    |                                            default: `nill` |
+| `billingMobile`                      |                                                                                   Billers mobile                                                                                    |                                            default: `nill` |
+| `billingName`                        |                                                                                    Billers Name                                                                                     |                                            default: `nill` |
+| `plan`                         |    Specify plan code generated from the Paystack Dashboard or API to create a subscription to a predefined plan by the transaction. The plan code is a unique code given to every plan, it is used to identify a particular plan. Here's an example of usage: `plan: "PLANCODE"`. The `PLANCODE` comes in the format `PLN_xxxxxxxxxx`  *NOTE*: _This would invalidate/override the value provided in `amount`_    |                                            default: `nill` |
+| `invoice_limit`                         |    Specify the number of times to charge customer during subscription to plan (integer). Works together with the `plan` prop    |                                            default: `nill` |
+| `subaccount`                         |    Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`     |                                            default: `nill` |
+| `split_code`                        |                                                                                           Specify _split_code_ generated from the Paystack Dashboard under _Transaction Splits menu_ or API to enable Multi-Split Payment on the transaction. According to Paystack's documentation available [here](https://paystack.com/docs/payments/multi-split-payments/), Multi-split enables merchants to split the settlement for a transaction across their payout account, and one or more subaccounts. Here's an example of usage: `split_code: "SPL_xxxxxxx"`                                                                                              |                                            default: `nill` |
+| `split`                        |                                                                                           Specify _split_ object to enable Dynamic Multi-Split Payment on the transaction. According to Paystack's documentation available [here](https://paystack.com/docs/payments/multi-split-payments/#dynamic-splits), Sometimes, you can't determine a split configuration until later in the purchase flow. With dynamic splits, you can create splits on the fly. The Structure is defined [in the Dynamic Multi-Split Structure below](#dynamic-multi-split-payment-object-structure)                                                                                              |                                            default: `nill` |
+| `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money", "bank_transfer", "eft"]. Here's an example of usage: `channels={["card","ussd"]}` |                                        default: `["card"]` |
+| `onCancel`                           |       callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback       |                                            default: `nill` |
+| `onSuccess`                          |                            callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                            |                                            default: `nill` |
+| `autoStart`                          |                                                                       Auto start payment once page is opened                                                                        |                                           default: `false` |
+| `refNumber`                          |                                                                 Reference number, if you have already generated one                                                                 | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
+| `handleWebViewMessage`               |                                                                  Will be called when a WebView receives a message                                                                   |                                            default: `true` |
+| `modalProps`                         |     Can be used to extend the root modal props for example to handle closing like so `modalProps={{ onRequestClose: () => paystackWebViewRef.current.endTransaction() }}`     |                                            default: `nill` |
 
-| Name                                 |                                                                                           use/description                                                                                           |                                                      extra |
+
+
+#### Dynamic Multi-Split Payment Object structure
+
+| Name                                 |                                                                                           use/description                                                                                           |                                                      required? |
 | :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
-| `paystackKey`                        |                                                                   Public or Private paystack key(visit paystack.com to get yours)                                                                   |                                                     `nill` |
-| `amount`                             |                                                                                          Amount to be paid                                                                                          |                                                     `nill` |
-| `activityIndicatorColor`             |                                                                                           color of loader                                                                                           |                                           default: `green` |
-| `billingEmail(required by paystack)` |                                                                                            Billers email                                                                                            |                                            default: `nill` |
-| `billingMobile`                      |                                                                                           Billers mobile                                                                                            |                                            default: `nill` |
-| `billingName`                        |                                                                                            Billers Name                                                                                             |                                            default: `nill` |
-| `subaccount`                        |                                                                                           Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`                                                                                              |                                            default: `nill` |
-| `channels`                           | Specify payment options available to users. Available channel options are: ["card", "bank", "ussd", "qr", "mobile_money"]. Here's an example of usage: `channels={["card","ussd"]}`                 |                                         default: `["card"]`|
-| `onCancel`                           |               callback function if user cancels or payment transaction could not be verified. In a case of not being verified, transactionRef number is also returned in the callback               |                                            default: `nill` |
-| `onSuccess`                          |                                    callback function if transaction was successful and verified (it will also return the transactionRef number in the callback )                                    |                                            default: `nill` |
-| `autoStart`                          |                                                                               Auto start payment once page is opened                                                                                |                                           default: `false` |
-| `refNumber`                          |                                                                         Reference number, if you have already generated one                                                                         | default: `''+Math.floor((Math.random() * 1000000000) + 1)` |
-| `handleWebViewMessage`               |                                                                          Will be called when a WebView receives a message                                                                           |                                            default: `true` |
+| `type`                        |                                                                   Dynamic Multi-Split type. Value can be `flat` or `percentage`                                                                   |                                                     `YES` |
+| `bearer_type`                             |                                                                                          Defines who bears the charges. Value can be `all`, `all-proportional`, `account` or `subaccount`                                                                                          |                                                     `YES` |
+| `subaccounts`                             |                                                                                          An array of subaccount object as defined [below](#dynamic-multi-split-payment-sub-account-object-structure). e.g. {"subaccount": 'ACCT_xxxxxx', "share": 60}                                                                                          |                                                     `YES` |
+| `bearer_subaccount`                             |                                                                                          Subaccount code of the bearerof the transaction. It should be specified if _bearer_type_ is `subaccount`                                                                                          |                                                     `NO` |
+| `reference`                             |                                                                                          Unique reference of the split. Can be defined by the user                                                                                         |                                                     `NO` |
+
+
+#### Dynamic Multi-Split Payment Sub-Account Object structure
+
+| Name                                 |                                                                                           use/description                                                                                           |                                                      required? |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
+| `subaccount`                        |                                                                                           Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`                                                                                              |                                            `YES` |
+| `share`                             |                                                                                          Defines the amount in `percentage (integer)` or `value (decimal allowed)` depending on the type of multi-split defined                                                                                          |                                                     `YES` |
 
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
 
-Want to help make this package even more awesome? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/master/CONTRIBUTING.md) and feel free to send in your PR!
+Want to help improve this package? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/main/CONTRIBUTING.md) and feel free to submit your PR!
 
 ## [](https://github.com/just1and0/React-Native-Paystack-WebView#licensing)Licensing
 
-This project is licensed under MIT license.
+This project is licensed under the MIT License.
 
 ## Related Projects
 
@@ -132,13 +170,16 @@ This project is licensed under MIT license.
 
 ### Video Tutorial
 
-- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0)
+- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0) 
 
-### Don't forget to star, like and share :)
+## Sponsorship
+- Star the project on Github
+- [Buy me a coffee](https://buymeacoffee.com/6pL0Q8YkW)
 
-## Contributors ✨
+## Thanks to Our Superheroes ✨
+A huge shoutout to our amazing contributors! Your efforts make this project better every day. Check out the ([emoji key](https://allcontributors.org/docs/en/emoji-key)) for what each contribution means:
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+ 
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -168,6 +209,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://fuadolatunji.me"><img src="https://avatars.githubusercontent.com/u/65264054?v=4?s=100" width="100px;" alt="Fuad Olatunji"/><br /><sub><b>Fuad Olatunji</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=fuadop" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://erasmuswill.dev"><img src="https://avatars.githubusercontent.com/u/15966713?v=4?s=100" width="100px;" alt="Wilhelm Erasmus"/><br /><sub><b>Wilhelm Erasmus</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=erasmuswill" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/opmat"><img src="https://avatars.githubusercontent.com/u/2133903?v=4?s=100" width="100px;" alt="Matiluko Opeyemi Emmanuel"/><br /><sub><b>Matiluko Opeyemi Emmanuel</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=opmat" title="Code">💻</a> <a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=opmat" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://mureyfolio.com.ng/"><img src="https://avatars.githubusercontent.com/u/47125673?v=4?s=100" width="100px;" alt="Oluwamurewa Alao"/><br /><sub><b>Oluwamurewa Alao</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=mureyvenom" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/El-Nazy"><img src="https://avatars.githubusercontent.com/u/48170272?v=4?s=100" width="100px;" alt="Emmanuel Ngene"/><br /><sub><b>Emmanuel Ngene</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=El-Nazy" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
@@ -178,11 +221,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-
-# Roadmap
-we have a lot to get done before we hit stable, here's a list;
-- Make the reference usage more user friendly
-- Since you want it to conform to InlineJS, let the variable names also match
-- Let the parameter types also conform to InlineJS parameter types
-- Paystack is a word, hence when used as a package name/class name, let it use PascalCase (Paystack) and when used as a variable, camelCase (paystack)
