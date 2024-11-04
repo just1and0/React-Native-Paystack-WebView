@@ -30,6 +30,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     onSuccess,
     activityIndicatorColor = 'green',
     modalProps,
+    metadata
   },
   ref,
 ) => {
@@ -77,6 +78,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 
   const invoiceLimitString = invoice_limit? `invoice_limit: ${invoice_limit},` : ''; // should only send invoice limit as integer when plan subscription is specified
 
+  const metaDataString = metadata ? `metadata: ${metadata},` : `metadata: { custom_fields: [{ display_name:  '${firstName + ' ' + lastName}', variable_name:  '${billingName}', value:'' }]},`;
+
   const Paystackcontent = `   
       <!DOCTYPE html>
       <html lang="en">
@@ -107,14 +110,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${subAccountString}
                 ${splitCodeString}
                 ${dynamicSplitString}
-                metadata: {
-                custom_fields: [
-                        {
-                        display_name:  '${firstName + ' ' + lastName}',
-                        variable_name:  '${billingName}',
-                        value:''
-                        }
-                ]},
+                ${metaDataString}
                 onSuccess: function(response){
                       var resp = {event:'successful', transactionRef:response};
                         window.ReactNativeWebView.postMessage(JSON.stringify(resp))

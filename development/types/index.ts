@@ -28,6 +28,26 @@ export interface DynamicMultiSplitProps {
   reference?: string;
 }
 
+type CustomField = {
+  display_name: string;
+  variable_name: string;
+  value: string | number;
+};
+
+type CustomFilters = {
+  recurring?: boolean;
+  banks?: string[];
+  card_brands?: ('verve' | 'visa' | 'mastercard')[];
+  supported_mobile_money_providers?: ('mtn' | 'atl' | 'vod')[];
+};
+
+type Metadata = {
+  cart_id?: string | number;
+  custom_fields?: CustomField[];
+  cancel_action?: string;
+  custom_filters?: CustomFilters;
+};
+
 export interface PayStackProps {
   paystackKey: string;
   billingEmail: string;
@@ -51,6 +71,7 @@ export interface PayStackProps {
   activityIndicatorColor?: string;
   ref: React.ReactElement;
   modalProps?: ModalProps;
+  metadata?: Metadata;
 }
 
 export interface PayStackRef {
