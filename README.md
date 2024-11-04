@@ -13,8 +13,8 @@ This package lets you accept payments with Paystack in a snap! Just install, add
 </center>
  
 </div> 
-<div> 
- <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
+<div align="center">
+  <img width="306" alt="Screenshot of library in action" src="https://user-images.githubusercontent.com/41248079/126550307-5f12c6d8-81af-4f26-951b-5d6514304022.png">
 </div>
  
 
