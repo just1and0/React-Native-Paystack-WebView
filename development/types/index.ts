@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ModalProps } from 'react-native';
 export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
 
-export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'bank_transfer' | 'eft';
+export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'bank_transfer' | 'eft' | 'apple_pay';
 
 export type SplitTypes = 'flat' | 'percentage';
 
