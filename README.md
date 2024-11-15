@@ -136,6 +136,22 @@ function Pay(){
 
 
 
+#### Meta Props
+ 
+ 
+| Name                | Description                                                                                                                                                                      | Required? | Default Value                                                                                                                                                                 |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `cart_id`           | A unique identifier for the cart. Can be either a string or a number.                                                                                                            | `NO`      | `undefined`                                                                                                                                                                 |
+| `custom_fields`     | An array of custom fields for adding additional metadata to the transaction. If not passed, a default custom field is created using the `firstName`, `lastName`, and `billingName`. | `NO`      | `[{ display_name: '${firstName + ' ' + lastName}', variable_name: '${billingName}', value: '' }]`                                                                           |
+| `cancel_action`     | A string specifying the action to take if a transaction is canceled.                                                                                                            | `NO`      | `undefined`                                                                                                                                                                 |
+| `custom_filters`    | Custom filters to restrict or specify transaction options, such as:                                                                                                              | `NO`      | `undefined`                                                                                                                                                                 |
+|                     | - **`recurring`**: A boolean to indicate if the transaction is recurring.                                                                                                       |           |                                                                                                                                                                             |
+|                     | - **`banks`**: An array of bank codes for supported banks.                                                                                                                     |           |                                                                                                                                                                             |
+|                     | - **`card_brands`**: Supported card brands, e.g., `'verve'`, `'visa'`, `'mastercard'`.                                                                                         |           |                                                                                                                                                                             |
+|                     | - **`supported_mobile_money_providers`**: Supported mobile money providers, e.g., `'mtn'`, `'atl'`, `'vod'`.                                                                   |           |                                                                                                                                                                             |
+
+---
+ 
 #### Dynamic Multi-Split Payment Object structure
 
 | Name                                 |                                                                                           use/description                                                                                           |                                                      required? |
