@@ -189,6 +189,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "maukoese",
+      "name": "Mauko",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14233942?v=4",
+      "profile": "https://osen.co.ke",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
