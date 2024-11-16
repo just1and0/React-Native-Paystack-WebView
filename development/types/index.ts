@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ModalProps } from 'react-native';
-export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES;
+export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES';
 
 export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'bank_transfer' | 'eft' | 'apple_pay';
 
