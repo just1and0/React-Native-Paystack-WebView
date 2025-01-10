@@ -7,11 +7,12 @@ import {
   toNumber,
   getAmountValueInKobo,
   getChannels,
-} from './helper';
+} from '../development/helper';
+import { PaymentChannels } from '../development/types';
 
 describe('Utility functions work properly', () => {
   test('getChannels should return a stingified array with comma', () => {
-    let testChannels = ['card', 'bank'];
+    let testChannels: PaymentChannels[] = ['card', 'bank'];
     let expectedOutput = 'channels: ["card","bank"],';
 
     const result = getChannels(testChannels);
