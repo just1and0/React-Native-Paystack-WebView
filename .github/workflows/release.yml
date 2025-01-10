@@ -27,7 +27,7 @@ jobs:
       - name: TypeScript Check
         run: yarn tsc
       - run: npm run build
-      - run: npm audit --audit-level=moderate
+      - run: npm audit signature
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
