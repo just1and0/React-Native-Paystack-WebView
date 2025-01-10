@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v4 
         with:
           node-version: "lts/*"
-      - run: npm install
+      - run: npm install  --legacy-peer-deps
       - name: Run Tests
         run: |
           npx jest --ci --coverage --maxWorkers=2
