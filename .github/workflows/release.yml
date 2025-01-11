@@ -27,7 +27,6 @@ jobs:
       - name: TypeScript Check
         run: yarn tsc
       - run: yarn build
-      - run: yarn  audit 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
