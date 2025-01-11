@@ -8,23 +8,19 @@ on:
       - synchronize
 
 jobs:
-  test:
+  test-build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the project
-        run: npm run build
-
-      - name: Run tests
-        run: npm test
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "lts/*"
+    - run: npm install  --legacy-peer-deps
+    - name: Run Tests
+      run: |
+        npx jest --ci --coverage --maxWorkers=2
+      continue-on-error: false
+    - name: TypeScript Check
+      run: yarn tsc
+    - run: yarn build
+   
