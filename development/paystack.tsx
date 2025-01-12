@@ -171,5 +171,5 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
     );
   }
 );
- 
+
 export default Paystack;
