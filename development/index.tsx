@@ -1,11 +1,7 @@
-import { NativeModules } from 'react-native'
-import { Paystack } from './paystack';
+import * as Paystack  from './paystack';
 import * as paystackProps from './types'
 
-export {
+export default {
   Paystack,
   paystackProps
 }
-
-export default NativeModules.ReactNativePaystackWebviewModule
-
