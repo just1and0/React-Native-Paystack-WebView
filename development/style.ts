@@ -10,5 +10,5 @@ export const styles = StyleSheet.create({
     activityIndicatorContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-    },
+    }
 });
