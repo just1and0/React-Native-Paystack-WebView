@@ -1,5 +1,11 @@
 import * as React from 'react';
 import { ModalProps } from 'react-native';
+
+export interface PayStackRef {
+  startTransaction: () => void;
+  endTransaction: () => void;
+}
+
 export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES';
 
 export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'bank_transfer' | 'eft' | 'apple_pay';
@@ -10,6 +16,7 @@ export type ChargeBearerTypes = 'all' | 'all-proportional' | 'account' | 'subacc
 
 interface Response {
   status: string;
+  data?: string;
 }
 interface SuccessResponse extends Response {
   transactionRef?: string;
@@ -24,7 +31,7 @@ export interface DynamicMultiSplitProps {
   type: SplitTypes;
   bearer_type: ChargeBearerTypes;
   subaccounts: DynamicSplitSubAccountInterface[];
-  bearer_subaccount?: string; // only if bearer_type is 'subaccount'
+  bearer_subaccount?: string;
   reference?: string;
 }
 
@@ -64,7 +71,7 @@ export interface PayStackProps {
   subaccount?: string;  
   split_code?: string;
   split?: DynamicMultiSplitProps;
-  handleWebViewMessage?: (string: string) => void;
+  handleWebViewMessage?: (Response: Response) => void;
   onCancel: (Response: Response) => void;
   onSuccess: (SuccessResponse:SuccessResponse) => void;
   autoStart?: boolean;

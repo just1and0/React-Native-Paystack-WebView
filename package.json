@@ -4,7 +4,7 @@
   "description": "This package allows you to accept payment in your react native project using paystack ",
   "homepage": "https://github.com/just1and0/React-Native-Paystack-WebView#readme",
   "main": "production/lib/index.js",
-  "types": "production/lib/index.d.ts",
+  "types": "production/lib/types/index.d.ts",
   "author": "Oluwatobi Shokunbi  <ayoshokz@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -12,15 +12,6 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "semantic-release": "semantic-release"
-  },
-  "jest": {
-    "preset": "react-native",
-    "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|react-native-webview|@react-native|@react-navigation)/)"
-    ]
   },
   "devDependencies": {
     "@babel/core": "^7.22.0",
@@ -49,6 +40,7 @@
     "react-native-webview": "*"
   },
   "dependencies": {
+    "@types/validator": "^13.6.3",
     "react-native-webview": "*",
     "validator": "^13.6.0"
   },
