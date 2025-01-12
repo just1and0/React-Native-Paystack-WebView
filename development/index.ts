@@ -1,7 +1,7 @@
-import * as Paystack  from './paystack';
+import Paystack  from './paystack';
 import * as paystackProps from './types'
 
-export default {
+export {
   Paystack,
   paystackProps
 }

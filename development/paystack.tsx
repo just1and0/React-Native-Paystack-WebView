@@ -25,8 +25,7 @@ import { PayStackProps, PayStackRef } from "./types";
 import { styles } from "./style";
 import { CLOSE_URL, DEFAULT_ACTIVITY_INDICATOR_COLOR, DEFAULT_AMOUNT, DEFAULT_CURRENCY } from "./utils/constants";
 
-const PaystackComponent = forwardRef<PayStackRef, PayStackProps>(
-  (
+const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> = (
     {
       paystackKey,
       billingEmail,
@@ -52,7 +51,7 @@ const PaystackComponent = forwardRef<PayStackRef, PayStackProps>(
       metadata,
     },
     ref
-  ): ReactElement => {
+) => {
     const [isLoading, setIsLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const webViewRef = useRef<WebView>(null);
@@ -169,6 +168,6 @@ const PaystackComponent = forwardRef<PayStackRef, PayStackProps>(
       </Modal>
     );
   }
-);
 
-export default PaystackComponent;
+
+export default forwardRef(Paystack);
