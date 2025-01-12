@@ -25,7 +25,7 @@ import { PayStackProps, PayStackRef } from "./types";
 import { styles } from "./style";
 import { CLOSE_URL, DEFAULT_ACTIVITY_INDICATOR_COLOR, DEFAULT_AMOUNT, DEFAULT_CURRENCY } from "./utils/constants";
 
-const Paystack = forwardRef<PayStackRef, PayStackProps>(
+export const Paystack = forwardRef<PayStackRef, PayStackProps>(
   (
     {
       paystackKey,
@@ -170,5 +170,3 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
     );
   }
 );
-
-export default Paystack;
