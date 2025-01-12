@@ -5,6 +5,7 @@ import React, {
   useRef,
   useImperativeHandle,
   useCallback,
+  ReactElement,
 } from "react";
 import {
   Modal,
@@ -51,7 +52,7 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
       metadata,
     },
     ref
-  ) => {
+  ): ReactElement => {
     const [isLoading, setIsLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const webViewRef = useRef<WebView>(null);
@@ -68,7 +69,6 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
     }));
 
     const generatePaystackParams = () => {
-
       const params = [
         buildKeyValueString("key", paystackKey),
         buildKeyValueString("email", billingEmail),
@@ -92,7 +92,6 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
       ];
       return params.filter(Boolean).join("\n");
     };
-
 
     const HTML_CONTENT = paystackHtmlContent(generatePaystackParams());
 
@@ -171,5 +170,5 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
     );
   }
 );
- 
+
 export default Paystack;
