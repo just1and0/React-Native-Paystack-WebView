@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import {
   toAmountInKobo,
   isValidDecimalMonetaryValue,
@@ -7,8 +6,11 @@ import {
   toNumber,
   getAmountValueInKobo,
   getChannels,
-} from '../development/helper';
-import { PaymentChannels } from '../development/types';
+  buildKeyValueString,
+  dynamicSplitObjectIsValid,
+  paystackHtmlContent,
+} from '../development/utils/helper';
+import { DynamicMultiSplitProps, PaymentChannels } from '../development/types';
 
 describe('Utility functions work properly', () => {
   test('getChannels should return a stingified array with comma', () => {
@@ -61,5 +63,33 @@ describe('Utility functions work properly', () => {
 
     result = isNegative(200.0);
     expect(result).toBe(false);
+  });
+});
+
+describe('Utility functions work properly', () => {
+  test('buildKeyValueString should return correct string for key-value', () => {
+    let result = buildKeyValueString('key1', 'value1');
+    expect(result).toBe("key1: 'value1',");
+
+    result = buildKeyValueString('key2', undefined);
+    expect(result).toBe('');
+  });
+
+  test('dynamicSplitObjectIsValid should return true for valid split object', () => {
+    const validSplit: DynamicMultiSplitProps = {
+      type: 'percentage',
+      bearer_type: 'all',
+      subaccounts: [{ subaccount: 'sub1', share: '50' }]
+    };
+
+    let result = dynamicSplitObjectIsValid(validSplit);
+    expect(result).toBe(true);
+  });
+ 
+  test('paystackHtmlContent should return HTML with correct params', () => {
+    const params = "key1: 'value1', key2: 'value2'";
+    const result = paystackHtmlContent(params);
+    expect(result).toContain("key1: 'value1',");
+    expect(result).toContain("key2: 'value2'");
   });
 });

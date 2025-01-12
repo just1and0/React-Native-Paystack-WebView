@@ -151,6 +151,14 @@ function Pay(){
 |                     | - **`supported_mobile_money_providers`**: Supported mobile money providers, e.g., `'mtn'`, `'atl'`, `'vod'`.                                                                   |           |                                                                                                                                                                             |
 
 ---
+#### Refs
+
+| Name              |                        use/description                        |   extra   |
+| :---------------- | :----------------------------------------------------------: | --------: |
+| `startTransaction`| Function triggered to start a transaction . Example usage: `paystackWebViewRef.current.startTransaction()` | default: `nill` |
+| `endTransaction`  | Function triggered to ends a transaction . Example usage: `paystackWebViewRef.current.endTransaction()`   | default: `nill` |
+
+---
  
 #### Dynamic Multi-Split Payment Object structure
 
