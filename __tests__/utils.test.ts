@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import {
   toAmountInKobo,
   isValidDecimalMonetaryValue,
@@ -10,7 +9,7 @@ import {
   buildKeyValueString,
   dynamicSplitObjectIsValid,
   paystackHtmlContent,
-} from '../development//utils/helper';
+} from '../development/utils/helper';
 import { DynamicMultiSplitProps, PaymentChannels } from '../development/types';
 
 describe('Utility functions work properly', () => {

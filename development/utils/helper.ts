@@ -120,3 +120,9 @@ export const paystackHtmlContent = (Params: string) => `
 </body>
 </html>
 `;
+
+export const generateMetaDataString = (firstName: string, lastName: string, billingName: string, metadata: any) => {
+  return metadata
+    ? `metadata: ${metadata},`
+    : `metadata: { custom_fields: [{ display_name:  '${firstName + " " + lastName}', variable_name:  '${billingName}', value:'' }]},`;
+};

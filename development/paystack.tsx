@@ -22,8 +22,7 @@ import {
 } from "./utils/helper";
 import { PayStackProps, PayStackRef } from "./types";
 import { styles } from "./style";
-
-const CLOSE_URL = "https://standard.paystack.co/close";
+import { CLOSE_URL, DEFAULT_ACTIVITY_INDICATOR_COLOR, DEFAULT_AMOUNT, DEFAULT_CURRENCY } from "./utils/constants";
 
 const Paystack = forwardRef<PayStackRef, PayStackProps>(
   (
@@ -33,8 +32,8 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
       phone,
       lastName,
       firstName,
-      amount = "0.00",
-      currency = "NGN",
+      amount = DEFAULT_AMOUNT,
+      currency = DEFAULT_CURRENCY,
       channels = ["card"],
       refNumber,
       billingName,
@@ -47,7 +46,7 @@ const Paystack = forwardRef<PayStackRef, PayStackProps>(
       onCancel,
       autoStart = false,
       onSuccess,
-      activityIndicatorColor = "green",
+      activityIndicatorColor = DEFAULT_ACTIVITY_INDICATOR_COLOR,
       modalProps,
       metadata,
     },
