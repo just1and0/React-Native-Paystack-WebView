@@ -199,6 +199,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "quartusk",
+      "name": "Quartus Kok",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39792290?v=4",
+      "profile": "https://github.com/quartusk",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
