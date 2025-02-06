@@ -86,7 +86,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
           ? `split: ${JSON.stringify(split)},`
           : "",
         metadata
-          ? `metadata: ${metadata},`
+          ? `metadata: ${JSON.stringify(metadata)},`
           : `metadata: { custom_fields: [{ display_name: '${firstName} ${lastName}', variable_name: '${billingName}', value: '' }]},`,
       ];
       return params.filter(Boolean).join("\n");
