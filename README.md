@@ -237,6 +237,9 @@ A huge shoutout to our amazing contributors! Your efforts make this project bett
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/El-Nazy"><img src="https://avatars.githubusercontent.com/u/48170272?v=4?s=100" width="100px;" alt="Emmanuel Ngene"/><br /><sub><b>Emmanuel Ngene</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=El-Nazy" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://osen.co.ke"><img src="https://avatars.githubusercontent.com/u/14233942?v=4?s=100" width="100px;" alt="Mauko"/><br /><sub><b>Mauko</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=maukoese" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/quartusk"><img src="https://avatars.githubusercontent.com/u/39792290?v=4?s=100" width="100px;" alt="Quartus Kok"/><br /><sub><b>Quartus Kok</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=quartusk" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
