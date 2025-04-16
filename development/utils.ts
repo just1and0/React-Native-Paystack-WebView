@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-import { DynamicMultiSplitProps, PaystackParams, PaystackTransactionResponse } from './types';
+import { Currency, DynamicMultiSplitProps, PaymentChannels, PaystackParams, PaystackTransactionResponse } from './types';
 
 export const validateParams = (params: PaystackParams, debug: boolean): boolean => {
   const errors: string[] = [];
@@ -90,8 +90,8 @@ export const generatePaystackParams = (config: {
   amount: number;
   reference: string;
   metadata?: object;
-  currency: string;
-  channels: string[];
+  currency: Currency;
+  channels: PaymentChannels;
   plan?: string;
   invoice_limit?: number;
   subaccount?: string;
