@@ -28,6 +28,8 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
     const [params, setParams] = useState<PaystackParams | null>(null);
     const [method, setMethod] = useState<'checkout' | 'newTransaction'>('checkout');
 
+    const fallbackRef = useMemo(() => `ref_${Date.now()}`, []);
+
     const open = useCallback(
         (params: PaystackParams, selectedMethod: 'checkout' | 'newTransaction') => {
             if (debug) console.log(`[Paystack] Opening modal with method: ${selectedMethod}`);
@@ -65,7 +67,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                 publicKey,
                 email: params.email,
                 amount: params.amount,
-                reference: params.reference || `ref_${Date.now()}`,
+                reference: params.reference || fallbackRef,
                 metadata: params.metadata,
                 currency,
                 channels: defaultChannels,
