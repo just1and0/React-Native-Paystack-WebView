@@ -74,8 +74,8 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                 plan: params.plan,
                 invoice_limit: params.invoice_limit,
                 subaccount: params.subaccount,
-                split_code: params.split_code,
                 split: params.split,
+                split_code: params.split_code,
             }),
             method
         );
