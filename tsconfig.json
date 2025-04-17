@@ -14,5 +14,5 @@
     "typeRoots": ["./lib/types"]
   },
   "exclude": ["**/__tests__/*"],
-  "include": ["development"]
+  "include": ["development", "__tests__/index.test.tsx"]
 }
