@@ -70,7 +70,12 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                 reference: params.reference || fallbackRef,
                 metadata: params.metadata,
                 currency,
-                channels: defaultChannels,
+                channels: defaultChannels, 
+                plan: params.plan,
+                invoice_limit: params.invoice_limit,
+                subaccount: params.subaccount,
+                split_code: params.split_code,
+                split: params.split,
             }),
             method
         );
