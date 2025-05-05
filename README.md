@@ -122,7 +122,7 @@ const Checkout = () => {
 | Prop              | Type      | Default | Description                              |
 |-------------------|-----------|---------|------------------------------------------|
 | `publicKey`       | `string`  | —       | Your Paystack public key                 |
-| `currency`        | `string`  | `NGN`   | NGN / GHS / USD                          |
+| `currency`        | `string`  |   —     | Currency code  (optional)                 |
 | `defaultChannels` | `string[]`| `['card']`| Payment channels                        |
 | `debug`           | `boolean` | `false` | Show debug logs                          |
 | `onGlobalSuccess` | `func`    | —       | Called on all successful transactions    |
