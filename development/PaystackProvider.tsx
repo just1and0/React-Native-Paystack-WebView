@@ -17,7 +17,7 @@ export const PaystackContext = createContext<{
 
 export const PaystackProvider: React.FC<PaystackProviderProps> = ({
     publicKey,
-    currency = 'NGN',
+    currency,
     defaultChannels = ['card'],
     debug = false,
     children,
@@ -69,7 +69,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                 amount: params.amount,
                 reference: params.reference || fallbackRef,
                 metadata: params.metadata,
-                currency,
+                ...(currency && { currency }),
                 channels: defaultChannels, 
                 plan: params.plan,
                 invoice_limit: params.invoice_limit,

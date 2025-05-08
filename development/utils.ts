@@ -90,7 +90,7 @@ export const generatePaystackParams = (config: {
   amount: number;
   reference: string;
   metadata?: object;
-  currency: Currency;
+  currency?: Currency;
   channels: PaymentChannels;
   plan?: string;
   invoice_limit?: number;
@@ -102,7 +102,7 @@ export const generatePaystackParams = (config: {
     `key: '${config.publicKey}'`,
     `email: '${config.email}'`,
     `amount: ${config.amount * 100}`,
-    `currency: '${config.currency}'`,
+    config.currency ? `currency: '${config.currency}'` : '',
     `reference: '${config.reference}'`,
     config.metadata ? `metadata: ${JSON.stringify(config.metadata)}` : '',
     config.channels ? `channels: ${JSON.stringify(config.channels)}` : '',
