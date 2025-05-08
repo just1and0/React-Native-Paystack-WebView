@@ -208,6 +208,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tolu-paystack",
+      "name": "Tolu Kalejaiye",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60101507?v=4",
+      "profile": "https://github.com/tolu-paystack",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
