@@ -75,17 +75,6 @@ This is a clean, interactive demo showcasing the React Native Paystack WebView l
    - Tap "Pay" to initiate payment
    - Experience the WebView integration
 
-## 📱 Demo Screenshots
-
-The demo features:
-
-- Clean, modern interface
-- Intuitive payment flow
-- Real-time validation
-- Professional styling
-- Mobile-optimized design
-- Proper status bar integration
-
 ## 🔧 Configuration
 
 ### Paystack Setup
@@ -148,12 +137,7 @@ This demo is part of the React Native Paystack WebView project and follows the s
 
 ## 🤝 Contributing
 
-Feel free to contribute to improve the demo:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+[Contributing guide](https://github.com/just1and0/React-Native-Paystack-WebView/blob/main/CONTRIBUTING.md)
 
 ## 🔗 Links
 
