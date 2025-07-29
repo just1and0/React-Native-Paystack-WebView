@@ -18,8 +18,6 @@ export default function HomeScreen() {
   const { popup } = usePaystack();
   const [email, setEmail] = useState('');
   const [amount, setAmount] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
 
   const { top } = useSafeAreaInsets();
 
@@ -29,6 +27,7 @@ export default function HomeScreen() {
       return;
     }
 
+    // This is a basic email validation and you would want to improve it for production use
     if (!email.includes('@')) {
       Alert.alert('Error', 'Please enter a valid email address');
       return;
@@ -39,9 +38,6 @@ export default function HomeScreen() {
       Alert.alert('Error', 'Please enter a valid amount');
       return;
     }
-
-    setIsLoading(true);
-    setPaymentStatus('processing');
 
     // Use the actual Paystack library
     popup.checkout({
@@ -58,34 +54,24 @@ export default function HomeScreen() {
         ],
       },
       onSuccess: (res: any) => {
-        setPaymentStatus('success');
-        setIsLoading(false);
         Alert.alert(
           'Payment Successful! 🎉',
           `Your payment of ₦${amount} has been processed successfully.\n\nReference: ${res.reference}`,
-          [{ text: 'OK', onPress: () => setPaymentStatus('idle') }],
+          [{ text: 'OK' }],
         );
         console.log('Payment Success:', res);
         setAmount('');
         setEmail('');
       },
       onCancel: () => {
-        setPaymentStatus('error');
-        setIsLoading(false);
-        Alert.alert('Payment Cancelled', 'The payment was cancelled by user.', [
-          { text: 'OK', onPress: () => setPaymentStatus('idle') },
-        ]);
+        Alert.alert('Payment Cancelled', 'The payment was cancelled by user.', [{ text: 'OK' }]);
         console.log('Payment Cancelled');
       },
       onLoad: (res: any) => {
         console.log('Payment Modal Loaded:', res);
       },
       onError: (err: any) => {
-        setPaymentStatus('error');
-        setIsLoading(false);
-        Alert.alert('Payment Error', `An error occurred: ${err.message || 'Unknown error'}`, [
-          { text: 'OK', onPress: () => setPaymentStatus('idle') },
-        ]);
+        Alert.alert('Payment Error', `An error occurred: ${err.message || 'Unknown error'}`, [{ text: 'OK' }]);
         console.log('Payment Error:', err);
       },
     });
@@ -225,9 +211,9 @@ export default function HomeScreen() {
             <View style={{ marginBottom: 20 }}>
               <TouchableOpacity
                 onPress={handlePayment}
-                disabled={isLoading || !email || !amount}
+                disabled={!email || !amount}
                 style={{
-                  backgroundColor: isLoading || !email || !amount ? '#cbd5e0' : '#667eea',
+                  backgroundColor: !email || !amount ? '#cbd5e0' : '#667eea',
                   borderRadius: 16,
                   paddingVertical: 18,
                   alignItems: 'center',
@@ -238,17 +224,10 @@ export default function HomeScreen() {
                   elevation: 5,
                 }}
               >
-                {isLoading ? (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <ActivityIndicator color="white" size="small" style={{ marginRight: 8 }} />
-                    <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Processing Payment...</Text>
-                  </View>
-                ) : (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ color: 'white', fontSize: 20, marginRight: 8 }}>🔒</Text>
-                    <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Pay ₦{amount || '0'}</Text>
-                  </View>
-                )}
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={{ color: 'white', fontSize: 20, marginRight: 8 }}>🔒</Text>
+                  <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Pay ₦{amount || '0'}</Text>
+                </View>
               </TouchableOpacity>
             </View>
 
