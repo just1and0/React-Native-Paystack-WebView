@@ -41,7 +41,7 @@ export default function HomeScreen() {
     // Use the actual Paystack library
     popup.checkout({
       email,
-      amount: numAmount * 100, // Convert to kobo
+      amount: numAmount,
       reference: `TXN_${Date.now()}`,
       metadata: {
         custom_fields: [
