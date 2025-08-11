@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useMemo, useState } from 'react';
-import { Modal, View, ActivityIndicator, } from 'react-native';
+import { Modal, SafeAreaView, ActivityIndicator, } from 'react-native';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import {
     PaystackParams,
@@ -89,7 +89,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
         <PaystackContext.Provider value={{ popup: { checkout, newTransaction } }}>
             {children}
             <Modal visible={visible} transparent animationType="slide">
-                <View style={styles.container}>
+                <SafeAreaView style={styles.container}>
                     <WebView
                         originWhitelist={["*"]}
                         source={{ html: paystackHTML }}
@@ -101,7 +101,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                         onLoadEnd={() => debug && console.log('[Paystack] WebView Load End')}
                         renderLoading={() => <ActivityIndicator size="large" />}
                     />
-                </View>
+                </SafeAreaView>
             </Modal>
         </PaystackContext.Provider>
     );
