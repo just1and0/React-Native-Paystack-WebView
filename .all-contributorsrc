@@ -218,6 +218,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "Harithmetic1",
+      "name": "Harith Onigemo ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45686269?v=4",
+      "profile": "https://harith-onigemo.netlify.app/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

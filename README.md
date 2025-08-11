@@ -269,6 +269,7 @@ A huge shoutout to our amazing contributors! Your efforts make this project bett
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/quartusk"><img src="https://avatars.githubusercontent.com/u/39792290?v=4?s=100" width="100px;" alt="Quartus Kok"/><br /><sub><b>Quartus Kok</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=quartusk" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tolu-paystack"><img src="https://avatars.githubusercontent.com/u/60101507?v=4?s=100" width="100px;" alt="Tolu Kalejaiye"/><br /><sub><b>Tolu Kalejaiye</b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=tolu-paystack" title="Code">💻</a> <a href="https://github.com/just1and0/React-Native-Paystack-WebView/issues?q=author%3Atolu-paystack" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://harith-onigemo.netlify.app/"><img src="https://avatars.githubusercontent.com/u/45686269?v=4?s=100" width="100px;" alt="Harith Onigemo "/><br /><sub><b>Harith Onigemo </b></sub></a><br /><a href="https://github.com/just1and0/React-Native-Paystack-WebView/commits?author=Harithmetic1" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
