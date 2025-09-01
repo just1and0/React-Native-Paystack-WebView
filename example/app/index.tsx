@@ -46,8 +46,8 @@ export default function HomeScreen() {
       metadata: {
         custom_fields: [
           {
-            display_name: 'Demo Payment',
-            variable_name: 'demo_payment',
+            display_name: 'Example Payment',
+            variable_name: 'example_payment',
             value: 'true',
           },
         ],
@@ -230,7 +230,7 @@ export default function HomeScreen() {
               </TouchableOpacity>
             </View>
 
-            {/* Demo Notice */}
+            {/* Example Notice */}
             <View
               style={{
                 backgroundColor: '#fff5f5',

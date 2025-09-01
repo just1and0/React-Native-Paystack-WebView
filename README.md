@@ -113,11 +113,11 @@ const Checkout = () => {
 
 ---
 
-## 🎮 Demo Project
+## 🎮 Example Project
 
 Want to see the library in action? Check out our interactive demo!
 
-### 🚀 Try the Demo
+### 🚀 Try the Example
 
 1. **Clone the repository**:
 
@@ -142,10 +142,6 @@ Want to see the library in action? Check out our interactive demo!
    - Open the app on your device or simulator
    - Enter a test email and amount
    - Experience the complete payment flow
-
-### 📱 Demo Screenshots
-
----
 
 ## 📘 API Reference
 

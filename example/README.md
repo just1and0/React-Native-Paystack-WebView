@@ -1,4 +1,4 @@
-# React Native Paystack WebView Demo
+# React Native Paystack WebView Example
 
 This is a clean, interactive demo showcasing the React Native Paystack WebView library in action. The demo provides a streamlined payment interface that demonstrates the library's core functionality.
 
@@ -11,7 +11,7 @@ This is a clean, interactive demo showcasing the React Native Paystack WebView l
 - **Mobile Optimized**: Touch-friendly interface with proper keyboard handling
 - **Status Bar Integration**: Proper status bar styling for iOS/Android
 
-## 🎯 Demo Features
+## 🎯 Example Features
 
 ### Interactive Payment Flow
 
@@ -26,7 +26,7 @@ This is a clean, interactive demo showcasing the React Native Paystack WebView l
 - **Header**: Gradient background with payment info and amount display
 - **Form Inputs**: Email and amount with validation and proper keyboard handling
 - **Payment Button**: Dynamic state with loading indicator
-- **Demo Notice**: Clear indication this is a demo environment
+- **Example Notice**: Clear indication this is a example environment
 - **Status Bar**: Light status bar for better visual integration
 
 ## 🛠️ Technical Details
@@ -53,7 +53,7 @@ This is a clean, interactive demo showcasing the React Native Paystack WebView l
 - Required field validation
 - Real-time feedback
 
-## 🚀 Running the Demo
+## 🚀 Running the Example
 
 1. **Start the development server**:
 
@@ -75,7 +75,7 @@ This is a clean, interactive demo showcasing the React Native Paystack WebView l
    - Tap "Pay" to initiate payment
    - Experience the WebView integration
 
-## 📱 Demo Screenshots
+## 📱 Example Screenshots
 
 🎥 [Watch the demo video on Imgur](https://imgur.com/a/E3pH8Hu)
 
@@ -133,7 +133,7 @@ The demo uses a test public key. To use your own:
 - SSL encryption notice
 - Secure payment processing
 - No sensitive data stored
-- Demo environment only
+- Example environment only
 
 ## 📄 License
 
