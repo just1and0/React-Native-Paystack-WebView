@@ -1,3 +1,4 @@
+ 
 <center>
  
 <h1>React Native Paystack WebView (v5)</h1>
@@ -7,10 +8,10 @@ Modern, hook-based, Paystack-powered payments in React Native apps using WebView
 </p>
 
 <a href="https://paystack.com/docs/libraries-and-plugins/libraries/#react-native">Endorsed</a> by <a href="https://paystack.com">Paystack</a>, so you know you’re in good hands. Payment processing has never been this easy!
-<a href="#contributors-">
-<img src="https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square" alt="All Contributors" />
-</a>
-
+   <a href="#contributors-">
+    <img src="https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square" alt="All Contributors" />
+  </a>
+  
 </center>
  
 <div align="center">
@@ -18,6 +19,7 @@ Modern, hook-based, Paystack-powered payments in React Native apps using WebView
 </div>
  
 ---
+ 
 
 ## 🚀 Installation
 
@@ -50,7 +52,7 @@ import { PaystackProvider } from 'react-native-paystack-webview';
 
 <PaystackProvider publicKey="pk_test_XXXXXX">
   <App />
-</PaystackProvider>;
+</PaystackProvider>
 ```
 
 ### Use in a component
@@ -77,22 +79,22 @@ const Checkout = () => {
         bearer_type: 'account',
         subaccounts: [
           { subaccount: 'ACCT_abc', share: 60 },
-          { subaccount: 'ACCT_xyz', share: 40 },
-        ],
+          { subaccount: 'ACCT_xyz', share: 40 }
+        ]
       },
       metadata: {
         custom_fields: [
           {
             display_name: 'Order ID',
             variable_name: 'order_id',
-            value: 'OID1234',
-          },
-        ],
+            value: 'OID1234'
+          }
+        ]
       },
       onSuccess: (res) => console.log('Success:', res),
       onCancel: () => console.log('User cancelled'),
       onLoad: (res) => console.log('WebView Loaded:', res),
-      onError: (err) => console.log('WebView Error:', err),
+      onError: (err) => console.log('WebView Error:', err)
     });
   };
 
@@ -113,114 +115,88 @@ const Checkout = () => {
 
 ---
 
-## 🎮 Example Project
-
-Want to see the library in action? Check out our interactive example!
-
-### 🚀 Try the Example
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/just1and0/React-Native-Paystack-WebView.git
-   cd React-Native-Paystack-WebView/example
-   ```
-
-2. **Install dependencies**:
-
-   ```bash
-   yarn install
-   ```
-
-3. **Start the example**:
-
-   ```bash
-   yarn start
-   ```
-
-4. **Test the payment flow**:
-   - Open the app on your device or simulator
-   - Enter a test email and amount
-   - Experience the complete payment flow
-
 ## 📘 API Reference
 
 ### `PaystackProvider`
 
-| Prop              | Type       | Default    | Description                           |
-| ----------------- | ---------- | ---------- | ------------------------------------- |
-| `publicKey`       | `string`   | —          | Your Paystack public key              |
-| `currency`        | `string`   | —          | Currency code (optional)              |
-| `defaultChannels` | `string[]` | `['card']` | Payment channels                      |
-| `debug`           | `boolean`  | `false`    | Show debug logs                       |
-| `onGlobalSuccess` | `func`     | —          | Called on all successful transactions |
-| `onGlobalCancel`  | `func`     | —          | Called on all cancelled transactions  |
+| Prop              | Type      | Default | Description                              |
+|-------------------|-----------|---------|------------------------------------------|
+| `publicKey`       | `string`  | —       | Your Paystack public key                 |
+| `currency`        | `string`  |   —     | Currency code  (optional)                 |
+| `defaultChannels` | `string[]`| `['card']`| Payment channels                        |
+| `debug`           | `boolean` | `false` | Show debug logs                          |
+| `onGlobalSuccess` | `func`    | —       | Called on all successful transactions    |
+| `onGlobalCancel`  | `func`    | —       | Called on all cancelled transactions     |
 
 ### `popup.checkout()` / `popup.newTransaction()`
 
-| Param           | Type            | Required | Description                            |
-| --------------- | --------------- | -------- | -------------------------------------- |
-| `email`         | `string`        | ✅       | Customer email                         |
-| `amount`        | `number`        | ✅       | Amount in Naira (not kobo)             |
-| `reference`     | `string`        | —        | Custom reference (optional)            |
-| `metadata`      | `object`        | —        | Custom fields / additional info        |
-| `plan`          | `string`        | —        | Paystack plan code (for subscriptions) |
-| `invoice_limit` | `number`        | —        | Max charges during subscription        |
-| `subaccount`    | `string`        | —        | Subaccount code for split payment      |
-| `split_code`    | `string`        | —        | Multi-split identifier                 |
-| `split`         | `object`        | —        | Dynamic split object                   |
-| `onSuccess`     | `(res) => void` | ✅       | Called on successful payment           |
-| `onCancel`      | `() => void`    | ✅       | Called on cancellation                 |
-| `onLoad`        | `(res) => void` | —        | Triggered when transaction view loads  |
-| `onError`       | `(err) => void` | —        | Triggered on WebView or script error   |
+| Param         | Type                | Required | Description                               |
+|---------------|---------------------|----------|-------------------------------------------|
+| `email`       | `string`            | ✅       | Customer email                            |
+| `amount`      | `number`            | ✅       | Amount in Naira (not kobo)                |
+| `reference`   | `string`            | —        | Custom reference (optional)               |
+| `metadata`    | `object`            | —        | Custom fields / additional info           |
+| `plan`        | `string`            | —        | Paystack plan code (for subscriptions)    |
+| `invoice_limit` | `number`          | —        | Max charges during subscription           |
+| `subaccount`  | `string`            | —        | Subaccount code for split payment         |
+| `split_code`  | `string`            | —        | Multi-split identifier                    |
+| `split`       | `object`            | —        | Dynamic split object                      |
+| `onSuccess`   | `(res) => void`     | ✅       | Called on successful payment              |
+| `onCancel`    | `() => void`        | ✅       | Called on cancellation                    |
+| `onLoad`      | `(res) => void`     | —        | Triggered when transaction view loads     |
+| `onError`     | `(err) => void`     | —        | Triggered on WebView or script error      |
 
 ---
 
 #### Meta Props
+ 
+ 
+| Name                | Description                                                                                                                                                                      | Required? | Default Value                                                                                                                                                                 |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `cart_id`           | A unique identifier for the cart. Can be either a string or a number.                                                                                                            | `NO`      | `undefined`                                                                                                                                                                 |
+| `custom_fields`     | An array of custom fields for adding additional metadata to the transaction. If not passed, a default custom field is created using the `firstName`, `lastName`, and `billingName`. | `NO`      | `[{ display_name: '${firstName + ' ' + lastName}', variable_name: '${billingName}', value: '' }]`                                                                           |
+| `cancel_action`     | A string specifying the action to take if a transaction is canceled.                                                                                                            | `NO`      | `undefined`                                                                                                                                                                 |
+| `custom_filters`    | Custom filters to restrict or specify transaction options, such as:                                                                                                              | `NO`      | `undefined`                                                                                                                                                                 |
+|                     | - **`recurring`**: A boolean to indicate if the transaction is recurring.                                                                                                       |           |                                                                                                                                                                             |
+|                     | - **`banks`**: An array of bank codes for supported banks.                                                                                                                     |           |                                                                                                                                                                             |
+|                     | - **`card_brands`**: Supported card brands, e.g., `'verve'`, `'visa'`, `'mastercard'`.                                                                                         |           |                                                                                                                                                                             |
+|                     | - **`supported_mobile_money_providers`**: Supported mobile money providers, e.g., `'mtn'`, `'atl'`, `'vod'`.                                                                   |           |                                                                                                                                                                             |
 
-| Name             | Description                                                                                                                                                                         | Required? | Default Value                                                                                     |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------- |
-| `cart_id`        | A unique identifier for the cart. Can be either a string or a number.                                                                                                               | `NO`      | `undefined`                                                                                       |
-| `custom_fields`  | An array of custom fields for adding additional metadata to the transaction. If not passed, a default custom field is created using the `firstName`, `lastName`, and `billingName`. | `NO`      | `[{ display_name: '${firstName + ' ' + lastName}', variable_name: '${billingName}', value: '' }]` |
-| `cancel_action`  | A string specifying the action to take if a transaction is canceled.                                                                                                                | `NO`      | `undefined`                                                                                       |
-| `custom_filters` | Custom filters to restrict or specify transaction options, such as:                                                                                                                 | `NO`      | `undefined`                                                                                       |
-|                  | - **`recurring`**: A boolean to indicate if the transaction is recurring.                                                                                                           |           |                                                                                                   |
-|                  | - **`banks`**: An array of bank codes for supported banks.                                                                                                                          |           |                                                                                                   |
-|                  | - **`card_brands`**: Supported card brands, e.g., `'verve'`, `'visa'`, `'mastercard'`.                                                                                              |           |                                                                                                   |
-|                  | - **`supported_mobile_money_providers`**: Supported mobile money providers, e.g., `'mtn'`, `'atl'`, `'vod'`.                                                                        |           |                                                                                                   |
-
+ 
 ---
-
+ 
 #### Dynamic Multi-Split Payment Object structure
 
-| Name                |                                                                       use/description                                                                        | required? |
-| :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | --------: |
-| `type`              |                                                Dynamic Multi-Split type. Value can be `flat` or `percentage`                                                 |     `YES` |
-| `bearer_type`       |                               Defines who bears the charges. Value can be `all`, `all-proportional`, `account` or `subaccount`                               |     `YES` |
-| `subaccounts`       | An array of subaccount object as defined [below](#dynamic-multi-split-payment-sub-account-object-structure). e.g. {"subaccount": 'ACCT_xxxxxx', "share": 60} |     `YES` |
-| `bearer_subaccount` |                           Subaccount code of the bearerof the transaction. It should be specified if _bearer_type_ is `subaccount`                           |      `NO` |
-| `reference`         |                                                  Unique reference of the split. Can be defined by the user                                                   |      `NO` |
+| Name                                 |                                                                                           use/description                                                                                           |                                                      required? |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
+| `type`                        |                                                                   Dynamic Multi-Split type. Value can be `flat` or `percentage`                                                                   |                                                     `YES` |
+| `bearer_type`                             |                                                                                          Defines who bears the charges. Value can be `all`, `all-proportional`, `account` or `subaccount`                                                                                          |                                                     `YES` |
+| `subaccounts`                             |                                                                                          An array of subaccount object as defined [below](#dynamic-multi-split-payment-sub-account-object-structure). e.g. {"subaccount": 'ACCT_xxxxxx', "share": 60}                                                                                          |                                                     `YES` |
+| `bearer_subaccount`                             |                                                                                          Subaccount code of the bearerof the transaction. It should be specified if _bearer_type_ is `subaccount`                                                                                          |                                                     `NO` |
+| `reference`                             |                                                                                          Unique reference of the split. Can be defined by the user                                                                                         |                                                     `NO` |
+
 
 #### Dynamic Multi-Split Payment Sub-Account Object structure
 
-| Name         |                                                                               use/description                                                                                | required? |
-| :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | --------: |
-| `subaccount` | Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"` |     `YES` |
-| `share`      |                            Defines the amount in `percentage (integer)` or `value (decimal allowed)` depending on the type of multi-split defined                            |     `YES` |
+| Name                                 |                                                                                           use/description                                                                                           |                                                      required? |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
+| `subaccount`                        |                                                                                           Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`                                                                                              |                                            `YES` |
+| `share`                             |                                                                                          Defines the amount in `percentage (integer)` or `value (decimal allowed)` depending on the type of multi-split defined                                                                                          |                                                     `YES` |
 
 ---
 
 ## 🧪 Debugging
 
 Enable `debug={true}` on the `PaystackProvider` to get logs like:
-
 - Transaction modal status
 - Incoming postMessage data
 - Success, cancel, error logs
 
-  ***
+ ---
+
 
 ## [](https://github.com/just1and0/object-to-array-convert#contributions)Contributions
+
 
 Want to help improve this package? [Read how to contribute](https://github.com/just1and0/React-Native-Paystack-WebView/blob/main/CONTRIBUTING.md) and feel free to submit your PR!
 
@@ -232,6 +208,7 @@ This project is licensed under the MIT License.
 
 ---
 
+
 ## Related Projects
 
 - [React-Native-quidpay-WebView](https://github.com/react-native-nigeria/react-native-quidpay-webview)
@@ -241,21 +218,21 @@ This project is licensed under the MIT License.
 
 ### Video Tutorial
 
-- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0)
+- [Accepting Payment With Paystack In React Native](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) by [just1and0](https://twitter.com/just1and0) 
 
 ---
 
 ## Sponsorship
-
 - Star the project on Github
 - [Buy me a coffee](https://buymeacoffee.com/6pL0Q8YkW)
-- [Like, Share and subscribe on Youtube](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s)
+-  [Like, Share and subscribe on Youtube](https://www.youtube.com/watch?v=M-V4Q9zk9DE&t=19s) 
 
 ---
 
 ## Thanks to Our Superheroes ✨
-
 A huge shoutout to our amazing contributors! Your efforts make this project better every day. Check out the ([emoji key](https://allcontributors.org/docs/en/emoji-key)) for what each contribution means:
+
+ 
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -302,3 +279,10 @@ A huge shoutout to our amazing contributors! Your efforts make this project bett
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+
+
+
+
+
+ 
