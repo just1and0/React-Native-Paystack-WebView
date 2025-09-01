@@ -30,11 +30,14 @@
     "build": "rm -rf production && tsc -p .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.22.0",
     "@babel/runtime": "^7.14.6",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@react-native-community/eslint-config": "^3.0.0",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^13.0.0",
@@ -44,6 +47,7 @@
     "babel-jest": "^26.6.3",
     "eslint": "^7.30.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^8.0.0",
     "jest": "^29.7.0",
     "jest-react-native": "^18.0.0",
     "metro-react-native-babel-preset": "^0.66.1",
@@ -69,5 +73,6 @@
     "LICENSE",
     "package.json",
     "contributing.md"
-  ]
+  ],
+  "packageManager": "yarn@4.5.3"
 }
