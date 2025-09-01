@@ -1,4 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged
+# we currently don't lint-staged config in package.json and this file is redundant for now, but we may add more tasks later
+# so we keep it for future use. I just added npx to ensure it works on all systems
+npx
