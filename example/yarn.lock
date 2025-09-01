@@ -3826,33 +3826,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"demo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "demo@workspace:."
-  dependencies:
-    "@babel/core": "npm:^7.25.2"
-    "@react-navigation/elements": "npm:^2.3.8"
-    "@react-navigation/native": "npm:^7.1.6"
-    "@types/react": "npm:~19.0.10"
-    eslint: "npm:^9.25.0"
-    eslint-config-expo: "npm:~9.2.0"
-    expo: "npm:~53.0.20"
-    expo-font: "npm:~13.3.2"
-    expo-linking: "npm:~7.1.7"
-    expo-router: "npm:~5.1.4"
-    expo-splash-screen: "npm:~0.30.10"
-    expo-status-bar: "npm:~2.2.3"
-    react: "npm:19.0.0"
-    react-native: "npm:0.79.5"
-    react-native-gesture-handler: "npm:~2.24.0"
-    react-native-reanimated: "npm:~3.17.4"
-    react-native-safe-area-context: "npm:5.4.0"
-    react-native-screens: "npm:~4.11.1"
-    react-native-webview: "npm:13.13.5"
-    typescript: "npm:~5.8.3"
-  languageName: unknown
-  linkType: soft
-
 "depd@npm:2.0.0":
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
@@ -4476,6 +4449,33 @@ __metadata:
   checksum: 10c0/0255d9f936215fd206156fd4caa9e8d35e62075d720dc7d847e89b417e5e62cf1ce6c9b4e0a1633a9256de0efefaf9f8d26924b1f3c8620cffb9db78e7d3076b
   languageName: node
   linkType: hard
+
+"example@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "example@workspace:."
+  dependencies:
+    "@babel/core": "npm:^7.25.2"
+    "@react-navigation/elements": "npm:^2.3.8"
+    "@react-navigation/native": "npm:^7.1.6"
+    "@types/react": "npm:~19.0.10"
+    eslint: "npm:^9.25.0"
+    eslint-config-expo: "npm:~9.2.0"
+    expo: "npm:~53.0.20"
+    expo-font: "npm:~13.3.2"
+    expo-linking: "npm:~7.1.7"
+    expo-router: "npm:~5.1.4"
+    expo-splash-screen: "npm:~0.30.10"
+    expo-status-bar: "npm:~2.2.3"
+    react: "npm:19.0.0"
+    react-native: "npm:0.79.5"
+    react-native-gesture-handler: "npm:~2.24.0"
+    react-native-reanimated: "npm:~3.17.4"
+    react-native-safe-area-context: "npm:5.4.0"
+    react-native-screens: "npm:~4.11.1"
+    react-native-webview: "npm:13.13.5"
+    typescript: "npm:~5.8.3"
+  languageName: unknown
+  linkType: soft
 
 "exec-async@npm:^2.2.0":
   version: 2.2.0

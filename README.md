@@ -115,7 +115,7 @@ const Checkout = () => {
 
 ## 🎮 Example Project
 
-Want to see the library in action? Check out our interactive demo!
+Want to see the library in action? Check out our interactive example!
 
 ### 🚀 Try the Example
 
@@ -123,7 +123,7 @@ Want to see the library in action? Check out our interactive demo!
 
    ```bash
    git clone https://github.com/just1and0/React-Native-Paystack-WebView.git
-   cd React-Native-Paystack-WebView/demo
+   cd React-Native-Paystack-WebView/example
    ```
 
 2. **Install dependencies**:
@@ -132,7 +132,7 @@ Want to see the library in action? Check out our interactive demo!
    yarn install
    ```
 
-3. **Start the demo**:
+3. **Start the example**:
 
    ```bash
    yarn start

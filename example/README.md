@@ -1,6 +1,6 @@
 # React Native Paystack WebView Example
 
-This is a clean, interactive demo showcasing the React Native Paystack WebView library in action. The demo provides a streamlined payment interface that demonstrates the library's core functionality.
+This is a clean, interactive example showcasing the React Native Paystack WebView library in action. The example provides a streamlined payment interface that demonstrates the library's core functionality.
 
 ## 🚀 Features
 
@@ -77,13 +77,13 @@ This is a clean, interactive demo showcasing the React Native Paystack WebView l
 
 ## 📱 Example Screenshots
 
-🎥 [Watch the demo video on Imgur](https://imgur.com/a/E3pH8Hu)
+🎥 [Watch the example video on Imgur](https://imgur.com/a/E3pH8Hu)
 
 ## 🔧 Configuration
 
 ### Paystack Setup
 
-The demo uses a test public key. To use your own:
+The example uses a test public key. To use your own:
 
 1. Replace the public key in `app/_layout.tsx`:
 
@@ -137,7 +137,7 @@ The demo uses a test public key. To use your own:
 
 ## 📄 License
 
-This demo is part of the React Native Paystack WebView project and follows the same MIT license.
+This example is part of the React Native Paystack WebView project and follows the same MIT license.
 
 ## 🤝 Contributing
 

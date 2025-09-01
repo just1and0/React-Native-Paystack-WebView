@@ -244,7 +244,7 @@ export default function HomeScreen() {
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={{ fontSize: 20, marginRight: 8 }}>ℹ️</Text>
                 <Text style={{ fontSize: 14, color: '#c53030', fontWeight: '500' }}>
-                  This is a demo. No real payments will be processed.
+                  This is a example. No real payments will be processed.
                 </Text>
               </View>
             </View>
