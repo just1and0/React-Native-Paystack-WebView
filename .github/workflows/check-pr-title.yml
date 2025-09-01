@@ -1,0 +1,55 @@
+name: Check PR title
+
+on:
+  merge_group:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+      - ready_for_review
+      - unlocked
+
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - uses: ./.github/actions/setup_repo
+      - name: Check PR title - commitlint
+        run: |
+          PR_NUMBER=$(echo "${{ github.ref }}" | gawk '{match($0, /pr-([0-9]+)-/, arr); print arr[1]}')
+          PR_NUMBER=${PR_NUMBER:-"${{ github.event.number }}"}
+
+          gh pr view $PR_NUMBER --json=title --jq=.title | yarn commitlint
+
+      - name: Check PR title - message scope
+        run: |
+            PR_NUMBER=$(echo "${{ github.ref }}" | gawk '{match($0, /pr-([0-9]+)-/, arr); print arr[1]}')
+            PR_NUMBER=${PR_NUMBER:-"${{ github.event.number }}"}
+
+            input=$(gh pr view $PR_NUMBER --json=title --jq=.title)
+
+            if [[ $input =~ ^fix\\(RNPSW\\):[[:space:]].+ ]]; then
+            echo "✅ Valid fix PR title"
+            elif [[ $input =~ ^feat\\(RNPSW\\):[[:space:]].+ ]]; then
+            echo "✅ Valid feature PR title"
+            elif [[ $input =~ ^perf\\(RNPSW\\):[[:space:]].+ ]]; then
+            echo "✅ Valid performance PR title"
+            elif [[ $input =~ ^BREAKING[[:space:]]CHANGE:[[:space:]].+ ]]; then
+            echo "✅ Valid breaking change PR title"
+            else
+            echo "❌ Invalid PR title format!"
+            echo "Must start with one of:"
+            echo "  • fix(RNPSW): <desc>"
+            echo "  • feat(RNPSW): <desc>"
+            echo "  • perf(RNPSW): <desc>"
+            echo "  • BREAKING CHANGE: <desc>"
+            exit 1
+            fi
