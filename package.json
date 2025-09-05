@@ -74,5 +74,5 @@
     "package.json",
     "contributing.md"
   ],
-  "packageManager": "yarn@4.5.3"
+  "packageManager": "yarn@1.22.22"
 }
