@@ -7,7 +7,7 @@
 Modern, hook-based, Paystack-powered payments in React Native apps using WebViews — now streamlined with Provider architecture & fully customizable.
 </p>
 
-<a href="https://paystack.com/docs/libraries-and-plugins/libraries/#react-native">Endorsed</a> by <a href="https://paystack.com">Paystack</a>, so you know you’re in good hands. Payment processing has never been this easy!
+<a href="https://paystack.com/docs/developer-tools/#community-libraries">Endorsed</a> by <a href="https://paystack.com">Paystack</a>, so you know you’re in good hands. Payment processing has never been this easy!
    <a href="#contributors-">
     <img src="https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square" alt="All Contributors" />
   </a>
