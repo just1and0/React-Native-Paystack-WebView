@@ -115,6 +115,36 @@ const Checkout = () => {
 
 ---
 
+## 🎮 Example Project
+
+Want to see the library in action? Check out our interactive example!
+
+### 🚀 Try the Example
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/just1and0/React-Native-Paystack-WebView.git
+   cd React-Native-Paystack-WebView/example
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   yarn install
+   ```
+
+3. **Start the example**:
+
+   ```bash
+   yarn start
+   ```
+
+4. **Test the payment flow**:
+   - Open the app on your device or simulator
+   - Enter a test email and amount
+   - Experience the complete payment flow
+
 ## 📘 API Reference
 
 ### `PaystackProvider`

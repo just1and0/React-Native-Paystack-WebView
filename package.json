@@ -69,5 +69,6 @@
     "LICENSE",
     "package.json",
     "contributing.md"
-  ]
+  ],
+  "packageManager": "yarn@4.5.3"
 }
