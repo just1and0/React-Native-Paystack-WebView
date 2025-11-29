@@ -1,107 +1,109 @@
 import React, { createContext, useCallback, useMemo, useState } from 'react';
-import { Modal, ActivityIndicator } from 'react-native';
+import { Modal, ActivityIndicator, } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
-import { PaystackParams, PaystackProviderProps } from './types';
+import {
+    PaystackParams,
+    PaystackProviderProps,
+} from './types';
 import { validateParams, paystackHtmlContent, generatePaystackParams, handlePaystackMessage } from './utils';
 import { styles } from './styles';
 
 export const PaystackContext = createContext<{
-  popup: {
-    checkout: (params: PaystackParams) => void;
-    newTransaction: (params: PaystackParams) => void;
-  };
+    popup: {
+        checkout: (params: PaystackParams) => void;
+        newTransaction: (params: PaystackParams) => void;
+    };
 } | null>(null);
 
 export const PaystackProvider: React.FC<PaystackProviderProps> = ({
-  publicKey,
-  currency,
-  defaultChannels = ['card'],
-  debug = false,
-  children,
-  onGlobalSuccess,
-  onGlobalCancel,
+    publicKey,
+    currency,
+    defaultChannels = ['card'],
+    debug = false,
+    children,
+    onGlobalSuccess,
+    onGlobalCancel,
 }) => {
-  const [visible, setVisible] = useState(false);
-  const [params, setParams] = useState<PaystackParams | null>(null);
-  const [method, setMethod] = useState<'checkout' | 'newTransaction'>('checkout');
+    const [visible, setVisible] = useState(false);
+    const [params, setParams] = useState<PaystackParams | null>(null);
+    const [method, setMethod] = useState<'checkout' | 'newTransaction'>('checkout');
 
-  const fallbackRef = useMemo(() => `ref_${Date.now()}`, []);
+    const fallbackRef = useMemo(() => `ref_${Date.now()}`, []);
 
-  const open = useCallback(
-    (params: PaystackParams, selectedMethod: 'checkout' | 'newTransaction') => {
-      if (debug) console.log(`[Paystack] Opening modal with method: ${selectedMethod}`);
-      if (!validateParams(params, debug)) return;
-      setParams(params);
-      setMethod(selectedMethod);
-      setVisible(true);
-    },
-    [debug],
-  );
-
-  const checkout = (params: PaystackParams) => open(params, 'checkout');
-  const newTransaction = (params: PaystackParams) => open(params, 'newTransaction');
-
-  const close = () => {
-    setVisible(false);
-    setParams(null);
-  };
-
-  const handleMessage = (event: WebViewMessageEvent) => {
-    handlePaystackMessage({
-      event,
-      debug,
-      params,
-      onGlobalSuccess,
-      onGlobalCancel,
-      close,
-    });
-  };
-
-  const paystackHTML = useMemo(() => {
-    if (!params) return '';
-    return paystackHtmlContent(
-      generatePaystackParams({
-        publicKey,
-        email: params.email,
-        amount: params.amount,
-        reference: params.reference || fallbackRef,
-        metadata: params.metadata,
-        ...(currency && { currency }),
-        channels: defaultChannels,
-        plan: params.plan,
-        invoice_limit: params.invoice_limit,
-        subaccount: params.subaccount,
-        split: params.split,
-        split_code: params.split_code,
-      }),
-      method,
+    const open = useCallback(
+        (params: PaystackParams, selectedMethod: 'checkout' | 'newTransaction') => {
+            if (debug) console.log(`[Paystack] Opening modal with method: ${selectedMethod}`);
+            if (!validateParams(params, debug)) return;
+            setParams(params);
+            setMethod(selectedMethod);
+            setVisible(true);
+        },
+        [debug]
     );
-  }, [params, method]);
 
-  if (debug && visible) {
-    console.log('[Paystack] HTML Injected:', paystackHTML);
-  }
+    const checkout = (params: PaystackParams) => open(params, 'checkout');
+    const newTransaction = (params: PaystackParams) => open(params, 'newTransaction');
 
-  return (
-    <PaystackContext.Provider value={{ popup: { checkout, newTransaction } }}>
-      {children}
-      <Modal visible={visible} transparent animationType="slide">
-        <SafeAreaView style={styles.container}>
-          <WebView
-            originWhitelist={['*']}
-            source={{ html: paystackHTML }}
-            onMessage={handleMessage}
-            javaScriptEnabled
-            domStorageEnabled
-            startInLoadingState
-            onLoadStart={() => debug && console.log('[Paystack] WebView Load Start')}
-            onLoadEnd={() => debug && console.log('[Paystack] WebView Load End')}
-            renderLoading={() => <ActivityIndicator size="large" />}
-          />
-        </SafeAreaView>
-      </Modal>
-    </PaystackContext.Provider>
-  );
+    const close = () => {
+        setVisible(false);
+        setParams(null);
+    }
+
+    const handleMessage = (event: WebViewMessageEvent) => {
+        handlePaystackMessage({
+            event,
+            debug,
+            params,
+            onGlobalSuccess,
+            onGlobalCancel,
+            close,
+        });
+    };
+
+    const paystackHTML = useMemo(() => {
+        if (!params) return '';
+        return paystackHtmlContent(
+            generatePaystackParams({
+                publicKey,
+                email: params.email,
+                amount: params.amount,
+                reference: params.reference || fallbackRef,
+                metadata: params.metadata,
+                ...(currency && { currency }),
+                channels: defaultChannels, 
+                plan: params.plan,
+                invoice_limit: params.invoice_limit,
+                subaccount: params.subaccount,
+                split: params.split,
+                split_code: params.split_code,
+            }),
+            method
+        );
+    }, [params, method]);
+
+    if (debug && visible) {
+        console.log('[Paystack] HTML Injected:', paystackHTML);
+    }
+
+    return (
+        <PaystackContext.Provider value={{ popup: { checkout, newTransaction } }}>
+            {children}
+            <Modal visible={visible} transparent animationType="slide">
+                <SafeAreaView style={styles.container}>
+                    <WebView
+                        originWhitelist={["*"]}
+                        source={{ html: paystackHTML }}
+                        onMessage={handleMessage}
+                        javaScriptEnabled
+                        domStorageEnabled
+                        startInLoadingState
+                        onLoadStart={() => debug && console.log('[Paystack] WebView Load Start')}
+                        onLoadEnd={() => debug && console.log('[Paystack] WebView Load End')}
+                        renderLoading={() => <ActivityIndicator size="large" />}
+                    />
+                </SafeAreaView>
+            </Modal>
+        </PaystackContext.Provider>
+    );
 };
