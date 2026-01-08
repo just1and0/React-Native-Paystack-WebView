@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useMemo, useState } from 'react';
-import { Modal, SafeAreaView, ActivityIndicator, } from 'react-native';
+import { Modal, ActivityIndicator, } from 'react-native';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
     PaystackParams,
     PaystackProviderProps,
