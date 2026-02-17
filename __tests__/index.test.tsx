@@ -1,54 +1,105 @@
-import { validateParams, sanitize, generatePaystackParams, shouldHandleExternally, openExternalUrl } from '../development/utils';
+import {
+  validateParams,
+  sanitize,
+  generatePaystackParams,
+  shouldHandleExternally,
+  openExternalUrl,
+} from '../development/utils';
 import { Alert, Linking } from 'react-native';
+import { TransactionType } from '../development/types';
 
 jest.mock('react-native', () => ({
   Alert: { alert: jest.fn() },
-  Linking: { canOpenURL: jest.fn(), openURL: jest.fn() }
+  Linking: { canOpenURL: jest.fn(), openURL: jest.fn() },
 }));
 
 describe('Paystack Utils', () => {
   describe('validateParams', () => {
     it('should return true for valid params', () => {
-      const result = validateParams({
-        email: 'test@example.com',
-        amount: 5000,
-        onSuccess: jest.fn(),
-        onCancel: jest.fn()
-      }, false);
+      const result = validateParams(
+        {
+          email: 'test@example.com',
+          amount: 5000,
+          onSuccess: jest.fn(),
+          onCancel: jest.fn(),
+        },
+        false,
+      );
+      expect(result).toBe(true);
+    });
+
+    it('should return true for valid resume transaction params', () => {
+      const result = validateParams(
+        {
+          accessCode: 'ac_123',
+          onSuccess: jest.fn(),
+          onCancel: jest.fn(),
+        },
+        false,
+      );
       expect(result).toBe(true);
     });
 
     it('should fail with missing email and show alert', () => {
-      const result = validateParams({
-        email: '',
-        amount: 5000,
-        onSuccess: jest.fn(),
-        onCancel: jest.fn()
-      }, true);
+      const result = validateParams(
+        {
+          email: '',
+          amount: 5000,
+          onSuccess: jest.fn(),
+          onCancel: jest.fn(),
+        },
+        true,
+      );
       expect(result).toBe(false);
       expect(Alert.alert).toHaveBeenCalledWith('Payment Error', expect.stringContaining('Email is required'));
     });
 
     it('should fail with invalid amount', () => {
-      const result = validateParams({
-        email: 'test@example.com',
-        amount: 0,
-        onSuccess: jest.fn(),
-        onCancel: jest.fn()
-      }, true);
+      const result = validateParams(
+        {
+          email: 'test@example.com',
+          amount: 0,
+          onSuccess: jest.fn(),
+          onCancel: jest.fn(),
+        },
+        true,
+      );
       expect(result).toBe(false);
-      expect(Alert.alert).toHaveBeenCalledWith('Payment Error', expect.stringContaining('Amount must be a valid number'));
+      expect(Alert.alert).toHaveBeenCalledWith(
+        'Payment Error',
+        expect.stringContaining('Amount must be a valid number'),
+      );
     });
 
     it('should fail with missing callbacks', () => {
-      const result = validateParams({
-        email: 'test@example.com',
-        amount: 1000,
-        onSuccess: undefined,
-        onCancel: undefined
-      } as any, true);
+      const result = validateParams(
+        {
+          email: 'test@example.com',
+          amount: 1000,
+          onSuccess: undefined,
+          onCancel: undefined,
+        } as any,
+        true,
+      );
       expect(result).toBe(false);
-      expect(Alert.alert).toHaveBeenCalledWith('Payment Error', expect.stringContaining('onSuccess callback is required'));
+      expect(Alert.alert).toHaveBeenCalledWith(
+        'Payment Error',
+        expect.stringContaining('onSuccess callback is required'),
+      );
+    });
+
+    it('should fail with invalid accessCode', () => {
+      const result = validateParams(
+        {
+          accessCode: ' ',
+        } as any,
+        true,
+      );
+      expect(result).toBe(false);
+      expect(Alert.alert).toHaveBeenCalledWith(
+        'Payment Error',
+        expect.stringContaining('accessCode must be a non-empty string'),
+      );
     });
   });
 
@@ -78,37 +129,71 @@ describe('Paystack Utils', () => {
         reference: 'ref123',
         metadata: { order: 123 },
         currency: 'NGN',
-        channels: ['card']
+        channels: ['card'],
       });
-      expect(js).toContain("key: 'pk_test'");
-      expect(js).toContain("email: 'email@test.com'");
-      expect(js).toContain("amount: 10000");
+      expect(js.mode).toBe(TransactionType.STANDARD);
+      expect(js.params).toContain("key: 'pk_test'");
+      expect(js.params).toContain("email: 'email@test.com'");
+      expect(js.params).toContain('amount: 10000');
+    });
+
+    it('should throw error if required fields are missing', () => {
+      expect(() =>
+        generatePaystackParams({
+          email: 'email@test.com',
+          amount: 100,
+          reference: 'ref123',
+        } as any),
+      ).toThrow('Public Key is required to generate Paystack parameters');
+      expect(() =>
+        generatePaystackParams({
+          publicKey: 'pk_test',
+          amount: 100,
+          reference: 'ref123',
+        } as any),
+      ).toThrow('Email and Amount are required to generate Paystack parameters');
+      expect(() =>
+        generatePaystackParams({
+          publicKey: 'pk_test',
+          email: 'email@test.com',
+          reference: 'ref123',
+        } as any),
+      ).toThrow('Email and Amount are required to generate Paystack parameters');
+      expect(() =>
+        generatePaystackParams({
+          publicKey: 'pk_test',
+          email: 'email@test.com',
+          amount: 100,
+        } as any),
+      ).toThrow('Reference is required to generate Paystack parameters');
+    });
+
+    it('should generate params for resume transaction', () => {
+      const js = generatePaystackParams({
+        accessCode: 'ac_123',
+      });
+      expect(js.mode).toBe(TransactionType.RESUME);
+      expect(js.accessCode).toBe('ac_123');
     });
   });
 
   describe('shouldHandleExternally', () => {
     it('matches a string host by prefix', () => {
-      expect(
-        shouldHandleExternally('https://joinzap.com/app/abc', ['https://joinzap.com/app/'])
-      ).toBe(true);
+      expect(shouldHandleExternally('https://joinzap.com/app/abc', ['https://joinzap.com/app/'])).toBe(true);
     });
 
     it('does not match when only part of the URL contains the prefix', () => {
-      expect(
-        shouldHandleExternally('https://evil.com/?u=https://joinzap.com/app/', ['https://joinzap.com/app/'])
-      ).toBe(false);
+      expect(shouldHandleExternally('https://evil.com/?u=https://joinzap.com/app/', ['https://joinzap.com/app/'])).toBe(
+        false,
+      );
     });
 
     it('matches a RegExp host', () => {
-      expect(
-        shouldHandleExternally('mypartner://pay', [/^mypartner:\/\//])
-      ).toBe(true);
+      expect(shouldHandleExternally('mypartner://pay', [/^mypartner:\/\//])).toBe(true);
     });
 
     it('returns false when no host matches', () => {
-      expect(
-        shouldHandleExternally('https://checkout.paystack.com/123', ['https://joinzap.com/app/'])
-      ).toBe(false);
+      expect(shouldHandleExternally('https://checkout.paystack.com/123', ['https://joinzap.com/app/'])).toBe(false);
     });
 
     it('returns false for an empty URL', () => {
