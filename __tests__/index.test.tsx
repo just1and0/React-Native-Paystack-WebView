@@ -1,8 +1,9 @@
-import { validateParams, sanitize, generatePaystackParams } from '../development/utils';
-import { Alert } from 'react-native';
+import { validateParams, sanitize, generatePaystackParams, shouldHandleExternally, openExternalUrl } from '../development/utils';
+import { Alert, Linking } from 'react-native';
 
 jest.mock('react-native', () => ({
-  Alert: { alert: jest.fn() }
+  Alert: { alert: jest.fn() },
+  Linking: { canOpenURL: jest.fn(), openURL: jest.fn() }
 }));
 
 describe('Paystack Utils', () => {
@@ -82,6 +83,68 @@ describe('Paystack Utils', () => {
       expect(js).toContain("key: 'pk_test'");
       expect(js).toContain("email: 'email@test.com'");
       expect(js).toContain("amount: 10000");
+    });
+  });
+
+  describe('shouldHandleExternally', () => {
+    it('matches a string host by prefix', () => {
+      expect(
+        shouldHandleExternally('https://joinzap.com/app/abc', ['https://joinzap.com/app/'])
+      ).toBe(true);
+    });
+
+    it('does not match when only part of the URL contains the prefix', () => {
+      expect(
+        shouldHandleExternally('https://evil.com/?u=https://joinzap.com/app/', ['https://joinzap.com/app/'])
+      ).toBe(false);
+    });
+
+    it('matches a RegExp host', () => {
+      expect(
+        shouldHandleExternally('mypartner://pay', [/^mypartner:\/\//])
+      ).toBe(true);
+    });
+
+    it('returns false when no host matches', () => {
+      expect(
+        shouldHandleExternally('https://checkout.paystack.com/123', ['https://joinzap.com/app/'])
+      ).toBe(false);
+    });
+
+    it('returns false for an empty URL', () => {
+      expect(shouldHandleExternally('', ['https://joinzap.com/app/'])).toBe(false);
+    });
+  });
+
+  describe('openExternalUrl', () => {
+    beforeEach(() => {
+      (Linking.canOpenURL as jest.Mock).mockReset();
+      (Linking.openURL as jest.Mock).mockReset();
+    });
+
+    it('opens the URL when an app can handle it', async () => {
+      (Linking.canOpenURL as jest.Mock).mockResolvedValue(true);
+      (Linking.openURL as jest.Mock).mockResolvedValue(undefined);
+
+      await openExternalUrl('https://joinzap.com/app/abc');
+
+      expect(Linking.canOpenURL).toHaveBeenCalledWith('https://joinzap.com/app/abc');
+      expect(Linking.openURL).toHaveBeenCalledWith('https://joinzap.com/app/abc');
+    });
+
+    it('does not open the URL when no app can handle it', async () => {
+      (Linking.canOpenURL as jest.Mock).mockResolvedValue(false);
+
+      await openExternalUrl('mypartner://pay');
+
+      expect(Linking.openURL).not.toHaveBeenCalled();
+    });
+
+    it('swallows errors instead of throwing', async () => {
+      (Linking.canOpenURL as jest.Mock).mockRejectedValue(new Error('boom'));
+
+      await expect(openExternalUrl('https://joinzap.com/app/abc')).resolves.toBeUndefined();
+      expect(Linking.openURL).not.toHaveBeenCalled();
     });
   });
 });

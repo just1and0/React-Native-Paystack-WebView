@@ -12,6 +12,12 @@ export type PaystackProviderProps = {
     publicKey: string;
     currency?: Currency;
     defaultChannels?: PaymentChannels;
+    /**
+     * Additional hosts to hand off to the OS instead of loading inside the
+     * checkout WebView. Added to the built-in defaults, which always apply.
+     * See the "Deep linking" section of the README.
+     */
+    deepLinkHosts?: Array<string | RegExp>;
     debug?: boolean;
     children: React.ReactNode;
     onGlobalSuccess?: (data: PaystackTransactionResponse) => void;

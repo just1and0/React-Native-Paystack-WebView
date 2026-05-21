@@ -89,6 +89,7 @@ const Checkout = () => {
             variable_name: 'order_id',
             value: 'OID1234'
           }
+          
         ]
       },
       onSuccess: (res) => console.log('Success:', res),
@@ -124,6 +125,7 @@ const Checkout = () => {
 | `publicKey`       | `string`  | —       | Your Paystack public key                 |
 | `currency`        | `string`  |   —     | Currency code  (optional)                 |
 | `defaultChannels` | `string[]`| `['card']`| Payment channels                        |
+| `deepLinkHosts`   | `(string \| RegExp)[]` | `[]` | Extra hosts to hand off to the OS instead of loading in the WebView (see [Deep linking](#-deep-linking)) |
 | `debug`           | `boolean` | `false` | Show debug logs                          |
 | `onGlobalSuccess` | `func`    | —       | Called on all successful transactions    |
 | `onGlobalCancel`  | `func`    | —       | Called on all cancelled transactions     |
@@ -182,6 +184,45 @@ const Checkout = () => {
 | :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------: |
 | `subaccount`                        |                                                                                           Specify subaccount code generated from the Paystack Dashboard or API to enable Split Payment on the transaction. Here's an example of usage: `subaccount: "SUB_ACCOUNTCODE"`                                                                                              |                                            `YES` |
 | `share`                             |                                                                                          Defines the amount in `percentage (integer)` or `value (decimal allowed)` depending on the type of multi-split defined                                                                                          |                                                     `YES` |
+
+---
+
+## 🔗 Deep linking
+
+Some payment channels need to hand off to a partner app. For example, the **Zap** channel renders a universal link to `https://joinzap.com/app/...` that should open the Zap app.
+
+WKWebView on iOS does **not** perform universal-link handoff or custom-scheme dispatch for navigations that originate inside the WebView, so tapping such a link would otherwise just load it as a web page. To fix this, the provider intercepts these navigations and forwards them to the OS via `Linking.openURL`, which triggers the universal-link handoff (iOS) or App Links / `Intent.ACTION_VIEW` dispatch (Android).
+
+`https://joinzap.com/app/` ships as a built-in default and **always applies** — it can't be removed. Use the `deepLinkHosts` prop to add your own partner hosts on top of the defaults:
+
+```tsx
+<PaystackProvider
+  publicKey="pk_test_XXXXXX"
+  deepLinkHosts={['mypartner://', /^https?:\/\/my-partner\.app\//]}
+>
+  <App />
+</PaystackProvider>
+```
+
+Each entry is matched against the navigation URL. String entries match if the URL **starts with** the string; `RegExp` entries are matched with `RegExp.test(url)`.
+
+> ⚠️ Only add hosts that should leave the WebView. Do **not** add 3DS / issuer ACS challenge pages, bank-redirect flows, or `checkout.paystack.com` — those must stay in the WebView for checkout to complete.
+
+### Returning to your app from Zap
+
+When the customer is sent to the Zap app, you can have Zap return to your app after the action completes by passing a `callback_url` in the transaction `metadata`. Set it to a URL (or deep link) that resolves back to your app:
+
+```tsx
+popup.checkout({
+  email: 'jane.doe@example.com',
+  amount: 5000,
+  metadata: {
+    callback_url: 'https://paystack.com',
+  },
+  onSuccess: (res) => console.log('Success:', res),
+  onCancel: () => console.log('User cancelled'),
+});
+```
 
 ---
 

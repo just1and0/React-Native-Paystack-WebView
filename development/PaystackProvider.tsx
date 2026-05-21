@@ -1,13 +1,17 @@
 import React, { createContext, useCallback, useMemo, useState } from 'react';
-import { Modal, ActivityIndicator, } from 'react-native';
+import { Modal, ActivityIndicator } from 'react-native';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
     PaystackParams,
     PaystackProviderProps,
 } from './types';
-import { validateParams, paystackHtmlContent, generatePaystackParams, handlePaystackMessage } from './utils';
+import { validateParams, paystackHtmlContent, generatePaystackParams, handlePaystackMessage, shouldHandleExternally, openExternalUrl } from './utils';
 import { styles } from './styles';
+
+export const DEFAULT_DEEP_LINK_HOSTS: string[] = [
+    'https://joinzap.com/app/',
+];
 
 export const PaystackContext = createContext<{
     popup: {
@@ -20,6 +24,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
     publicKey,
     currency,
     defaultChannels = ['card'],
+    deepLinkHosts = [],
     debug = false,
     children,
     onGlobalSuccess,
@@ -30,6 +35,11 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
     const [method, setMethod] = useState<'checkout' | 'newTransaction'>('checkout');
 
     const fallbackRef = useMemo(() => `ref_${Date.now()}`, []);
+
+    const resolvedDeepLinkHosts = useMemo(
+        () => [...DEFAULT_DEEP_LINK_HOSTS, ...deepLinkHosts],
+        [deepLinkHosts]
+    );
 
     const open = useCallback(
         (params: PaystackParams, selectedMethod: 'checkout' | 'newTransaction') => {
@@ -95,6 +105,15 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                         originWhitelist={["*"]}
                         source={{ html: paystackHTML }}
                         onMessage={handleMessage}
+                        onShouldStartLoadWithRequest={(request) => {
+                            const url = request.url ?? '';
+                            if (!shouldHandleExternally(url, resolvedDeepLinkHosts)) {
+                                return true;
+                            }
+                            if (debug) console.log('[Paystack] Opening external/deep link via OS:', url);
+                            void openExternalUrl(url, debug);
+                            return false;
+                        }}
                         javaScriptEnabled
                         domStorageEnabled
                         startInLoadingState
