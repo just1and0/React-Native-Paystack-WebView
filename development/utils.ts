@@ -1,11 +1,6 @@
 import { Alert, Linking } from 'react-native';
 import { Currency, DynamicMultiSplitProps, PaymentChannels, PaystackParams, PaystackTransactionResponse } from './types';
 
-/**
- * Whether a navigation URL should be handed off to the OS instead of being
- * loaded inside the checkout WebView. String matchers match by prefix;
- * RegExp matchers use `.test(url)`.
- */
 export const shouldHandleExternally = (
   url: string,
   hosts: Array<string | RegExp>
@@ -15,10 +10,6 @@ export const shouldHandleExternally = (
     typeof matcher === 'string' ? url.indexOf(matcher) === 0 : matcher.test(url)
   );
 
-/**
- * Hand a URL off to the OS. Checks `Linking.canOpenURL` first so we don't
- * attempt to open a URL no installed app can handle, and swallows any error.
- */
 export const openExternalUrl = async (url: string, debug = false): Promise<void> => {
   try {
     const supported = await Linking.canOpenURL(url);
