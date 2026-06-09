@@ -103,11 +103,38 @@ const Checkout = () => {
 };
 ```
 
+### Resume transaction
+<p> The resume transaction flow allows you to initiate a transaction on your server and complete it in the app. This flow provides both the security of server initialization and the convenience of the user experience in the app. 
+</p>
+
+```tsx
+import React from 'react';
+import { Button } from 'react-native';
+import { usePaystack } from 'react-native-paystack-webview';
+
+const ResumeTransaction = () => {
+  const { popup } = usePaystack();
+
+  const resumePayment = () => {
+    popup.resumeTransaction({
+      accessCode: 'ACCESS_CODE_FROM_PAYSTACK',
+      onSuccess: (res) => console.log('Payment resumed successfully:', res),
+      onCancel: () => console.log('User cancelled'),
+      onLoad: (res) => console.log('WebView Loaded:', res),
+      onError: (err) => console.log('WebView Error:', err)
+    });
+  };
+
+  return <Button title="Resume Payment" onPress={resumePayment} />;
+};
+```
+
 ---
 
 ## 🧠 Features
 
-- ✅ Simple `checkout()` or `newTransaction()` calls
+- ✅ Simple `checkout()`, `newTransaction()`, or `resumeTransaction()` calls
+- ✅ Resume interrupted transactions with access codes
 - ✅ Global callbacks with `onGlobalSuccess` or `onGlobalCancel`
 - ✅ Debug logging with `debug` prop
 - ✅ Fully typed params for transactions
@@ -144,6 +171,18 @@ const Checkout = () => {
 | `subaccount`  | `string`            | —        | Subaccount code for split payment         |
 | `split_code`  | `string`            | —        | Multi-split identifier                    |
 | `split`       | `object`            | —        | Dynamic split object                      |
+| `onSuccess`   | `(res) => void`     | ✅       | Called on successful payment              |
+| `onCancel`    | `() => void`        | ✅       | Called on cancellation                    |
+| `onLoad`      | `(res) => void`     | —        | Triggered when transaction view loads     |
+| `onError`     | `(err) => void`     | —        | Triggered on WebView or script error      |
+
+### `popup.resumeTransaction()`
+
+Resume a transaction that was previously interrupted. This method allows users to complete a payment using an access code provided by Paystack.
+
+| Param         | Type                | Required | Description                               |
+|---------------|---------------------|----------|-------------------------------------------|
+| `accessCode`  | `string`            | ✅       | Access code from Paystack for resuming a transaction |
 | `onSuccess`   | `(res) => void`     | ✅       | Called on successful payment              |
 | `onCancel`    | `() => void`        | ✅       | Called on cancellation                    |
 | `onLoad`      | `(res) => void`     | —        | Triggered when transaction view loads     |
