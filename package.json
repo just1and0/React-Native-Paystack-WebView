@@ -22,7 +22,8 @@
     "africa",
     "nigeria",
     "fintech",
-    "Zap"
+    "Zap",
+    "deepLink"
   ],
   "types": "production/lib/index.d.ts",
   "author": "Oluwatobi Shokunbi  <ayoshokz@gmail.com>",
