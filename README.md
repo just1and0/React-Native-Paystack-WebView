@@ -113,7 +113,7 @@ const Checkout = () => {
 - ✅ Fully typed params for transactions
 - ✅ Works seamlessly with Expo & bare React Native
 - ✅ Full test coverage
-- ✅ Zap integration
+- ✅ [Zap](https://paystack.com/zap) integration
 
 ---
 
