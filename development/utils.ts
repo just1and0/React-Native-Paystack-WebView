@@ -156,7 +156,7 @@ export const generatePaystackParams = (config: {
     }
   `;
 
-  if (config.accessCode && config.accessCode !== '' && config.accessCode !== undefined) {
+  if (config.accessCode) {
     return {
       mode: TransactionType.RESUME,
       accessCode: config.accessCode,
