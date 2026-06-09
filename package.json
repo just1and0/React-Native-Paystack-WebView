@@ -21,7 +21,8 @@
     "provider",
     "africa",
     "nigeria",
-    "fintech"
+    "fintech",
+    "Zap"
   ],
   "types": "production/lib/index.d.ts",
   "author": "Oluwatobi Shokunbi  <ayoshokz@gmail.com>",
