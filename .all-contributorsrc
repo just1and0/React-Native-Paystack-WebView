@@ -236,6 +236,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "allen-paystack",
+      "name": "Oloruntobi Allen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56396726?v=4",
+      "profile": "https://github.com/allen-paystack",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
