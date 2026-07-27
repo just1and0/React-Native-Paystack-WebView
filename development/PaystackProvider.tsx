@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {
     PaystackParams,
     PaystackProviderProps,
+    TransactionMethod
 } from './types';
 import { validateParams, paystackHtmlContent, generatePaystackParams, handlePaystackMessage, shouldHandleExternally, openExternalUrl } from './utils';
 import { styles } from './styles';
@@ -17,6 +18,7 @@ export const PaystackContext = createContext<{
     popup: {
         checkout: (params: PaystackParams) => void;
         newTransaction: (params: PaystackParams) => void;
+        resumeTransaction: (params: PaystackParams) => void;
     };
 } | null>(null);
 
@@ -32,7 +34,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
 }) => {
     const [visible, setVisible] = useState(false);
     const [params, setParams] = useState<PaystackParams | null>(null);
-    const [method, setMethod] = useState<'checkout' | 'newTransaction'>('checkout');
+    const [method, setMethod] = useState<TransactionMethod>(TransactionMethod.CHECKOUT);
 
     const fallbackRef = useMemo(() => `ref_${Date.now()}`, []);
 
@@ -42,7 +44,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
     );
 
     const open = useCallback(
-        (params: PaystackParams, selectedMethod: 'checkout' | 'newTransaction') => {
+        (params: PaystackParams, selectedMethod: TransactionMethod) => {
             if (debug) console.log(`[Paystack] Opening modal with method: ${selectedMethod}`);
             if (!validateParams(params, debug)) return;
             setParams(params);
@@ -52,8 +54,9 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
         [debug]
     );
 
-    const checkout = (params: PaystackParams) => open(params, 'checkout');
-    const newTransaction = (params: PaystackParams) => open(params, 'newTransaction');
+    const checkout = (params: PaystackParams) => open(params, TransactionMethod.CHECKOUT);
+    const newTransaction = (params: PaystackParams) => open(params, TransactionMethod.NEW_TRANSACTION);
+    const resumeTransaction = (params: PaystackParams) => open(params, TransactionMethod.RESUME_TRANSACTION);
 
     const close = () => {
         setVisible(false);
@@ -87,6 +90,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                 subaccount: params.subaccount,
                 split: params.split,
                 split_code: params.split_code,
+                accessCode: params.accessCode,
             }),
             method
         );
@@ -97,7 +101,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
     }
 
     return (
-        <PaystackContext.Provider value={{ popup: { checkout, newTransaction } }}>
+        <PaystackContext.Provider value={{ popup: { checkout, newTransaction, resumeTransaction } }}>
             {children}
             <Modal visible={visible} transparent animationType="slide">
                 <SafeAreaView style={styles.container}>

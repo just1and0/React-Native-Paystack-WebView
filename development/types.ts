@@ -24,7 +24,14 @@ export type PaystackProviderProps = {
     onGlobalCancel?: () => void;
 };
 
-export type PaystackParams = {
+type PaystackBaseCallbacks = {
+    onSuccess: (data: PaystackTransactionResponse) => void;
+    onCancel: () => void;
+    onLoad?: (res: PaystackOnloadResponse) => void;
+    onError?: (res: any) => void;
+};
+
+type StandardFields = {
     email: string;
     amount: number;
     metadata?: Record<string, any>;
@@ -34,11 +41,23 @@ export type PaystackParams = {
     subaccount?: string;
     split_code?: string;
     split?: DynamicMultiSplitProps;
-    onSuccess: (data: PaystackTransactionResponse) => void;
-    onCancel: () => void;
-    onLoad?: (res: PaystackOnloadResponse) => void;
-    onError?: (res: any) => void;
-};
+    accessCode?: never;
+}
+
+type ResumeTransactionFields = {
+    accessCode: string;
+    email?: never;
+    amount?: never;
+    metadata?: never;
+    reference?: never;
+    plan?: never;
+    invoice_limit?: never;
+    subaccount?: never;
+    split_code?: never;
+    split?: never;
+}
+
+export type PaystackParams = PaystackBaseCallbacks & (StandardFields | ResumeTransactionFields);
 
 export type PaystackCheckoutParams = {
     email: string;
@@ -86,3 +105,20 @@ export interface DynamicMultiSplitProps {
     bearer_subaccount?: string;
     reference?: string;
 }
+
+export enum TransactionMethod {
+    CHECKOUT = 'checkout',
+    NEW_TRANSACTION = 'newTransaction',
+    RESUME_TRANSACTION = 'resumeTransaction'
+}
+
+export enum TransactionType {
+  STANDARD = 'standard',
+  RESUME = 'resume'
+}
+
+export type PaystackGeneratedConfig = {
+  mode: TransactionType;
+  accessCode?: string;
+  params: string;
+};
