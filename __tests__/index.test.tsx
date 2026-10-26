@@ -1,4 +1,4 @@
-import { validateParams, sanitize, generatePaystackParams, shouldHandleExternally, openExternalUrl } from '../development/utils';
+import { validateParams, sanitize, generatePaystackParams, shouldHandleExternally, openExternalUrl, handlePaystackMessage, paystackHtmlContent, toJsLiteral, toSubunit } from '../development/utils';
 import { Alert, Linking } from 'react-native';
 
 jest.mock('react-native', () => ({
@@ -80,9 +80,115 @@ describe('Paystack Utils', () => {
         currency: 'NGN',
         channels: ['card']
       });
-      expect(js).toContain("key: 'pk_test'");
-      expect(js).toContain("email: 'email@test.com'");
+      expect(js).toContain('key: "pk_test"');
+      expect(js).toContain('email: "email@test.com"');
       expect(js).toContain("amount: 10000");
+    });
+
+    // Evaluates the generated object literal, as the WebView would.
+    const evaluate = (js: string) => new Function(`return {${js}};`)();
+
+    it('keeps the script valid when a value contains a quote', () => {
+      const js = generatePaystackParams({
+        publicKey: 'pk_test',
+        email: "o'brien@example.com",
+        amount: 100,
+        reference: 'ref123',
+        channels: ['card'],
+      });
+      expect(evaluate(js).email).toBe("o'brien@example.com");
+    });
+
+    it('cannot close the script tag from inside a value', () => {
+      const js = generatePaystackParams({
+        publicKey: 'pk_test',
+        email: 'a@b.com',
+        amount: 100,
+        reference: 'ref123',
+        metadata: { note: '</script><script>alert(1)</script>' },
+        channels: ['card'],
+      });
+      expect(js).not.toContain('</script>');
+      expect(evaluate(js).metadata.note).toBe('</script><script>alert(1)</script>');
+    });
+
+    it('sends a whole number of subunits', () => {
+      const js = generatePaystackParams({
+        publicKey: 'pk_test',
+        email: 'a@b.com',
+        amount: 19.99,
+        reference: 'ref123',
+        channels: ['card'],
+      });
+      expect(evaluate(js).amount).toBe(1999);
+    });
+  });
+
+  describe('toJsLiteral', () => {
+    it('escapes characters that break an inline script', () => {
+      expect(toJsLiteral('</script>')).toBe('"\\u003c/script>"');
+      expect(toJsLiteral('a\u2028b')).toBe('"a\\u2028b"');
+    });
+  });
+
+  describe('toSubunit', () => {
+    it('rounds to an integer', () => {
+      expect(toSubunit(19.99)).toBe(1999);
+      expect(toSubunit(10.5)).toBe(1050);
+      expect(toSubunit(5000)).toBe(500000);
+    });
+  });
+
+  describe('handlePaystackMessage', () => {
+    const messageEvent = (payload: object) => ({ nativeEvent: { data: JSON.stringify(payload) } });
+    const baseParams = () => ({
+      email: 'a@b.com',
+      amount: 100,
+      onSuccess: jest.fn(),
+      onCancel: jest.fn(),
+      onLoad: jest.fn(),
+      onError: jest.fn(),
+    });
+
+    it('passes the load event to onLoad', () => {
+      const params = baseParams();
+      const loaded = { id: '1', accessCode: 'ac_1', customer: {} };
+      handlePaystackMessage({ event: messageEvent({ event: 'load', data: loaded }), debug: false, params });
+      expect(params.onLoad).toHaveBeenCalledWith(loaded);
+    });
+
+    it('passes errors to onError and closes the modal', () => {
+      const params = baseParams();
+      const close = jest.fn();
+      handlePaystackMessage({
+        event: messageEvent({ event: 'error', error: { message: 'boom' } }),
+        debug: false,
+        params,
+        close,
+      });
+      expect(params.onError).toHaveBeenCalledWith({ message: 'boom' });
+      expect(close).toHaveBeenCalled();
+    });
+
+    it('still closes on error when no onError was given', () => {
+      const close = jest.fn();
+      const { onError, ...params } = baseParams();
+      handlePaystackMessage({
+        event: messageEvent({ event: 'error', error: { message: 'boom' } }),
+        debug: false,
+        params,
+        close,
+      });
+      expect(close).toHaveBeenCalled();
+    });
+  });
+
+  describe('paystackHtmlContent', () => {
+    it('reports a failure to load or start the checkout', () => {
+      const html = paystackHtmlContent('key: "pk_test"');
+      expect(html).toContain('onerror=');
+      expect(html).toContain("typeof PaystackPop === 'undefined'");
+      expect(html).toContain('catch (e)');
     });
   });
 
