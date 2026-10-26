@@ -9,6 +9,9 @@ import {
 import { validateParams, paystackHtmlContent, generatePaystackParams, handlePaystackMessage, shouldHandleExternally, openExternalUrl } from './utils';
 import { styles } from './styles';
 
+const createReference = () =>
+    `ref_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+
 export const DEFAULT_DEEP_LINK_HOSTS: string[] = [
     'https://joinzap.com/app/',
 ];
@@ -34,8 +37,6 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
     const [params, setParams] = useState<PaystackParams | null>(null);
     const [method, setMethod] = useState<'checkout' | 'newTransaction'>('checkout');
 
-    const fallbackRef = useMemo(() => `ref_${Date.now()}`, []);
-
     const resolvedDeepLinkHosts = useMemo(
         () => [...DEFAULT_DEEP_LINK_HOSTS, ...deepLinkHosts],
         [deepLinkHosts]
@@ -45,7 +46,10 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
         (params: PaystackParams, selectedMethod: 'checkout' | 'newTransaction') => {
             if (debug) console.log(`[Paystack] Opening modal with method: ${selectedMethod}`);
             if (!validateParams(params, debug)) return;
-            setParams(params);
+            // A reference was generated once per mounted provider, so every
+            // payment without one reused it and Paystack rejected the second as
+            // a duplicate. Each payment now gets its own.
+            setParams({ ...params, reference: params.reference || createReference() });
             setMethod(selectedMethod);
             setVisible(true);
         },
@@ -78,7 +82,7 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                 publicKey,
                 email: params.email,
                 amount: params.amount,
-                reference: params.reference || fallbackRef,
+                reference: params.reference ?? createReference(),
                 metadata: params.metadata,
                 ...(currency && { currency }),
                 channels: defaultChannels, 
@@ -119,6 +123,13 @@ export const PaystackProvider: React.FC<PaystackProviderProps> = ({
                         startInLoadingState
                         onLoadStart={() => debug && console.log('[Paystack] WebView Load Start')}
                         onLoadEnd={() => debug && console.log('[Paystack] WebView Load End')}
+                        onError={(event) => {
+                            // The checkout page itself failed to load: report it rather
+                            // than leave the customer on a blank modal.
+                            if (debug) console.error('[Paystack] WebView Error:', event.nativeEvent);
+                            params?.onError?.({ message: event.nativeEvent.description });
+                            close();
+                        }}
                         renderLoading={() => <ActivityIndicator size="large" />}
                     />
                 </SafeAreaView>

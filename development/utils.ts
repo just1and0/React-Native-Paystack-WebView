@@ -93,11 +93,13 @@ export const handlePaystackMessage = ({
       }
       case 'error': {
         if (debug) console.error('[Paystack] Error:', data.error);
+        params?.onError?.(data.error);
         close?.();
         break;
       }
       case 'load': {
         if (debug) console.log('[Paystack] Loaded:', data);
+        params?.onLoad?.(data.data);
         break;
       }
     }
@@ -105,6 +107,22 @@ export const handlePaystackMessage = ({
     if (debug) console.warn('[Paystack] Message Error:', e);
   }
 };
+
+/**
+ * Serialises a value for embedding in the inline <script>. JSON.stringify escapes
+ * quotes and backslashes, so an email like o'brien@example.com no longer ends the
+ * string early and breaks the whole checkout script. `<` is escaped too, so a
+ * value containing `</script>` can't close the script tag, and U+2028/U+2029 are
+ * escaped because they are valid in JSON but end a line in older JS engines.
+ */
+export const toJsLiteral = (value: unknown): string =>
+  JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
+
+/** Paystack expects the amount in the smallest unit as an integer (e.g. kobo). */
+export const toSubunit = (amount: number): number => Math.round(amount * 100);
 
 export const generatePaystackParams = (config: {
   publicKey: string;
@@ -121,18 +139,18 @@ export const generatePaystackParams = (config: {
   split?: DynamicMultiSplitProps;
 }): string => {
   const props = [
-    `key: '${config.publicKey}'`,
-    `email: '${config.email}'`,
-    `amount: ${config.amount * 100}`,
-    config.currency ? `currency: '${config.currency}'` : '',
-    `reference: '${config.reference}'`,
-    config.metadata ? `metadata: ${JSON.stringify(config.metadata)}` : '',
-    config.channels ? `channels: ${JSON.stringify(config.channels)}` : '',
-    config.plan ? `plan: '${config.plan}'` : '',
-    config.invoice_limit ? `invoice_limit: ${config.invoice_limit}` : '',
-    config.subaccount ? `subaccount: '${config.subaccount}'` : '',
-    config.split_code ? `split_code: '${config.split_code}'` : '',
-    config.split ? `split: ${JSON.stringify(config.split)}` : '',
+    `key: ${toJsLiteral(config.publicKey)}`,
+    `email: ${toJsLiteral(config.email)}`,
+    `amount: ${toSubunit(config.amount)}`,
+    config.currency ? `currency: ${toJsLiteral(config.currency)}` : '',
+    `reference: ${toJsLiteral(config.reference)}`,
+    config.metadata ? `metadata: ${toJsLiteral(config.metadata)}` : '',
+    config.channels ? `channels: ${toJsLiteral(config.channels)}` : '',
+    config.plan ? `plan: ${toJsLiteral(config.plan)}` : '',
+    config.invoice_limit ? `invoice_limit: ${toJsLiteral(config.invoice_limit)}` : '',
+    config.subaccount ? `subaccount: ${toJsLiteral(config.subaccount)}` : '',
+    config.split_code ? `split_code: ${toJsLiteral(config.split_code)}` : '',
+    config.split ? `split: ${toJsLiteral(config.split)}` : '',
     `onSuccess: function(response) {
         window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'success', data: response }));
       }`,
@@ -162,13 +180,28 @@ export const paystackHtmlContent = (
       <title>Paystack</title>
     </head>
     <body onload="payWithPaystack()" style="background-color:#fff;height:100vh">
-      <script src="https://js.paystack.co/v2/inline.js"></script>
+      <script>
+        // Without these, a checkout that never starts (offline, or Paystack's
+        // script blocked) left a blank modal and no callback ever fired.
+        function reportError(message) {
+          window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'error', error: { message: message } }));
+        }
+      </script>
+      <script
+        src="https://js.paystack.co/v2/inline.js"
+        onerror="reportError('Could not load Paystack. Check your internet connection and try again.')"
+      ></script>
       <script>
         function payWithPaystack() {
-          var paystack = new PaystackPop();
-          paystack.${method}({
-            ${params}
-          });
+          if (typeof PaystackPop === 'undefined') return;
+          try {
+            var paystack = new PaystackPop();
+            paystack.${method}({
+              ${params}
+            });
+          } catch (e) {
+            reportError((e && e.message) || 'Could not start the payment.');
+          }
         }
       </script>
     </body>
